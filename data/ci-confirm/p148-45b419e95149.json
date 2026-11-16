@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "base_sha": "5feefef12670e322b02c4c8aa10f5666710de20d",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/bsengine/BSDismemberSkinInstance.cpp": "9bf9bcf4484b1c25e7a3bb4dbc90de2f3407886cd76fdde7c934dd8fc33ce3a2",
+    "reconstruction/bsengine/BSDismemberSkinInstance.h": "9f8cfaaf6b3c8ab1841d32152f3f9a61814575f0fd91e78f8288b0e47c73d5ed"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr95-cb531ec9-0-squash-ef6180",
+      "unit": "reconstruction/bsengine/BSDismemberSkinInstance.cpp",
+      "closure": [
+        "reconstruction/bsengine/BSDismemberSkinInstance.cpp",
+        "reconstruction/bsengine/BSDismemberSkinInstance.h"
+      ],
+      "source_sha256": "7ca55942acae146976b87469750aceea2608c8f66be36b42f3afcd95ab2c5e1f",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2.json",
+      "recipe_sha256": "923a7ef7ea6d9792a66669014f059f40af29e111b065f2ae6b0a6835d7f4e838",
+      "functions": [
+        {
+          "rva": 15688064,
+          "size": 19,
+          "symbol": "?RegisterStreamables@BSDismemberSkinInstance@@UEAA_NAEAVNiStream@@@Z"
+        }
+      ],
+      "mac_object_sha256": "d4f8570cd4d48a145792240725e689d4ec7d130df9c5929e6e921c4d5e17a820",
+      "mac_content_sha256": "120a9e366fc5b8c0c7c09ab11dca10cc931fb023144eba94ee3a8211fdea17d8"
+    }
+  ]
+}
