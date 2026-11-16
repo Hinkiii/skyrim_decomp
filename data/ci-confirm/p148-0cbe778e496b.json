@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "base_sha": "71a29efd76f9a0bbb07cf50d1435207debec5b17",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/netimmerse/NiNode.h": "184d3316024082efd6ba4ffd6cacb6248836a6d2854fe705b400bc50e81c91b1",
+    "reconstruction/netimmerse/NiSwitchNode.cpp": "ea988e15c03e55065bdc758074fa9d40c610db290d9e39513b7b46b3de56019c",
+    "reconstruction/netimmerse/NiSwitchNode.h": "2319da675f1802305c8348b630aaf6f60cfa5c0844dcb330f54beec3841a8264"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr72-p200-clean",
+      "unit": "reconstruction/netimmerse/NiSwitchNode.cpp",
+      "closure": [
+        "reconstruction/netimmerse/NiNode.h",
+        "reconstruction/netimmerse/NiSwitchNode.cpp",
+        "reconstruction/netimmerse/NiSwitchNode.h"
+      ],
+      "source_sha256": "e4934d5c139929241f001e0bf3cbf49c9e17925f7313ee181142d2b7f28223c6",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2.json",
+      "recipe_sha256": "923a7ef7ea6d9792a66669014f059f40af29e111b065f2ae6b0a6835d7f4e838",
+      "functions": [
+        {
+          "rva": 15651776,
+          "size": 160,
+          "symbol": "?LoadBinary@NiSwitchNode@@UEAAXAEAVNiStream@@@Z"
+        },
+        {
+          "rva": 15651984,
+          "size": 142,
+          "symbol": "?SaveBinary@NiSwitchNode@@UEAAXAEAVNiStream@@@Z"
+        },
+        {
+          "rva": 15652144,
+          "size": 82,
+          "symbol": "?IsEqual@NiSwitchNode@@UEAA_NPEAVNiObject@@@Z"
+        },
+        {
+          "rva": 15652576,
+          "size": 143,
+          "symbol": "?AttachChild@NiSwitchNode@@UEAAXPEAVNiAVObject@@_N@Z"
+        },
+        {
+          "rva": 15653600,
+          "size": 161,
+          "symbol": "?SetAt1@NiSwitchNode@@UEAAXIPEAVNiAVObject@@AEAV?$NiPointer@VNiAVObject@@@@@Z"
+        },
+        {
+          "rva": 15655168,
+          "size": 170,
+          "symbol": "?OnVisible@NiSwitchNode@@UEAAXAEAVNiCullingProcess@@H@Z"
+        },
+        {
+          "rva": 15655808,
+          "size": 4,
+          "symbol": "?AsSwitchNodeImpl@NiSwitchNode@@QEAAPEAV1@XZ"
+        }
+      ],
+      "mac_object_sha256": "fe6d27acd7ce907a578f9cda07b2ee9aa6d9e173843769c8b844fbe36f166c03",
+      "mac_content_sha256": "26bc697a5a023aaaddb078b0abe5efd0485b3331e408238fe0fa431f0af29801"
+    }
+  ]
+}
