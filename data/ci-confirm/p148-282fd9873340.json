@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "base_sha": "71a29efd76f9a0bbb07cf50d1435207debec5b17",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/netimmerse/NiNode.h": "184d3316024082efd6ba4ffd6cacb6248836a6d2854fe705b400bc50e81c91b1",
+    "reconstruction/netimmerse/NiSwitchNode.cpp": "fd630fa1ce8be54ff74eaa1225628eec6379d3ecea3d25447d3baebfdfe96b13",
+    "reconstruction/netimmerse/NiSwitchNode.h": "92016a9410b71a28f833997e8116475f8260a836f33256ebef7e56c87a353688"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr72-8f9bb99e-p197-squash",
+      "unit": "reconstruction/netimmerse/NiSwitchNode.cpp",
+      "closure": [
+        "reconstruction/netimmerse/NiNode.h",
+        "reconstruction/netimmerse/NiSwitchNode.cpp",
+        "reconstruction/netimmerse/NiSwitchNode.h"
+      ],
+      "source_sha256": "398a549fdbe03a0a7b50ec58a2f14d57c1af147d8d55b210ca720e5f86468bcb",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2.json",
+      "recipe_sha256": "923a7ef7ea6d9792a66669014f059f40af29e111b065f2ae6b0a6835d7f4e838",
+      "functions": [
+        {
+          "rva": 15651776,
+          "size": 160,
+          "symbol": "?LoadBinary@NiSwitchNode@@UEAAXAEAVNiStream@@@Z"
+        },
+        {
+          "rva": 15651984,
+          "size": 142,
+          "symbol": "?SaveBinary@NiSwitchNode@@UEAAXAEAVNiStream@@@Z"
+        },
+        {
+          "rva": 15652144,
+          "size": 82,
+          "symbol": "?IsEqual@NiSwitchNode@@UEAA_NPEAVNiObject@@@Z"
+        },
+        {
+          "rva": 15652576,
+          "size": 143,
+          "symbol": "?AttachChild@NiSwitchNode@@UEAAXPEAVNiAVObject@@_N@Z"
+        },
+        {
+          "rva": 15653600,
+          "size": 161,
+          "symbol": "?SetAt1@NiSwitchNode@@UEAAXIPEAVNiAVObject@@AEAV?$NiPointer@VNiAVObject@@@@@Z"
+        },
+        {
+          "rva": 15653952,
+          "size": 341,
+          "symbol": "?UpdateDownwardPass@NiSwitchNode@@UEAAXAEAVNiUpdateData@@I@Z"
+        },
+        {
+          "rva": 15654304,
+          "size": 363,
+          "symbol": "?UpdateSelectedDownwardPass@NiSwitchNode@@UEAAXAEAVNiUpdateData@@I@Z"
+        },
+        {
+          "rva": 15654688,
+          "size": 339,
+          "symbol": "?UpdateRigidDownwardPass@NiSwitchNode@@UEAAXAEAVNiUpdateData@@I@Z"
+        },
+        {
+          "rva": 15655040,
+          "size": 110,
+          "symbol": "?UpdateWorldBound@NiSwitchNode@@UEAAXXZ"
+        },
+        {
+          "rva": 15655168,
+          "size": 170,
+          "symbol": "?OnVisible@NiSwitchNode@@UEAAXAEAVNiCullingProcess@@H@Z"
+        },
+        {
+          "rva": 15655808,
+          "size": 4,
+          "symbol": "?AsSwitchNodeImpl@NiSwitchNode@@QEAAPEAV1@XZ"
+        }
+      ],
+      "mac_object_sha256": "ad2231bdd271835a0f201b9a0380cc2436a953aec4c8c4c60e596824d053356d",
+      "mac_content_sha256": "c53f0099806f2367a7382220be59c34f41b119d862a64ff48d2d93777c76cf3c"
+    }
+  ]
+}
