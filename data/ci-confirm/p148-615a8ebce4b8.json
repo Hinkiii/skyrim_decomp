@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "base_sha": "9ff2b6aad67dadd90bc7da2638e52575d3e71e72",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/bsengine/BSSubIndexTriShape.cpp": "da53fd6dddb0be02647a6a08e8256e1503ec594e505f1487d50a3b126516b61f",
+    "reconstruction/bsengine/BSSubIndexTriShape.h": "52a0e3fee86c97178914bc1f7bb770ba63efe6e21193c209d85f1e06883f68bc"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr99-5b099e95-0-squash-ff6bb0",
+      "unit": "reconstruction/bsengine/BSSubIndexTriShape.cpp",
+      "closure": [
+        "reconstruction/bsengine/BSSubIndexTriShape.cpp",
+        "reconstruction/bsengine/BSSubIndexTriShape.h"
+      ],
+      "source_sha256": "93bc48cd6f50b70ef83fddcb123615e6257f3e82d5352f26ec33ee41ce2fb01d",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2.json",
+      "recipe_sha256": "923a7ef7ea6d9792a66669014f059f40af29e111b065f2ae6b0a6835d7f4e838",
+      "functions": [
+        {
+          "rva": 16739248,
+          "size": 4,
+          "symbol": "?AsSubIndexTriShape@BSSubIndexTriShape@@UEAAPEAV1@XZ"
+        }
+      ],
+      "mac_object_sha256": "20fcb312ef5fb51c7834d10864f3f5e6a92fe817f98680d483585dd5bbb6061b",
+      "mac_content_sha256": "fc027b5d5b2d27cac131e7dec0975bdfddf27906dae391ab0b7c2c117c679913"
+    }
+  ]
+}
