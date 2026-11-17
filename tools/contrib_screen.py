@@ -16,6 +16,10 @@ STANDARD_HEADERS = frozenset(('cstddef', 'cstdint', 'cstring', 'climits', 'cfloa
                               'type_traits', 'utility', 'new', 'limits', 'stddef.h', 'stdint.h', 'intrin.h'))
 PRAGMAS = re.compile(r'(?:once|pack\s*\([^\n]*\)|warning\s*\([^\n]*\))\s*\Z')
 TOKEN = re.compile(r'[A-Za-z_]\w*|[^\s]')
+MAX_MESSAGE_BYTES = 4096
+MAX_HISTORY_BYTES = 65536
+MAX_IDENTITY_BYTES = 256
+EMAIL = re.compile(r'[^\s<>@,;"\\]+@[^\s<>@,;"\\]+\Z')
 
 
 def screen(blob, name, *, headers=STANDARD_HEADERS):
@@ -127,6 +131,36 @@ def screen(blob, name, *, headers=STANDARD_HEADERS):
         return total
     for key in definitions:
         weight(key, ())
+    return sorted(problems)
+
+
+def screen_text(text, *, limit=MAX_MESSAGE_BYTES):
+    """Return fixed reason codes for free text that becomes permanent public history.
+
+    Commit messages and identities carry no code, so the source-only rules (macros, includes)
+    do not apply; the rules for what must never be published (private decompiler output, host
+    paths, control characters, pasted byte dumps) do.
+    """
+    from decompiler_privacy import private_decompiler_text
+    raw = text.encode('utf-8', 'surrogateescape')
+    if len(raw) > limit:
+        return ['text-size-cap']
+    try:
+        raw.decode('utf-8')
+    except UnicodeDecodeError:
+        return ['non-utf8']
+    problems = set()
+    if any(unicodedata.category(c).startswith('C') and c not in '\t\r\n' for c in text):
+        problems.add('control-character')
+    if private_decompiler_text(text):
+        problems.add('private-decompiler-output')
+    if (re.search(r'(?:(?<![A-Za-z0-9_])[A-Za-z]:[\\/]|\\\\|\.\.[\\/]|~[\\/]|\.(?:local|git)(?:[\\/]|\b))', text)
+            or re.search(r'(?:^|[\s"\'(<>=])/(?:Users|home|root|etc|var|tmp|opt|mnt|private|proc)/', text)):
+        problems.add('host-path')
+    if (re.search(r'(?:\b[0-9A-Fa-f]{2}(?:[ ,]+(?:0x)?[0-9A-Fa-f]{2}){15,}\b)', text)
+            or re.search(r'(?:0x[0-9A-Fa-f]{2},\s*){16,}', text)
+            or re.search(r'[A-Za-z0-9+/=]{200,}', text)):
+        problems.add('pasted-bytes')
     return sorted(problems)
 
 

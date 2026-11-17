@@ -676,6 +676,91 @@ class GitTransport(unittest.TestCase):
         return subprocess.run(['git', *args], cwd=self.root, check=True,
                               capture_output=True, text=True).stdout.strip()
 
+    def _history_pr(self, message, *, extra=0, name=None):
+        self.git('checkout', '--quiet', 'contributor')
+        for i in range(extra):
+            self.git('commit', '--quiet', '--allow-empty', '-m', f'filler {i}')
+        env = dict(os.environ)
+        if name:
+            env['GIT_AUTHOR_NAME'] = name
+        unit = self.root / 'reconstruction/synth/Synth.cpp'
+        unit.write_text(unit.read_text() + '// more\n')
+        self.git('add', str(unit))
+        subprocess.run(['git', 'commit', '--quiet', '-m', message], cwd=self.root, check=True, env=env)
+        head = self.git('rev-parse', 'HEAD')
+        self.git('checkout', '--quiet', 'main')
+        return head
+
+    def test_clean_history_passes_and_is_framed_as_untrusted(self):
+        from contrib_publication import screen_publication
+        head = self._history_pr('Tidy the synthetic unit\n\nNo behaviour change.')
+        result = screen_publication(self.root, self.base, head, merge_method='merge')
+        self.assertIn('UNTRUSTED DATA', result['history'])
+        self.assertIn('Tidy the synthetic unit', result['history'])
+        self.assertIn('Original Contributor <contributor@example.invalid>', result['history'])
+        self.assertIn('contribute original source', result['history'])
+
+    def test_malicious_history_text_blocks_the_merge(self):
+        from contrib_publication import PublicationRejected, screen_publication
+        for kind, message, name in [
+                ('private', 'see // PRIVATE DECOMPILER HINT: x\n\n// PRIVATE DECOMPILER HINT: y', None),
+                ('path', 'copied from C:\\Users\\me\\dump', None),
+                ('unixpath', 'notes in /Users/me/.local/x', None),
+                ('bytes', ' '.join(['4D 5A'] * 20), None),
+                ('control', 'bad\x1b[2Jtext', None),
+                ('name', 'fine', 'Evil ../../.local/x')]:
+            with self.subTest(kind=kind):
+                head = self._history_pr(message, name=name)
+                with self.assertRaises(PublicationRejected) as caught:
+                    screen_publication(self.root, self.base, head, merge_method='merge')
+                self.assertTrue(str(caught.exception).startswith('deterministic screen'))
+                self.assertEqual(caught.exception.commit, head)
+                self.assertNotIn(message, str(caught.exception))
+                self.git('branch', '-f', 'contributor', self.head)
+
+    def test_history_size_caps_are_enforced(self):
+        from contrib_publication import PublicationRejected, screen_publication
+        from contrib_screen import MAX_HISTORY_BYTES, MAX_MESSAGE_BYTES
+        head = self._history_pr('x ' * (MAX_MESSAGE_BYTES // 2 + 1))
+        with self.assertRaisesRegex(PublicationRejected, 'text-size-cap'):
+            screen_publication(self.root, self.base, head, merge_method='merge')
+        self.git('branch', '-f', 'contributor', self.head)
+        # Each message is under its cap but the sum is over the total cap.
+        self.git('checkout', '--quiet', 'contributor')
+        for i in range(MAX_HISTORY_BYTES // 3000 + 2):
+            self.git('commit', '--quiet', '--allow-empty', '-m', f'part {i}\n' + 'word ' * 590)
+        unit = self.root / 'reconstruction/synth/Synth.cpp'
+        unit.write_text(unit.read_text() + '// more\n')
+        self.git('add', str(unit))
+        self.git('commit', '--quiet', '-m', 'last')
+        head = self.git('rev-parse', 'HEAD')
+        self.git('checkout', '--quiet', 'main')
+        with self.assertRaisesRegex(PublicationRejected, 'history-size-cap'):
+            screen_publication(self.root, self.base, head, merge_method='merge')
+
+    def test_squash_ignores_history_text_but_ai_screen_still_gets_it(self):
+        from contrib_publication import history_report, screen_publication
+        head = self._history_pr('see C:\\Users\\me\\dump')
+        result = screen_publication(self.root, self.base, head)
+        self.assertEqual(result['history'], '')
+        from contrib_publication import PublicationRejected
+        with self.assertRaises(PublicationRejected):
+            history_report(self.base, head, lambda *a: subprocess.run(
+                ['git', *a], cwd=self.root, check=True, capture_output=True).stdout)
+
+    def test_ai_screen_prompt_includes_history(self):
+        tree = self.private / 'live' / 'pr-1-x' / 'tree'
+        tree.mkdir(parents=True)
+        (tree.parent / 'diff.txt').write_text('DIFFBODY')
+        (tree.parent / 'history.txt').write_text('HISTORYBODY')
+        seen = []
+        with patch.object(self.runtime, 'model', side_effect=lambda t, m, prompt, out: seen.append(prompt) or 'SAFE\nok'):
+            result = self.runtime.ai_screen(dict(tree=str(tree), diff=str(tree.parent / 'diff.txt'),
+                                                 history=str(tree.parent / 'history.txt'), merge_method='squash'))
+        self.assertTrue(result['safe'])
+        self.assertIn('DIFFBODY', seen[0])
+        self.assertIn('HISTORYBODY', seen[0])
+
     def test_stale_intake_is_archived_and_checkpoints_cleared(self):
         directory = self.private / 'live' / ('pr-1-' + self.head + '-squash')
         tree = directory / 'tree'
