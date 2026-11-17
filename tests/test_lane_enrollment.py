@@ -93,6 +93,21 @@ class EnrollmentLane(unittest.TestCase):
         self.assertNotIn(0x1000, rows)
         self.assertFalse(any(e.get('event') == 'lane-all-dropped' for e in self.events()))
 
+    def test_match_record_carried_by_the_lane_counts_as_committed_evidence(self):
+        data = self.unenroll()
+        reports = [fn['report'] for fn in data['functions']]
+        for fn in data['functions']:
+            fn['evidence'] = fn['report']
+        # The published base does not hold the records; only the lane's carry supplies them.
+        git(self.root, 'rm', '-q', '--cached', '--', *reports)
+        git(self.root, 'commit', '-q', '-m', 'synthetic base without records')
+        git(self.root, 'push', '--quiet', 'origin', 'main')
+        (self.root / af.PROGRESS).write_text(json.dumps(data))
+        self.enqueue()
+        result = self.lane(push=False)
+        self.assertFalse(result['dropped'])
+        self.assertEqual(result['integrated']['accepted'], 3)
+
     def test_run_that_drops_everything_logs_an_event_and_fails_the_command(self):
         data = self.unenroll()
         self.mark_untracked_evidence(data, 0x1000)

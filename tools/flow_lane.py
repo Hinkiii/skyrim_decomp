@@ -1134,13 +1134,14 @@ def stale_sibling_members(tree, baseline, requests):
     return accepted, dropped
 
 
-def admit_enrollments(tree, source, enrollments):
+def admit_enrollments(tree, source, enrollments, carried=()):
     """Refuse an item whose new inventory rows cite evidence the published tree will not hold.
 
     The whole-inventory validator fails on any row with missing evidence, so one bad row from
-    one queued item would otherwise reject every other item in the run. Evidence is never
-    carried by the lane: it has to be committed content of the tree being published, and an
-    untracked file in the input checkout does not count.
+    one queued item would otherwise reject every other item in the run. Evidence has to be
+    committed content of the tree being published, or one of the files this request carries
+    itself (a function's own match record often is its evidence). An untracked file that the
+    lane does not carry does not count.
     """
     for fn in enrollments:
         evidence = fn.get('evidence')
@@ -1150,6 +1151,7 @@ def admit_enrollments(tree, source, enrollments):
                  f'{fn["id"]}: enrollment evidence {evidence!r} is not a public findings/reports path')
         tracked = subprocess.run(['git', 'cat-file', '-e', 'HEAD:' + evidence], cwd=tree,
                                  capture_output=True).returncode == 0
+        tracked = tracked or (evidence in carried and (Path(source) / evidence).is_file())
         f.refuse(tracked, f'{fn["id"]}: Evidence {evidence} is not committed content of the '
                           'integration tree (untracked or missing in the input checkout); commit and '
                           'publish it, or pass --with-metadata, then re-queue')
@@ -1337,7 +1339,7 @@ def build(root, fdir, receipt, python, branch, soft_free_gb=None, allow_low_disk
                                           for r in request['functions'] if by_rva[r]['id'] not in public_ids]
                 for enrollment in request['enrollments']:
                     f.validate_enrollment(enrollment)
-                admit_enrollments(tree, source, request['enrollments'])
+                admit_enrollments(tree, source, request['enrollments'], paths)
                 f._integration_origin_unchanged(source, f.git(source, 'rev-parse', 'HEAD'), base,
                                                sorted(paths), request['build_id'], request['functions'], headers=headers,
                                                enrollments=request['enrollments'])
