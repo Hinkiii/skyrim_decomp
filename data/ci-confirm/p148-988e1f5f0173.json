@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "base_sha": "59479c2f38538f9cf1016004f95ddee110312fab",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_3/ActorState.cpp": "3afbc1304e88aee32b2ec36b4a86d24d3dc6a7d1d12ee466a1877832bd92c98a",
+    "reconstruction/actor207_3/ActorState.h": "e70669f4d0c444ab403b7d3a8b878c644854c0a09101f8283f409b12c5d38524",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actor207_3/PlayerMenuModeSink.cpp": "cdfa046f077eaad399277938879e88434009a373111871440850dd9ecf1b1931",
+    "reconstruction/actor207_3/PlayerMenuModeSink.h": "84621301350738877e83455972068c0f3c59b1652617dab764b92adf3df89f13",
+    "reconstruction/actors/ActorPrimaryTargetPrefix.h": "9f4cad2440775aa5bb2d9fc455866f568f479af2df3e55bb4ac7437f6880202b",
+    "reconstruction/actors/ActorValueTargetPrefix.h": "a2b69d80addbd5d6131b45bf56e732001d919ec58ceb9170ef0b6e80545ca72e"
+  },
+  "units": [
+    {
+      "task_id": "r246-receivers-01",
+      "unit": "reconstruction/actor207_3/ActorState.cpp",
+      "closure": [
+        "reconstruction/actor207_3/ActorState.cpp",
+        "reconstruction/actor207_3/ActorState.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "d8b54b8acaf6b190c9d38b715206cf11064eea3b3b82fc698950160c15a0dcdd",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7726240,
+          "size": 59,
+          "symbol": "?Transition@ActorState@P2073@@UEAA_NI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "d8e76a64b9e310f81de3038e53b8fc5ace87ee0dd0b5b003f3868adaaa9a2774",
+      "first_content_sha256": "db65c394cf92d2b786966c8b3ad0287e08a356e7817280b7da684ea6c69038eb"
+    },
+    {
+      "task_id": "r246-receivers-02",
+      "unit": "reconstruction/actor207_3/PlayerMenuModeSink.cpp",
+      "closure": [
+        "reconstruction/actor207_3/PlayerMenuModeSink.cpp",
+        "reconstruction/actor207_3/PlayerMenuModeSink.h",
+        "reconstruction/actors/ActorPrimaryTargetPrefix.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "1c649a1fccb6c5b5fb896414b97edcfbb476fe92acbdb40cb47ba2c42160cf77",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7728336,
+          "size": 58,
+          "symbol": "?ProcessEvent@PlayerMenuModeSink@P2073@@QEAAHPEBUMenuModeChangeEvent@2@PEAX@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "60482ec26ee5cffcfaec6bf2d65f6f271f46be9a6f2d14fe21729a87a456fd8e",
+      "first_content_sha256": "4cba2c5df9d86d990ec3b2348d0541c801963c96c36350d0d2abf56e4438703e"
+    }
+  ]
+}
