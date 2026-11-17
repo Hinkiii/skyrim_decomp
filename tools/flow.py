@@ -9,6 +9,9 @@
     python3 tools/flow.py dispatched <group>             # a Reviewer was started on that group's brief
     python3 tools/flow.py void-review <group> --setup-failure --reason TEXT  # retire specified setup-failure verdicts
     python3 tools/flow.py redo-review <group>            # new task id after a review the parser refused
+    python3 tools/flow.py review-check <review file>     # OK or each parser problem with line and fix
+    python3 tools/flow.py review-group --select <rva ...>  # group exactly these confirmed functions
+    python3 tools/flow.py detach-function <group> --functions <rva ...> --reason TEXT  # leave a group, reviews untouched
     python3 tools/flow.py record-rerun <group> --compare FILE   # sampling re-run result (AGREE/DISAGREE rows)
     python3 tools/flow.py integrate <group> [--no-push] [--approved-only]  # enqueue; --run drains the lane
     python3 tools/flow.py integrate-groups <group> <group> --name <batch>  # enqueue a multi-group selection
@@ -267,9 +270,11 @@ def review_path(root, task):
     return path
 
 
-def read_review(root, g, functions):
-    """(status, {rva: block}) of a group's saved review: status 'missing', 'malformed: <why>' or 'ok'."""
-    path = review_path(root, g)
+def read_review(root, g, functions, path=None):
+    """(status, {rva: block}) of a group's saved review: status 'missing', 'malformed: <why>' or 'ok'.
+
+    `path` checks another file under the group's rules (review-check); acceptance reads the saved one."""
+    path = Path(path) if path else review_path(root, g)
     if not path.is_file():
         return 'missing', {}
     try:
@@ -626,7 +631,8 @@ def family_brief(root, path, profile=None, fdir=None, render_only=False, attache
     brief = f'.local/briefs/{task}.md'
     members = (f"Also write `.local/reviews/{task}.md` with ordinary full-review blocks for all first 20, "
                f"in this same pass. Their group is {attached[0]['name']}; the standard checklist and member inputs "
-               f"are in `{attached[0]['member_brief']}`. Use task id {task}, not the earlier task id in that brief."
+               f"are in `{attached[0]['member_brief']}`. Use task id {task}, not the earlier task id in that brief. "
+               f"Before you end, run `python3 tools/flow.py review-check .local/reviews/{task}.md` and get OK."
                if attached else 'The first 20 already have individual approvals; assess them with the template.')
     text = f"""# Family review {task}
 
@@ -938,6 +944,106 @@ def start_worker(entry, prompt, agent_type=None):
     return f'Agent tool: {kind}model {entry["model"]}, fresh context, prompt "{prompt}"'
 
 
+# What to do about each parser message. The first matching pattern wins.
+REVIEW_FIXES = (
+    (r'unseen|character U\+|carriage return', 'replace it with a plain ASCII space or delete it; only tab and plain line ends are allowed'),
+    (r'before the "# Review', 'delete everything above the "# Review <task-id>" title line'),
+    (r'second "# Review"', 'keep one title line; rename a heading that starts with "# Review" in commentary'),
+    (r'no "# Review', 'start the document with "# Review <task-id>" using the task id from the brief'),
+    (r'unknown field', 'delete the key or fix its spelling; only the keys in the runbook output format are allowed'),
+    (r'given twice|twice', 'keep one occurrence'),
+    (r'is empty', 'give the field a value, or "none" for a list field'),
+    (r'must be one of|must be pass or fail', 'use exactly one of the listed lower-case words'),
+    (r'unknown check', 'use only plausible_source, provenance, claim_scope and publication_hygiene under checks'),
+    (r'is "none" or a list|items must share|one space after the dash',
+     'write "none", or the key alone and then one "  - <item>" line per item at one indent'),
+    (r'checks takes no value', 'put the key alone on its line and each check on an indented sub-line'),
+    (r'missing required|required field|lacks', 'add the field in the runbook order'),
+    (r'heading is not', 'write the heading exactly "## <build id> 0x<lowercase hex RVA> <size>" using the size in the brief table; '
+                        'in a commentary section no line may start with "verdict"'),
+    (r'title is', 'the title must be "# Review <task-id>" with the task id this brief gives'),
+    (r'fresh_context', 'write "fresh_context: yes"'),
+    (r'drafted_or_triaged', 'write "drafted_or_triaged_any_reviewed_function: no"; if you drafted or triaged one, stop and report'),
+    (r'reviewer_model', 'write your own model id as the brief assigns it'),
+    (r'sampling_second_pass', 'write the value the brief states for sampling_second_pass'),
+    (r'no block for', 'add a block for every function in the brief table'),
+)
+
+
+def review_fix(message):
+    for pattern, fix in REVIEW_FIXES:
+        if re.search(pattern, message):
+            return fix
+    return 'follow the output format in docs/reviewer-runbook.md'
+
+
+def review_check(root, fdir, path):
+    """([(line, problem, fix)], note) for a review file under the parser and group rules that
+    integration and acceptance apply (read_review and af.refuse_malformed); empty means it passes."""
+    root, path = Path(root), Path(path)
+    found = []
+
+    def add(line, message):
+        found.append((line, message, review_fix(message)))
+
+    def relative(offset, message):
+        m = re.match(r'line (\d+): (.*)', message, re.S)
+        return (offset + int(m.group(1)), m.group(2)) if m else (offset or 1, message)
+
+    if not path.is_file():
+        return [(0, f'{path} does not exist', 'write the review to .local/reviews/<task-id>.md')], None
+    try:
+        text = path.read_text(encoding='utf-8')
+    except UnicodeDecodeError as exc:
+        return [(1, f'not valid UTF-8: {exc}', 'save the file as UTF-8 text')], None
+    functions = inventory(root)['functions']
+    title, header, blocks = af.review_blocks(text)
+    if title is None:
+        add(1, 'no "# Review <task-id>" title')
+    for message in header['_problems']:
+        add(*relative(header['_offset'], message))
+    sizes = {(fn['build_id'], fn['rva']): fn['size'] for fn in functions}
+    builds = {af.folded(fn['build_id']) for fn in functions}
+    for parts, body in blocks:
+        heading, line = body['_heading'], body['_offset']
+        if not (parts and af.folded(parts[0]) in builds) and not body['_verdict_line']:
+            continue  # commentary
+        exact = re.fullmatch(r'(\S+) 0x([0-9a-f]+) ([0-9]+)', heading)
+        key = exact and (exact.group(1), int(exact.group(2), 16))
+        if not (exact and key in sizes and heading == f'{key[0]} 0x{key[1]:x} {sizes[key]}'):
+            add(line, f'heading "## {heading}" is not "<build id> 0x<lowercase hex RVA> <size>" '
+                      'for an inventory function and its size, or a commentary section has a line starting with "verdict"')
+            continue
+        for message in body['_problems']:
+            add(*relative(line, message))
+    note = None
+    g = None
+    if title is not None:
+        known = [x for x in groups(fdir, allow_incomplete=True).values() if x.get('task_id') == title]
+        g = next((x for x in known if not x.get('superseded_by')), known[0] if known else None)
+    if g is None:
+        note = (f'no review group has task id {title!r}; reviewer_model, sampling_second_pass and function coverage '
+                'were not checked' if title is not None else None)
+    elif not found:
+        status, got = read_review(root, g, functions, path)
+        if status.startswith('malformed'):
+            why = status[len('malformed: '):]
+            field = re.match(r'(fresh_context|drafted_or_triaged\w*|reviewer_model|sampling_second_pass)', why)
+            line = next((i for i, l in enumerate(text.splitlines(), 1)
+                         if field and l.startswith(field.group(1) + ':')), 1)
+            add(line, why)
+        else:
+            for rva in g['functions']:
+                if rva not in got:
+                    add(0, f'no block for {g["build_id"]} {rva} (the group lists it)')
+    if not found and g is None:
+        try:  # parity backstop: the acceptance-side check must agree
+            af.refuse_malformed(header, blocks, functions)
+        except af.Refused as exc:
+            add(1, str(exc))
+    return found, note
+
+
 # ------------------------------------------------------------------ review groups and briefs
 
 def unit_of(root, fn):
@@ -950,8 +1056,24 @@ def next_group_name(fdir):
     return f'g{n:03d}'
 
 
-def review_group(root, fdir, max_size=DEFAULT_GROUP_MAX, reviewer_model=None, seed='flow', select=None):
-    """Group every confirmed function not yet in a review group, unit by unit; returns new group names."""
+def resolve_select(root, items):
+    """Function ids for RVAs (0x...) or inventory ids; refuses an unknown one."""
+    data = inventory(root)
+    by_id = {fn['id']: fn for fn in data['functions']}
+    by_rva = {hexrva(fn['rva']): fn['id'] for fn in data['functions'] if fn['build_id'] == data['target_build_id']}
+    out = set()
+    for item in items:
+        key = item if item in by_id else by_rva.get(item.lower())
+        refuse(key is not None, f'{item} names no function of the target build')
+        out.add(key)
+    return out
+
+
+def review_group(root, fdir, max_size=DEFAULT_GROUP_MAX, reviewer_model=None, seed='flow', select=None, strict=False):
+    """Group every confirmed function not yet in a review group, unit by unit; returns new group names.
+
+    With `select` (inventory ids) only those functions are grouped; `strict` refuses when one of them
+    is not confirmed and ungrouped, so a typo cannot silently shrink the group."""
     root = Path(root)
     profile = session_profile(fdir)
     if reviewer_model:
@@ -973,6 +1095,11 @@ def review_group(root, fdir, max_size=DEFAULT_GROUP_MAX, reviewer_model=None, se
     states = function_states(root, fdir, online=False, review_rvas=scope)
     todo = [r for r, s in states.items() if s['state'] == 'confirmed' and not s.get('group')
             and not family_deferred(root, by_rva[r]) and (select is None or by_rva[r]['id'] in select)]
+    if strict and select is not None:
+        taken = {by_rva[r]['id'] for r in todo}
+        why = {by_rva[r]['id']: states[r]['state'] + (f' in group {states[r]["group"]}' if states[r].get('group') else '')
+               for r in by_rva if by_rva[r]['id'] in select and by_rva[r]['id'] not in taken}
+        refuse(not why, 'cannot group: ' + '; '.join(f'{k} is {v}' for k, v in sorted(why.items())))
     units = {}
     for rva in sorted(todo, key=lambda r: int(r, 16)):
         units.setdefault(unit_of(root, by_rva[rva])[0], []).append(rva)
@@ -1091,8 +1218,12 @@ source files it identifies, under the maintainer's recorded FNV reuse and model-
    independent.
 4. Write your review document, exactly in the runbook's output format, with the title
    `# Review {g['task_id']}`, to `.local/reviews/{g['task_id']}.md`. Create it once; never edit or
-   overwrite it afterwards. If that file already exists, stop and return `exists` in the table.
-5. Return only the short table from the runbook ("Return message"), nothing else.
+   overwrite it after step 5 reports OK. If that file already exists, stop and return `exists` in the table.
+5. Before you end, run `python3 tools/flow.py review-check .local/reviews/{g['task_id']}.md` from the review
+   working directory. It runs the parser integration and acceptance use and prints OK or each problem with
+   its line and fix. A refused review cannot be edited later, so get OK first: if it reports problems,
+   you may fix your own just-written file now (the only edit allowed), then rerun until OK.
+6. Return only the short table from the runbook ("Return message"), nothing else.
 
 Do not push, post publicly, mark `matched`, edit any other file, or start further agents.
 """
@@ -1134,6 +1265,7 @@ checkout (docs/verification.md, Sampling safeguard). Gates: as recorded for conf
 3. `python3 tools/sampling_packet.py --sample .local/flow/rerun/{g['name']}/sample.json --rerun .local/flow/rerun/{g['name']}/out/<build id> --compare-out .local/flow/rerun/{g['name']}/compare.txt`
 4. `python3 tools/flow.py record-rerun {g['name']} --compare .local/flow/rerun/{g['name']}/compare.txt`
 5. Remove the worktree. Return a table: function, AGREE/DISAGREE; and the compare file path.
+   If this task also saved a review file, run `python3 tools/flow.py review-check <that file>` and get OK first.
 
 Never edit the comparator, the records or the compare file to get AGREE; a DISAGREE is escalated.
 Do not push, post publicly, mark `matched`, or start further agents.
@@ -1181,7 +1313,8 @@ def void_review(root, fdir, name, reason, setup_failure, selected=None):
         save_group(fdir, g)
         log_event(fdir, 'dispatch-reset', group=name, task_id=g['task_id'], reason=reason)
         return []
-    refuse(status == 'ok', 'a complete saved review is required')
+    refuse(status == 'ok', f'a complete saved review is required ({status}); detach-function removes members '
+           f'from a group with an unreadable review without touching it')
     chosen = set(selected if selected is not None else blocks)
     refuse(bool(chosen) and chosen <= blocks.keys(), 'select verdicts present in the saved review')
     refuse(all(blocks[r].get('verdict') in ('reject', 'escalate') for r in chosen),
@@ -1301,7 +1434,8 @@ def split_group(root, fdir, name, selected):
     chosen = sorted({by_id.get(r, r) for r in selected}, key=lambda r: int(r, 16) if r.startswith('0x') else -1)
     refuse(chosen and set(chosen) <= set(parent['functions']), 'selection must name functions of the parent group')
     status, first = read_review(root, parent, data['functions'])
-    refuse(status == 'ok', f'parent review {status}')
+    refuse(status == 'ok', f'parent review {status}; to move members out of such a group run: '
+           f'python3 tools/flow.py detach-function {name} --functions <rva ...> --reason TEXT')
     review = parent
     for rva in chosen:
         refuse(first.get(rva, {}).get('verdict') == 'approve', f'{rva}: selected function lacks approval')
@@ -1339,6 +1473,51 @@ def split_group(root, fdir, name, selected):
     save_group(fdir, child)
     log_event(fdir, 'split-group', group=child_name, parent=name, functions=chosen)
     return child
+
+
+def detach_functions(root, fdir, name, selected, reason):
+    """Remove functions from a primary review group (and its sampling pair) without touching any saved review.
+
+    A malformed or incomplete saved review blocks split-group and void-review, so the functions that must
+    move on cannot be separated from it. Detaching rewrites only flow metadata: every review file stays
+    byte-identical, the detached functions return to `confirmed` and a fresh group (review-group --select)
+    gives them a new review. A group left empty is superseded."""
+    from check import naming_finding_problem
+    refuse(bool(reason.strip()) and naming_finding_problem(reason) is None, 'reason must be short public prose')
+    root = Path(root)
+    g = load_group(fdir, name)
+    refuse(g['kind'] == 'review', 'detach from the primary review group, not its sampling pair')
+    refuse(not g.get('superseded_by') and not g.get('integrated'), 'group is superseded or integrated')
+    data = inventory(root)
+    by_id = {fn['id']: hexrva(fn['rva']) for fn in data['functions']}
+    chosen = sorted({by_id.get(r, r.lower()) for r in selected}, key=lambda r: int(r, 16))
+    refuse(chosen and set(chosen) <= set(g['functions']), 'selection must name functions of the group')
+    states = function_states(root, fdir, online=False, review_rvas=set(chosen))
+    for rva in chosen:
+        refuse(states[rva]['state'] not in ('accepted', 'pushed'), f'{rva} is already accepted')
+    pair = load_group(fdir, g['pair']) if g.get('pair') else None
+    touched = [g] + ([pair] if pair else [])
+    for group in touched:
+        refuse(not group.get('superseded_by') and not group.get('integrated'), 'group is superseded or integrated')
+        group['detached'] = list(group.get('detached', [])) + [
+            {'function': r, 'reason': reason, 'task_id': g['task_id'], 'time': utc()} for r in chosen]
+        group['functions'] = [r for r in group['functions'] if r not in chosen]
+        group['sampled'] = [r for r in group.get('sampled') or [] if r not in chosen]
+        group['components'] = {r: v for r, v in (group.get('components') or {}).items() if r not in chosen}
+        if not group['functions']:
+            group['superseded_by'] = 'detach:' + g['task_id']
+    if g['sampled'] == [] and pair:
+        pair['superseded_by'] = 'detach:' + g['task_id']
+        g['pair'] = None
+    by_rva = {hexrva(fn['rva']): fn for fn in data['functions'] if fn['build_id'] == data['target_build_id']}
+    for group in touched:
+        # A brief nobody has used yet would otherwise list functions the group no longer holds.
+        if not group.get('dispatched') and group['functions'] and not group.get('superseded_by'):
+            group['brief'] = write_review_brief(root, group, by_rva)
+        save_group(fdir, group)
+    log_event(fdir, 'detach-function', group=name, task_id=g['task_id'], functions=chosen, reason=reason,
+              emptied=bool(g.get('superseded_by')))
+    return chosen
 
 
 # ------------------------------------------------------------------ next actions
@@ -2673,6 +2852,13 @@ def parser():
     s = sub.add_parser('review-group')
     s.add_argument('--max', type=int, default=DEFAULT_GROUP_MAX)
     s.add_argument('--reviewer-model', help='override the profile\'s Reviewer (refused unless the rule admits it)')
+    s.add_argument('--select', nargs='+', metavar='RVA', help='group exactly these confirmed, ungrouped functions (RVAs or ids)')
+    s = sub.add_parser('review-check')
+    s.add_argument('review', help='review file to check with the parser integration and acceptance use')
+    s = sub.add_parser('detach-function')
+    s.add_argument('group')
+    s.add_argument('--functions', nargs='+', required=True)
+    s.add_argument('--reason', required=True)
     s = sub.add_parser('family-plan')
     s.add_argument('--spec', required=True)
     s.add_argument('--supersede', help='replace an unapproved family while preserving its history')
@@ -2891,7 +3077,8 @@ def execute(a, root, fdir):
             pause_family(root, a.path, a.reason)
             print('family paused; assess accepted members and revoke invalidated evidence')
         elif a.cmd == 'review-group':
-            made = review_group(root, fdir, a.max, a.reviewer_model)
+            select = resolve_select(root, a.select) if a.select else None
+            made = review_group(root, fdir, a.max, a.reviewer_model, select=select, strict=select is not None)
             if not made:
                 print('no confirmed function waits for a review group')
             for name in made:
@@ -2900,6 +3087,18 @@ def execute(a, root, fdir):
                       + (f'; sampled {len(g["sampled"])} -> group {g["pair"]}, brief {load_group(fdir, g["pair"])["brief"]}, '
                          f're-run brief .local/briefs/rerun-{name}.md' if g['sampled'] else ''))
             print('next: python3 tools/flow.py next-actions')
+        elif a.cmd == 'review-check':
+            problems, note = review_check(root, fdir, a.review)
+            for line, message, fix in problems:
+                print(f'line {line}: {message}\n    fix: {fix}')
+            if note:
+                print(f'note: {note}')
+            print(f'{len(problems)} problem(s)' if problems else 'OK')
+            return 1 if problems else 0
+        elif a.cmd == 'detach-function':
+            done = detach_functions(root, fdir, a.group, a.functions, a.reason)
+            print(f'{a.group}: detached {" ".join(done)}; saved reviews unchanged')
+            print('next: python3 tools/flow.py review-group --select ' + ' '.join(done))
         elif a.cmd == 'dispatched':
             g = load_group(fdir, a.group)
             g['rerun_dispatched' if a.rerun else 'dispatched'] = utc()

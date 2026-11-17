@@ -283,9 +283,17 @@ in which no line starts with "verdict". The acceptance tool (`tools/accept_funct
 the whole review if any block or the header strays from this format; a refused review is remedied
 by a new Reviewer run under a new task id, never by editing the file.
 
+Before you end, run `python3 tools/flow.py review-check .local/reviews/<task-id>.md` from the
+review working directory and get `OK`. It applies the same parser and group rules that integration
+and acceptance apply (header, every block heading and size, every field, the assigned model, the
+sampling flag, a block for each listed function) and prints each problem with its line number and
+the fix. Fix your own just-written file until it prints `OK`; once it does, the file is final and
+is never edited. Do not return the table before `OK`.
+
 ## Return message
 
-Return only this, so the orchestrator's context stays small; everything else is in the file:
+Return only this, after `review-check` printed `OK`, so the orchestrator's context stays small;
+everything else is in the file:
 
 ```text
 review: .local/reviews/<task-id>.md

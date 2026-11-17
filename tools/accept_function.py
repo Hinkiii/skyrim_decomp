@@ -374,11 +374,15 @@ def review_blocks(text):
     starts = [i for i, l in enumerate(lines) if l.startswith('## ')]
     header = fields(lines[:starts[0]] if starts else lines, known=HEADER_FIELDS)
     header['_problems'] = document + header['_problems']
+    # Problem messages say "line N" relative to their section; these offsets give the file line.
+    base = 0 if first is None else first + 1
+    header['_offset'] = base
     blocks = []
     for n, i in enumerate(starts):
         section = lines[i + 1:starts[n + 1] if n + 1 < len(starts) else len(lines)]
         body = fields(section, known=BLOCK_FIELDS, required=BLOCK_REQUIRED)
         body['_heading'] = lines[i][3:]
+        body['_offset'] = base + i + 1
         body['_verdict_line'] = any(folded(l).strip().startswith('verdict') for l in section)
         blocks.append((lines[i][3:].split(), body))
     return title, header, blocks
