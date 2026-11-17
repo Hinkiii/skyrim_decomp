@@ -9,7 +9,7 @@ Selection only saves work; it never decides a match.
 """
 import subprocess
 
-import source_digest
+from check_source_digest import include_closure, source_digest_cache
 
 # Compiler, comparator, pins, target identity and recipes are shared by every unit.
 GLOBAL_PREFIXES = ('tools/', 'builds/', 'reconstruction/recipes/')
@@ -48,13 +48,16 @@ def select(root, base, units):
         return set(units), reason
     changed = set(paths)
     chosen = set()
-    for compiled, extra in units.items():
-        deps = set(extra) | {compiled}
-        try:
-            deps.update(source_digest.include_closure(root, compiled))
-        except (ValueError, OSError):
-            chosen.add(compiled)  # an unreadable closure cannot be shown unchanged
-            continue
-        if deps & changed:
-            chosen.add(compiled)
+    # One stable tree for the whole pass: the scoped cache shares directory scans and header closures
+    # across thousands of units that include the same headers.
+    with source_digest_cache():
+        for compiled, extra in units.items():
+            deps = set(extra) | {compiled}
+            try:
+                deps.update(include_closure(root, compiled))
+            except (ValueError, OSError):
+                chosen.add(compiled)  # an unreadable closure cannot be shown unchanged
+                continue
+            if deps & changed:
+                chosen.add(compiled)
     return chosen, f'{len(chosen)} of {len(units)} units have a changed include closure, record or recipe'
