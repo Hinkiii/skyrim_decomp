@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "base_sha": "59479c2f38538f9cf1016004f95ddee110312fab",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/netimmerse/NiAVObject.h": "c4d354e7bceed5ac12f00f54bb6c8ea2da03e15f554f8b4f452f55eaac05cd99",
+    "reconstruction/netimmerse/NiObject.h": "00a9b1e9eaeefaa0a069d434e7a3eda6a70e91bf10abfaa2dd57b667643fc433",
+    "reconstruction/netimmerse/NiPointLight.cpp": "6ed2036f208be920c1c97f1041d9ae59881653c5b4f1307811600ce5252975a7",
+    "reconstruction/netimmerse/NiPointLight.h": "c465be5b11d7f13aa35bf338ba8ac640a2bfbfa8af30611d825e1c2d658c56c5"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr102-4eb3058f-0-squash-efe5f0",
+      "unit": "reconstruction/netimmerse/NiPointLight.cpp",
+      "closure": [
+        "reconstruction/netimmerse/NiAVObject.h",
+        "reconstruction/netimmerse/NiObject.h",
+        "reconstruction/netimmerse/NiPointLight.cpp",
+        "reconstruction/netimmerse/NiPointLight.h"
+      ],
+      "source_sha256": "66ae67440fa3c7c64600dc9adad85f3ccd3804775fd7acdbd3360846a6fa18db",
+      "recipe": "reconstruction/recipes/o2-fpfast-root-includes.json",
+      "recipe_sha256": "a6df3f3f1af44ec7ba9c6e181357718ee3fa4577d33abb58c3176ae33fd52d2c",
+      "functions": [
+        {
+          "rva": 15721968,
+          "size": 52,
+          "symbol": "??_GNiPointLight@@UEAAPEAXI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "f57b27f4d46308755d9a3cee8002063b531e66d35a35149a9916fde9ff28ff77",
+      "first_content_sha256": "65de3e897fa87128971f51fb5b10393597599e0bf27cf220bd73636ef2e55499"
+    }
+  ]
+}
