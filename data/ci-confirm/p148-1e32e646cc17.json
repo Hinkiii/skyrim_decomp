@@ -1,0 +1,432 @@
+{
+  "schema": 1,
+  "base_sha": "21905fcbfea8c3689ac92a04e93578061320ed43",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_1/SceneActor.cpp": "92596d719ea6060231ce0a5819a020a071f8f4e0e0626115adadf3aa38be1762",
+    "reconstruction/actor207_1/SceneActor.h": "81fd8794fa404ee8b7865f690233cf6a704bf8b300606885ef5a573dcc524a6d",
+    "reconstruction/actors/ActorPrimaryTargetPrefix.h": "9f4cad2440775aa5bb2d9fc455866f568f479af2df3e55bb4ac7437f6880202b",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actors/ActorValueTargetPrefix.h": "a2b69d80addbd5d6131b45bf56e732001d919ec58ceb9170ef0b6e80545ca72e",
+    "reconstruction/actor207_1/StateRelated.cpp": "a15d2b5e260a82ccacfa61074b50ca95445c6f3c263422d6a17fa5283720d38a",
+    "reconstruction/actor207_1/StateRelated.h": "ae6f6aa426f5cd1ea67a80f7708bc917004b43371c9284a2dfc1ad7a7d0aa61c",
+    "reconstruction/actor207_1/AIProcess207Pass.cpp": "def2784d2f04051ab6ea70f21b7a1f65fc2eee193932074c399d863eed1b7d03",
+    "reconstruction/actor207_1/AIProcess207Pass.h": "15a9034e031448ce3812c2a568df8f72a38d72a570b2c684dc5644dbf0a471e7",
+    "reconstruction/actor207_1/ChangeActor.cpp": "72200e9ac791d6bd90457ef7bef348ad3b178783617493af4d8c2750d1ad9695",
+    "reconstruction/actor207_1/ChangeActor.h": "1b90426556ed36adc48ffa72b97d3643869fda05459f8098f979beb2448cbbd2",
+    "reconstruction/actor207_1/LimbActor.cpp": "09884befd0ef5a4e5ecea8e2d8651b659b22b9164b82297b94bc2fd8b8192551",
+    "reconstruction/actor207_1/LimbActor.h": "684eca29e18721024312812bb07a70a02ee6129b09f7ab245e2056abce2c8993",
+    "reconstruction/actor207_1/RotationActor.cpp": "9bee886bdedf42dd5968245a6489e91a5e9337bcca128f1b2629533617cb10c2",
+    "reconstruction/actor207_1/RotationActor.h": "71eab1f65982d58bdf741800276424f7c47dd78696826c525e1f3c8506b54669",
+    "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp": "c1088b9de4a21ddba86df8318953a14f2e73c3585143fb2f72a02cf48025b27d",
+    "reconstruction/actor207_3_aggregate/TESObjectREFR.h": "e4b616abac4804718a98edbf0c88439055de99e675d807863b994ec0b546c151",
+    "reconstruction/actor207_3_component/PlayerCharacter.cpp": "929d0d99ccceb90c808b73e61d21806c1e44f5b3db02b001e6c042a4eea3232a",
+    "reconstruction/actor207_3_component/PlayerCharacter.h": "8e2265d9376db86dce97f4dc31106573ff2c8948722ef689b11b039cfbbdd464",
+    "reconstruction/actor207_3/MagicTarget.cpp": "d2c1dd583fbdf87f21d2baeb8d7946277794d72ceacc752645eb8613f6dad90f",
+    "reconstruction/actor207_3/MagicTarget.h": "b8f8b6dce358fb9d59facf81c687b66d51ef776095825a0b683ddab694dd98c6",
+    "reconstruction/actor207_3_nodes/TESObjectREFR.cpp": "64102116d3a4e07aab684afa7ad678c66269262df8eff0530653f2cc53e1a536",
+    "reconstruction/actor207_3_nodes/TESObjectREFR.h": "dc50dbe2db7c8e57206256e102c6d4228a008bf74c39a81f9b590b2ca9baef8c",
+    "reconstruction/actor207_3/PlayerCharacter.cpp": "9b35c12f255b22c218f4c3dd5d36e96e8a11f25b2fbad306810c38b6e65aa937",
+    "reconstruction/actor207_3/PlayerCharacter.h": "1994312d26cf1dd872dc4e559e833192d3d30d76ba4d8be2897d24caae3506bd",
+    "reconstruction/actor207_3_animation/TESObjectREFR.cpp": "ad41b2e27ca8557acd4c269029920230da01b903f82b20e10c178bc5b48c1239",
+    "reconstruction/actor207_3_animation/TESObjectREFR.h": "d1f4f7c827811061dcb5ac9af26a92e4e58b79d759ea9c9aee0368b7be48a89a",
+    "reconstruction/actor207_3/RegistryEntry.cpp": "b2b3bc2d91954c8be7db5d7d691827f4a23b78f666813a9c1b96d5124bbade7a",
+    "reconstruction/actor207_3/RegistryEntry.h": "d6f558f2029555aa89fd761168ec0242d8b39e18694830f4df8f78f77ec0d131",
+    "reconstruction/actor207_3/TESObjectREFR.cpp": "a749fa1c6d7e68e8b674574d3de8da566a96ac828af76e414a3d0ed61472ef16",
+    "reconstruction/actor207_3/TESObjectREFR.h": "365c95e377c933cf01997a548a407ce75219c16b2992231bb2545cd97b625fef"
+  },
+  "units": [
+    {
+      "task_id": "r246-final-01",
+      "unit": "reconstruction/actor207_1/SceneActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/SceneActor.cpp",
+        "reconstruction/actor207_1/SceneActor.h",
+        "reconstruction/actors/ActorPrimaryTargetPrefix.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "8413ba9f05c3887cabb073a27384f6cb5b0703779bdb8cc8482e99b7f082be78",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3041968,
+          "size": 54,
+          "symbol": "?UpdateScene@SceneActor@P2071@@QEAAXI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "ec3c20406b68887abb724cc84a925f7051de62be02536524526744c2cb7245f7",
+      "first_content_sha256": "2594da930503addd2c351564f6784bb2fa31b9d010fead0ad3254c9f91211f14"
+    },
+    {
+      "task_id": "r246-final-02",
+      "unit": "reconstruction/actor207_1/StateRelated.cpp",
+      "closure": [
+        "reconstruction/actor207_1/StateRelated.cpp",
+        "reconstruction/actor207_1/StateRelated.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "ef299de58af122bba6185e79ed1c335ea396c807bd3035d053a3dab431e712ef",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6974432,
+          "size": 56,
+          "symbol": "?QueryActorState@P2071@@YA_NPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VAIProcess@2@VMovementControllerNPC@2@@P206Target@@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "33e5d1d5625c6e220da678311308589e8e7c3c8caf1ef8b88bd825fd9d571412",
+      "first_content_sha256": "6cdb00db1674c29e35e58139b6ae95229970d2be665d9822d27f71efedc6d8a6"
+    },
+    {
+      "task_id": "r246-final-03",
+      "unit": "reconstruction/actor207_1/AIProcess207Pass.cpp",
+      "closure": [
+        "reconstruction/actor207_1/AIProcess207Pass.cpp",
+        "reconstruction/actor207_1/AIProcess207Pass.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "2a45412585d1cc96e4f1c94f193b6d3698b1611b73cf4d928f89a68e9b8f4fd5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7349152,
+          "size": 18,
+          "symbol": "?SetHighFloat@AIProcess207Pass@P2071@@QEAAXM@Z"
+        },
+        {
+          "rva": 7242608,
+          "size": 44,
+          "symbol": "?UpdateTimeBits@AIProcess207Pass@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "9dbcdbe1573a646b2b25f22f04198a272efcbf54920ee1bce958c34c0a1d3f0f",
+      "first_content_sha256": "8d91a43e6820a22f3d94a7d7505a710d636b6db34c39d9d263475feea1608c6d"
+    },
+    {
+      "task_id": "r246-final-04",
+      "unit": "reconstruction/actor207_1/ChangeActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ChangeActor.cpp",
+        "reconstruction/actor207_1/ChangeActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "cfd10b2035e426452e0fd131dc59fd4c8d4159fe1f537afd2dd9cdee6478839d",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7110752,
+          "size": 60,
+          "symbol": "?ResetActorChange@ChangeActor@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "75ea049145a6421a4d5f6850b82558c036dc7969e77739e2089d644f8a2a6ccf",
+      "first_content_sha256": "f008539072da93bf79e7aef9f687f4a7572a48f277a10b66ec52752c4f5afa3d"
+    },
+    {
+      "task_id": "r246-final-05",
+      "unit": "reconstruction/actor207_1/LimbActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/LimbActor.cpp",
+        "reconstruction/actor207_1/LimbActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "492fac95808bcdd1ee201ce7a55358afd534dc5da71f0b16bd501ea29ca5ddec",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3077984,
+          "size": 43,
+          "symbol": "?IsLimbGone@LimbActor@P2071@@QEAA_NI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "cdc449d37a9b8a9bf64f52bee6bf940c4c10317a8f60cd41838544da67829bc6",
+      "first_content_sha256": "3c1c90726d9d5f2752472381de035dc7d0ec2135697927be6eb5a002c9b0a5e8"
+    },
+    {
+      "task_id": "r246-final-06",
+      "unit": "reconstruction/actor207_1/RotationActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/RotationActor.cpp",
+        "reconstruction/actor207_1/RotationActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "903d35e5bfa2a91e73f539a03b17d8fba18d312ce4f8350839e5a2e79a29d8ca",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6767120,
+          "size": 53,
+          "symbol": "?ModifyRotationZ@RotationActor@P2071@@QEAAXM@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "cc899a99669bd246dd549ab5bb9ada42c2c0ac235cf3c2d2c7a9ce37c13dc540",
+      "first_content_sha256": "837411e9835fadefd070048f743dead75bb3f74964743bd860f129945a4fb950"
+    },
+    {
+      "task_id": "r246-final-07",
+      "unit": "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_aggregate/TESObjectREFR.h"
+      ],
+      "source_sha256": "4dd57111b51b9e1f28bcd5be389486d92eea57ff5cd6140cdfa34674ded6c81a",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3017104,
+          "size": 49,
+          "symbol": "?ForwardRequest@TESObjectREFR@P2073@@QEAAXPEAVRequestTarget@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "8658e8019d68b186f21aea9942a2c329c637518b4eae8da99a5423348d313812",
+      "first_content_sha256": "7ba407a2f811177683d907146524684c34c2a800b4cbd4a0c9302dce6ebae43e"
+    },
+    {
+      "task_id": "r246-final-08",
+      "unit": "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+        "reconstruction/actor207_3_component/PlayerCharacter.h"
+      ],
+      "source_sha256": "ce263048f08e0608add96237e68d713d3bfdfb44ff19ec9a7eba2e7f49af2a57",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7660992,
+          "size": 49,
+          "symbol": "?ProcessComponent@PlayerCharacter@P2073@@UEAAXPEAVComponentInput@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "5cc41d58e1fffd089fa3974636cdd355d23345f6d51a00748858a6593716d549",
+      "first_content_sha256": "66ead2bc918b305ae72260e99a21e9bcbd63a4e7caa0b0f49d1e31cc8850f604"
+    },
+    {
+      "task_id": "r246-final-09",
+      "unit": "reconstruction/actor207_3/MagicTarget.cpp",
+      "closure": [
+        "reconstruction/actor207_3/MagicTarget.cpp",
+        "reconstruction/actor207_3/MagicTarget.h"
+      ],
+      "source_sha256": "e7e3e40bf917aa084c86035831fd76dd900099c832db29b482618fc32b730cca",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7644416,
+          "size": 41,
+          "symbol": "?IsInvulnerable@MagicTarget@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "823aaf8ce17999674f7eaf4ea6e1b9b7091b39130e4b55d5167f8b75e3ba10c8",
+      "first_content_sha256": "5c7b0cbc85885af936bfc3c0850892db387582eec1fdd3c67923e801bdac36e2"
+    },
+    {
+      "task_id": "r246-final-10",
+      "unit": "reconstruction/actor207_3_nodes/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_nodes/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_nodes/TESObjectREFR.h"
+      ],
+      "source_sha256": "717d9a3e2319bc3f5c08e8a4a0301df4ad8acf5aebe5bbb431602ede1a8b7b4b",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 2732880,
+          "size": 50,
+          "symbol": "?FindNodeValue@P2073@@YAPEAXPEAVTESObjectREFR@1@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "18cbb17b7169fd3b327403c46f158b547fe21d6880afc5359f3a19814320c040",
+      "first_content_sha256": "135ff42a0d3856f2b74864a3b05135beea38d65d856d044d72526fb359fb9cac"
+    },
+    {
+      "task_id": "r246-final-11",
+      "unit": "reconstruction/actor207_3/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3/PlayerCharacter.cpp",
+        "reconstruction/actor207_3/PlayerCharacter.h"
+      ],
+      "source_sha256": "9b9049bf959416c1ed7136cf1a065aa791de277ccdef7de16463c0d756c3a24f",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7724432,
+          "size": 35,
+          "symbol": "?PositionOrAlternate@PlayerCharacter@P2073@@QEAAPEBUNiPoint3@2@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "90236b5284122162f2b38d6877c6953f2f8d18ff4a650b5f62dbb5c60523324a",
+      "first_content_sha256": "d2706b73ba9c9410eb3d4d0361336e56aa629552f301ef08ee69c1f5ded61464"
+    },
+    {
+      "task_id": "r246-final-12",
+      "unit": "reconstruction/actor207_3_animation/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_animation/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_animation/TESObjectREFR.h"
+      ],
+      "source_sha256": "6379d7e3e05117b81cbaaddec5c097a514c86f1afc7fd25e99eacd9d0d3f8864",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7008400,
+          "size": 57,
+          "symbol": "?IsSprinting@TESObjectREFR@P2073@@QEAA_NXZ"
+        },
+        {
+          "rva": 7007312,
+          "size": 63,
+          "symbol": "?HasSyncSprint@TESObjectREFR@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "3462eaaaf8dc0625c18cc09e23e888690c5a9c444ee8385d50ea77f6490de6f5",
+      "first_content_sha256": "be195f483b6a38f65f6bf6ea8e44aa026bd72b881b8fa80487858843c2fac990"
+    },
+    {
+      "task_id": "r246-final-13",
+      "unit": "reconstruction/actor207_3/RegistryEntry.cpp",
+      "closure": [
+        "reconstruction/actor207_3/RegistryEntry.cpp",
+        "reconstruction/actor207_3/RegistryEntry.h"
+      ],
+      "source_sha256": "c08724307ad2b7bd88f54d56385fffb571a7d01bcd7d0bcf5cd5e0a1d8b261f5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7702336,
+          "size": 42,
+          "symbol": "?ReadIndexedValue@P2073@@YAMXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "dbc544bc1646b468b8617c9dd37a7d4ee8802276667af1b4a18a259cbec2920d",
+      "first_content_sha256": "5444e802e8794712e9c50ceebfa6023bbb2c8cfd2152859c42e0a8bbb56c97b4"
+    },
+    {
+      "task_id": "r246-final-14",
+      "unit": "reconstruction/actor207_3/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3/TESObjectREFR.cpp",
+        "reconstruction/actor207_3/TESObjectREFR.h"
+      ],
+      "source_sha256": "3be13cbc81a248417f2a17176a1a5edff1c5a78f5b1c856d68f4082e94924ae5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3107008,
+          "size": 53,
+          "symbol": "?ClearExtra@TESObjectREFR@P2073@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "c1cc6c2598eb9090285896f7a7d9a7c028c7c415aa575f29c428e36ad66dc29c",
+      "first_content_sha256": "a91784ff59228e1e58b31c2c8e1c8e34d048f3b60b14d37efbc56aa80188fddd"
+    }
+  ]
+}
