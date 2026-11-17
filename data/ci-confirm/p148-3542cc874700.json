@@ -1,0 +1,394 @@
+{
+  "schema": 1,
+  "base_sha": "4e95fea0e954aed9d19f0ec1e0bc9e9c40f657b4",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_3/PlayerMenuModeSink.cpp": "91b21aec03437b246e24d89aba32e4944856cc868d21eaf22b3a6c32fb4b655a",
+    "reconstruction/actor207_3/PlayerMenuModeSink.h": "17774e82c6c868c7e7856850f5fd04051edb3bee59f24f06110407ed6ca71849",
+    "reconstruction/actor207_3_animation/TESObjectREFR.cpp": "ad41b2e27ca8557acd4c269029920230da01b903f82b20e10c178bc5b48c1239",
+    "reconstruction/actor207_3_animation/TESObjectREFR.h": "d1f4f7c827811061dcb5ac9af26a92e4e58b79d759ea9c9aee0368b7be48a89a",
+    "reconstruction/actor207_3_flags/TESObjectREFR.cpp": "347d5ad6cd9e74d1a671a673156cbcba4c50e9dac93717a333c5b1495493e710",
+    "reconstruction/actor207_3_flags/TESObjectREFR.h": "132088dd50a732ce29ce111ed5b28c74bde1c1897d89fc3b1cdc4a23cd451c7e",
+    "reconstruction/actor207_3/RegistryEntry.cpp": "b2b3bc2d91954c8be7db5d7d691827f4a23b78f666813a9c1b96d5124bbade7a",
+    "reconstruction/actor207_3/RegistryEntry.h": "d6f558f2029555aa89fd761168ec0242d8b39e18694830f4df8f78f77ec0d131",
+    "reconstruction/actor207_3_spell/Actor.cpp": "07077940607eca9a6bc22872df62fff81eac4326e4985d4f696681167ec78ecf",
+    "reconstruction/actor207_3_spell/Actor.h": "fe24fcdff1bea00c550191209ae100a4a617b507d3a0ca0f9dc9a9ee4ce40658",
+    "reconstruction/actor207_3_temporary/TESForm.cpp": "0d0632c53339c3f9dd31cc0b9f01f362dc17828726ea9cef2eaa6b236332a7fe",
+    "reconstruction/actor207_3_temporary/TESForm.h": "6e11a2eec7b223e9ac7df871336a97ab79c7dbc36cbc8106cd71c1bfcaf2e9d7",
+    "reconstruction/actor207_3/TESForm.cpp": "b10126e6a3c0c888a18896fb0a06b1120efdd820255a944e704fee3719f9ce90",
+    "reconstruction/actor207_3/TESForm.h": "de99705689a23f02240129cd5eda0ca02fcd4246ea953fbf58a341079f362383",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actor207_3/TESObjectREFR.cpp": "a749fa1c6d7e68e8b674574d3de8da566a96ac828af76e414a3d0ed61472ef16",
+    "reconstruction/actor207_3/TESObjectREFR.h": "365c95e377c933cf01997a548a407ce75219c16b2992231bb2545cd97b625fef",
+    "reconstruction/actor207_3_update_call/TESObjectREFR.cpp": "2e99e8373b35d768b7d9055f935030c4acf19877cfdaae02b80cdf169d971dc7",
+    "reconstruction/actor207_3_update_call/TESObjectREFR.h": "4298d033876f711f5959cb0c771cc35b58f33bc1d373ec6d4647003c27770c88",
+    "reconstruction/actor207_3_update_flag/TESObjectREFR.cpp": "ba403f6d130bb1632a1bf44e0995b1a1a02d48bc8baa0007a7495f6df3d6a6c2",
+    "reconstruction/actor207_3_update_flag/TESObjectREFR.h": "e68ee2c7a1c6d55dfa67a9a0bb7780760429c6c2e78879ed5f0bf1f5c35e6faf",
+    "reconstruction/actor207_3_zone/TESObjectREFR.cpp": "63ebf99c8f0d346518ec7f8cbe7c57b87d5edb06a4c84a9da36aaad61227deac",
+    "reconstruction/actor207_3_zone/TESObjectREFR.h": "f78c07c279f2a7b7eb7d567f61fda85641f90bd6664b7783aa35ac20bbe18407",
+    "reconstruction/actor207_solretry/ActorForward.cpp": "96a598053a8ba644d2b0331a138ea83c5d798bafecfe45f73c73b65234bc9d09",
+    "reconstruction/actor207_solretry/ActorForward.h": "b756948d29804d99891ab13ba67ff75e3220a990c646945729e8975bda9b2f1e",
+    "reconstruction/actor207_solretry/NiPoint3.h": "2640216e4e5d5fc71d49c04fef64a93451a0b2070aa737d7bf778d5d6ec30225",
+    "reconstruction/actor207_solretry/ActorVector.cpp": "9563d851816ef6338c191396f87fd4c740438622d2c19e402eb052e95d762592",
+    "reconstruction/actor207_solretry/ActorVector.h": "9c73febc74833a38ff7a47911aefe9d305de1050cc774cc791e32b84335848b7"
+  },
+  "units": [
+    {
+      "task_id": "p207-3-playermenumodesink",
+      "unit": "reconstruction/actor207_3/PlayerMenuModeSink.cpp",
+      "closure": [
+        "reconstruction/actor207_3/PlayerMenuModeSink.cpp",
+        "reconstruction/actor207_3/PlayerMenuModeSink.h"
+      ],
+      "source_sha256": "3a5ea46459fac37ee82b2fa4373ff3be39fb64497402b93c5c6ac2d21e852d0d",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7728336,
+          "size": 58,
+          "symbol": "?ProcessEvent@PlayerMenuModeSink@P2073@@QEAAHPEBUMenuModeChangeEvent@2@PEAX@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "5e26d62f78e7dfd3c62ff2151cf975eae60eb3a15c69dfb0f95e31cffdc7439f",
+      "first_content_sha256": "86b833a91d4a90c2c06cfe470276c772f861aba853d5ffc72bece55c2a05b454"
+    },
+    {
+      "task_id": "p207-3-referenceanimation",
+      "unit": "reconstruction/actor207_3_animation/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_animation/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_animation/TESObjectREFR.h"
+      ],
+      "source_sha256": "6379d7e3e05117b81cbaaddec5c097a514c86f1afc7fd25e99eacd9d0d3f8864",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7008400,
+          "size": 57,
+          "symbol": "?IsSprinting@TESObjectREFR@P2073@@QEAA_NXZ"
+        },
+        {
+          "rva": 7007312,
+          "size": 63,
+          "symbol": "?HasSyncSprint@TESObjectREFR@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "d6ef454612978449af46666752a0260fa7eec0f82c5536d37b1fa529ebacd121",
+      "first_content_sha256": "be195f483b6a38f65f6bf6ea8e44aa026bd72b881b8fa80487858843c2fac990"
+    },
+    {
+      "task_id": "p207-3-referenceflags",
+      "unit": "reconstruction/actor207_3_flags/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_flags/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_flags/TESObjectREFR.h"
+      ],
+      "source_sha256": "4c59c0d27db1a1068c1fff6975f10cafdf7de09df4bd8ce1be0d69df72c3c9fe",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3030864,
+          "size": 52,
+          "symbol": "?FlagTwo@TESObjectREFR@P2073@@QEAA_NXZ"
+        },
+        {
+          "rva": 3030928,
+          "size": 52,
+          "symbol": "?FlagThree@TESObjectREFR@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "c36413aee53adb486cd82e158c295d23a29b8ef99af69cab540b7b37970d0c33",
+      "first_content_sha256": "0fcdb2d14a5434fc7889efb70d9b3e8b80185ebbc7758442549f94aada6aabb8"
+    },
+    {
+      "task_id": "p207-3-registryentry",
+      "unit": "reconstruction/actor207_3/RegistryEntry.cpp",
+      "closure": [
+        "reconstruction/actor207_3/RegistryEntry.cpp",
+        "reconstruction/actor207_3/RegistryEntry.h"
+      ],
+      "source_sha256": "c08724307ad2b7bd88f54d56385fffb571a7d01bcd7d0bcf5cd5e0a1d8b261f5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7702336,
+          "size": 42,
+          "symbol": "?ReadIndexedValue@P2073@@YAMXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "404ef41cdf70c5ff051fb32f3147dddaea6568e72659747e90a4ddbf434b8550",
+      "first_content_sha256": "5444e802e8794712e9c50ceebfa6023bbb2c8cfd2152859c42e0a8bbb56c97b4"
+    },
+    {
+      "task_id": "p207-3-spell",
+      "unit": "reconstruction/actor207_3_spell/Actor.cpp",
+      "closure": [
+        "reconstruction/actor207_3_spell/Actor.cpp",
+        "reconstruction/actor207_3_spell/Actor.h"
+      ],
+      "source_sha256": "859cf0b58ab34a3d703f46fb0d2bd8512aab11a3613101db7ab6c877bb3d0643",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7171328,
+          "size": 48,
+          "symbol": "?HasSelectedSpell@Actor@P2073@@QEAA_NH@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "464bb92ba21c5288028bb315317958fcb5196b9053ba27f6328d5c72a46c2321",
+      "first_content_sha256": "df4b4ea0921a246f05a1453b2d085e7009dc3917bf865818822e9da3defd711f"
+    },
+    {
+      "task_id": "p207-3-temporary",
+      "unit": "reconstruction/actor207_3_temporary/TESForm.cpp",
+      "closure": [
+        "reconstruction/actor207_3_temporary/TESForm.cpp",
+        "reconstruction/actor207_3_temporary/TESForm.h"
+      ],
+      "source_sha256": "b08cc8bbb6e4776a1451533f6d266e00f9682a5d7d85082567afc1fa986712b8",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 1991264,
+          "size": 49,
+          "symbol": "?SetTemporary@TESForm@P2073@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "1f1d866ca4411aaf70b13830db4e6e1de690e4049e49a72de9206e5ab97b6ef1",
+      "first_content_sha256": "bc6b74bb2f9332970c7401aad8aae1f3be278cd0694c788669da8a3278a5a36c"
+    },
+    {
+      "task_id": "p207-3-tesform",
+      "unit": "reconstruction/actor207_3/TESForm.cpp",
+      "closure": [
+        "reconstruction/actor207_3/TESForm.cpp",
+        "reconstruction/actor207_3/TESForm.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "61db4f2a7b033d361715fe50e34f2f2fba3eb81fe98c182b5dab687497167e6a",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 8809072,
+          "size": 53,
+          "symbol": "?CombinedMeasure@P2073@@YAMPEAVTESForm@1@0@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "a9a8f4be5f2aa39119d45b8832ff70182cba5b2c1e7c5a20acb14188a2017239",
+      "first_content_sha256": "4252771433ab6cde1fa1ebc86735056f12d84ad5ba4bda08e7b346f5494b5884"
+    },
+    {
+      "task_id": "p207-3-tesobjectrefrpass",
+      "unit": "reconstruction/actor207_3/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3/TESObjectREFR.cpp",
+        "reconstruction/actor207_3/TESObjectREFR.h"
+      ],
+      "source_sha256": "3be13cbc81a248417f2a17176a1a5edff1c5a78f5b1c856d68f4082e94924ae5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3107008,
+          "size": 53,
+          "symbol": "?ClearExtra@TESObjectREFR@P2073@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "954fcc47507dcd3f1a6f971180e468f312af969a86c6642d250185fb1e9d1e4b",
+      "first_content_sha256": "a91784ff59228e1e58b31c2c8e1c8e34d048f3b60b14d37efbc56aa80188fddd"
+    },
+    {
+      "task_id": "p207-3-update-call",
+      "unit": "reconstruction/actor207_3_update_call/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_update_call/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_update_call/TESObjectREFR.h"
+      ],
+      "source_sha256": "dcfaa5cc559e59502f7fe769cca03ed91a92dd455352b7c66857c261df97db08",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3132224,
+          "size": 53,
+          "symbol": "?PrepareUpdate@TESObjectREFR@P2073@@QEAAPEAUBSAnimationUpdateData@2@PEAU32@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "f03c131a9ca1a25c6110179225c6dcd3275c5a8bc8d1e4ba08f213a032b414a2",
+      "first_content_sha256": "8567b7e2e0a3d06c04df496d0c2302dad8d372960bba677e20cb38f346f411f9"
+    },
+    {
+      "task_id": "p207-3-update-flag",
+      "unit": "reconstruction/actor207_3_update_flag/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_update_flag/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_update_flag/TESObjectREFR.h"
+      ],
+      "source_sha256": "0d6a2949b87ddc70a65db6d1dd12d488695de80be7060e3589967bb4c6101c02",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3074816,
+          "size": 58,
+          "symbol": "?QueryUpdateFlag@TESObjectREFR@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "767141dd570f26f594a4c1cb97174abc955dd4a15c37d729ba2487ae5d5161d6",
+      "first_content_sha256": "d59032c31e0826328390fb3ffe3ae18a935b597d40f73cdbb7865d37cfb9cf41"
+    },
+    {
+      "task_id": "p207-3-zone",
+      "unit": "reconstruction/actor207_3_zone/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_zone/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_zone/TESObjectREFR.h"
+      ],
+      "source_sha256": "7929fdcee03d6042f3865ec23894ffd54ca1b4aaaa9a73c8f97b2c0ab9adf1d5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3148576,
+          "size": 52,
+          "symbol": "?GetEncounterZone@TESObjectREFR@P2073@@QEAAPEAVBGSEncounterZone@2@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "2a9f3b2c72ceca1261a3ad388eeef712c6a50a5ad72a11fa2eb928cc507b3c1e",
+      "first_content_sha256": "f4f3e1ebc7f31bbb80971b6f87fe03e291b87c12f99b2b3554fb6b45c64c54f2"
+    },
+    {
+      "task_id": "p207-solretry-actorforward",
+      "unit": "reconstruction/actor207_solretry/ActorForward.cpp",
+      "closure": [
+        "reconstruction/actor207_solretry/ActorForward.cpp",
+        "reconstruction/actor207_solretry/ActorForward.h",
+        "reconstruction/actor207_solretry/NiPoint3.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "eb5f9c93b2d55c61c0e1d9b7560e42fcc3b86c7151b9bd42adc585f7f5cdeaaf",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6974240,
+          "size": 62,
+          "symbol": "?ForwardValues@ActorForward@P207SolRetry@@QEAAXAEBVNiPoint3@2@MMM@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "d3de27e4a8fd4d897a6280b099afdaee19c26e228fd878fc18e4a9b91413fabf",
+      "first_content_sha256": "5c55421e98cab686474dae2bda7d5eeaa0994022d2906b6bdfecf0498303a394"
+    },
+    {
+      "task_id": "p207-solretry-actorvector",
+      "unit": "reconstruction/actor207_solretry/ActorVector.cpp",
+      "closure": [
+        "reconstruction/actor207_solretry/ActorVector.cpp",
+        "reconstruction/actor207_solretry/ActorVector.h",
+        "reconstruction/actor207_solretry/NiPoint3.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "899456f78d248673501192af6b5c9c5ea20f3c5031646c9544f92b4ac938f9db",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6975568,
+          "size": 61,
+          "symbol": "?ReadVector@ActorVector@P207SolRetry@@QEAA?AVNiPoint3@2@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "ad7326880a3f764c7f5c72c1fabfcefc870f7f367a0b1c9f9fe313a8e53479eb",
+      "first_content_sha256": "ed7f5564cff3c0c2938d09a5efb1145536f7c73b31e44a28f2b487e00194ed29"
+    }
+  ]
+}
