@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "base_sha": "ee5d52cd971db12f3bdfa7c707647ccec1e88505",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/netimmerse/NiPointLight.cpp": "6ed2036f208be920c1c97f1041d9ae59881653c5b4f1307811600ce5252975a7",
+    "reconstruction/netimmerse/NiPointLight.h": "2b48c400e88f5916b065bf3fdb8ac7d0f101e290e2a949d19b9f4e39f9974015"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr102-e9906be1-0-squash-efe1f0",
+      "unit": "reconstruction/netimmerse/NiPointLight.cpp",
+      "closure": [
+        "reconstruction/netimmerse/NiPointLight.cpp",
+        "reconstruction/netimmerse/NiPointLight.h"
+      ],
+      "source_sha256": "abda915a337015bef20af55723e456de3ab40df81f6a31093e378e8461153800",
+      "recipe": "reconstruction/recipes/o2-fpfast-root-includes.json",
+      "recipe_sha256": "a6df3f3f1af44ec7ba9c6e181357718ee3fa4577d33abb58c3176ae33fd52d2c",
+      "functions": [
+        {
+          "rva": 15720944,
+          "size": 192,
+          "symbol": "?LoadBinary@NiPointLight@@UEAAXAEAVNiStream@@@Z"
+        }
+      ],
+      "mac_object_sha256": "6d38f2c088820ea75ccdd0921789ec4e11dd313d48d318b4660e130e52dcc9d6",
+      "mac_content_sha256": "598cd6ac65234b2edc3fb19e7fca25031cb0a106c6726cf796dee194c3a9a717"
+    }
+  ]
+}
