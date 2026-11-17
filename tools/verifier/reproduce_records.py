@@ -149,6 +149,9 @@ def main():
     p.add_argument('--host', required=True, help='host name in .local/verifier/runners.json')
     p.add_argument('--jobs', type=int, help='units in flight (default: the host\'s max_parallel)')
     p.add_argument('--unit', action='append', help='only this compiled file (repeatable)')
+    p.add_argument('--changed-since', metavar='REV',
+                   help='only units whose include closure, record or recipe changed since REV; '
+                        'a change under tools/, builds/ or recipes selects every unit')
     p.add_argument('--out', type=Path, help='private output directory (default .local/verifier/reproduce/<host id>)')
     a = p.parse_args()
     try:
@@ -164,6 +167,17 @@ def main():
         todo = units(recs, target, matched, out_root)
         if a.unit:
             todo = [t for t in todo if t[0]['compiled'] in a.unit]
+        if a.changed_since:
+            import unit_selection
+            deps = {}
+            for task, by_rva in todo:
+                extra = deps.setdefault(task['compiled'], {task['recipe'], task['symbols_repo']})
+                for rec in by_rva.values():
+                    extra.update(rec['source'].get('translation_unit') or ())
+                    extra.add(f"reports/{target['build_id']}/0x{rec['runs'][0]['report']['function']['rva']:x}.json")
+            keep, why = unit_selection.select(REPO, a.changed_since, deps)
+            print(f'reproduce: {why}')
+            todo = [t for t in todo if t[0]['compiled'] in keep]
         jobs = a.jobs or host['max_parallel']
         print(f'reproduce: {sum(len(b) for _, b in todo)} records in {len(todo)} units on {runners.describe(host)}; '
               f'{jobs} in flight')

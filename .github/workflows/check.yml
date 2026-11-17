@@ -1,6 +1,9 @@
 name: Infrastructure checks
 on:
   push:
+    # Candidate branches for second-host confirmation are validated by the dispatched confirm
+    # workflow; running the full suite on each of them is pure waste and no gate reads it.
+    branches-ignore: ['ci-confirm/**']
   pull_request:
 permissions:
   contents: read

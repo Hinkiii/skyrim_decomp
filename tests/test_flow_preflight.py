@@ -89,3 +89,59 @@ def test_conflict_aborts(tmp_path):
     assert check(main, root, True)['problem'] == 'rebase conflict: file'
     assert git(root, 'rev-parse', 'HEAD') == original
     assert not (root / '.git/rebase-merge').exists()
+
+
+def tooling_change(root):
+    (root / 'tools').mkdir(exist_ok=True)
+    commit(root, 'tools/x.py', 'x\n')
+    return git(root, 'rev-parse', 'HEAD')
+
+
+def linux(main, root, runs=None, error=None):
+    def gh(*args):
+        if error:
+            raise flow_preflight.ci_status.GhError(error)
+        return runs
+    with patch.object(flow_preflight.ci_status, 'gh', side_effect=gh) as mocked:
+        out = check(main, root)
+    return out, mocked
+
+
+def test_linux_green_run_for_exact_sha(tmp_path):
+    main, root = setup_repos(tmp_path)
+    sha = tooling_change(root)
+    out, mocked = linux(main, root, [dict(headSha=sha, status='completed', conclusion='success')])
+    assert out == dict(ok=True, problem=None, rebased=False)
+    assert '--commit' in mocked.call_args.args and sha in mocked.call_args.args
+
+
+def test_linux_run_for_other_sha_does_not_count(tmp_path):
+    main, root = setup_repos(tmp_path)
+    sha = tooling_change(root)
+    out, _ = linux(main, root, [dict(headSha='0' * 40, status='completed', conclusion='success')])
+    assert not out['ok']
+    assert f'git push origin {sha}:refs/heads/' in out['problem'] and 'has not run' in out['problem']
+    assert 'ci_status.py' in out['problem'] and '--wait' in out['problem']
+
+
+def test_linux_red_and_running_runs_block(tmp_path):
+    main, root = setup_repos(tmp_path)
+    sha = tooling_change(root)
+    red, _ = linux(main, root, [dict(headSha=sha, status='completed', conclusion='failure')])
+    assert 'is red' in red['problem']
+    running, _ = linux(main, root, [dict(headSha=sha, status='in_progress', conclusion=None)])
+    assert 'still running' in running['problem']
+
+
+def test_linux_gh_unavailable_warns_without_blocking(tmp_path):
+    main, root = setup_repos(tmp_path)
+    tooling_change(root)
+    out, _ = linux(main, root, error='gh: not found')
+    assert out['ok'] and 'gh unavailable' in out['warnings'][0]
+
+
+def test_linux_skipped_for_non_tooling_change(tmp_path):
+    main, root = setup_repos(tmp_path)
+    commit(root, 'reconstruction.cpp', 'x\n')
+    out, mocked = linux(main, root, error='must not be asked')
+    assert out['ok'] and not mocked.called
