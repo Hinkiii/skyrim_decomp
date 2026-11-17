@@ -2936,14 +2936,23 @@ def execute(a, root, fdir):
                 if flow_lane.running(fdir) and not a.wait_lane:
                     print('push lane is already running; request remains queued for the next run')
                 else:
-                    print(json.dumps(flow_lane.run_lane(root, fdir, a.branch, not a.no_push,
-                                     soft_free_gb=a.soft_free_gb, allow_low_disk=a.allow_low_disk,
-                                     wait_lane=a.wait_lane), indent=2))
+                    result = flow_lane.run_lane(root, fdir, a.branch, not a.no_push,
+                                                soft_free_gb=a.soft_free_gb, allow_low_disk=a.allow_low_disk,
+                                                wait_lane=a.wait_lane)
+                    print(json.dumps(result, indent=2))
+                    if flow_lane.nothing_published(result):
+                        print('flow: lane run finished with nothing published; see the dropped reasons above',
+                              file=sys.stderr)
+                        return 1
         elif a.cmd == 'lane-run':
             import flow_lane
-            print(json.dumps(flow_lane.run_lane(root, fdir, a.branch, not a.no_push, a.ci_wait, min_free_gb=a.min_free_gb,
-                             soft_free_gb=a.soft_free_gb, allow_low_disk=a.allow_low_disk, resume=a.resume,
-                             wait_lane=a.wait_lane), indent=2))
+            result = flow_lane.run_lane(root, fdir, a.branch, not a.no_push, a.ci_wait, min_free_gb=a.min_free_gb,
+                                        soft_free_gb=a.soft_free_gb, allow_low_disk=a.allow_low_disk, resume=a.resume,
+                                        wait_lane=a.wait_lane)
+            print(json.dumps(result, indent=2))
+            if flow_lane.nothing_published(result):
+                print('flow: lane run finished with nothing published; see the dropped reasons above', file=sys.stderr)
+                return 1
         elif a.cmd == 'lane-status':
             import flow_lane
             # Atomic writers give a recent per-file observation; status never waits on a publisher.

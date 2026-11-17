@@ -1134,6 +1134,29 @@ def stale_sibling_members(tree, baseline, requests):
     return accepted, dropped
 
 
+def admit_enrollments(tree, source, enrollments):
+    """Refuse an item whose new inventory rows cite evidence the published tree will not hold.
+
+    The whole-inventory validator fails on any row with missing evidence, so one bad row from
+    one queued item would otherwise reject every other item in the run. Evidence is never
+    carried by the lane: it has to be committed content of the tree being published, and an
+    untracked file in the input checkout does not count.
+    """
+    for fn in enrollments:
+        evidence = fn.get('evidence')
+        parts = Path(evidence).parts if isinstance(evidence, str) and evidence else ()
+        f.refuse(parts and not Path(evidence).is_absolute() and '..' not in parts
+                 and parts[0] in ('findings', 'reports'),
+                 f'{fn["id"]}: enrollment evidence {evidence!r} is not a public findings/reports path')
+        tracked = subprocess.run(['git', 'cat-file', '-e', 'HEAD:' + evidence], cwd=tree,
+                                 capture_output=True).returncode == 0
+        f.refuse(tracked, f'{fn["id"]}: Evidence {evidence} is not committed content of the '
+                          'integration tree (untracked or missing in the input checkout); commit and '
+                          'publish it, or pass --with-metadata, then re-queue')
+        f.refuse(fn.get('report') and (Path(source) / fn['report']).is_file(),
+                 f'{fn["id"]}: match record {fn.get("report")} is missing from the input checkout')
+
+
 def merge_metadata(tree, source, revision):
     # integration_base validated the metadata-only history before this transport step.
     f.git(tree, 'fetch', '--quiet', str(source), revision)
@@ -1204,6 +1227,18 @@ def commit_acceptance(tree, requests, items, message, commit_date):
     result = subprocess.run(command, cwd=tree, env=env, input=message, capture_output=True, text=True)
     f.refuse(result.returncode == 0, 'contributor merge commit failed')
     f.git(tree, 'update-ref', 'HEAD', result.stdout.strip(), previous)
+
+
+def nothing_published(receipt):
+    """True for a run that consumed queued work and published none of it."""
+    return (isinstance(receipt, dict) and receipt.get('state') == 'done' and bool(receipt.get('items'))
+            and not (receipt.get('integrated') or {}).get('pushed'))
+
+
+def log_all_dropped(fdir, receipt):
+    f.log_event(Path(fdir), 'lane-all-dropped', lane=receipt['id'],
+                dropped=len(receipt.get('dropped', [])),
+                reasons=sorted({str(d.get('reason', ''))[:200] for d in receipt.get('dropped', [])})[:5])
 
 
 def build(root, fdir, receipt, python, branch, soft_free_gb=None, allow_low_disk=False, hard_free_gb=None):
@@ -1302,6 +1337,7 @@ def build(root, fdir, receipt, python, branch, soft_free_gb=None, allow_low_disk
                                           for r in request['functions'] if by_rva[r]['id'] not in public_ids]
                 for enrollment in request['enrollments']:
                     f.validate_enrollment(enrollment)
+                admit_enrollments(tree, source, request['enrollments'])
                 f._integration_origin_unchanged(source, f.git(source, 'rev-parse', 'HEAD'), base,
                                                sorted(paths), request['build_id'], request['functions'], headers=headers,
                                                enrollments=request['enrollments'])
@@ -1349,6 +1385,7 @@ def build(root, fdir, receipt, python, branch, soft_free_gb=None, allow_low_disk
         for item in receipt['items']:
             item['state'] = 'dropped'
         save_run(fdir, receipt)
+        log_all_dropped(fdir, receipt)
         return None
     carry_base = f.git(tree, 'rev-parse', 'HEAD')
 
@@ -1379,6 +1416,7 @@ def build(root, fdir, receipt, python, branch, soft_free_gb=None, allow_low_disk
         for item in receipt['items']:
             item['state'] = 'dropped'
         save_run(fdir, receipt)
+        log_all_dropped(fdir, receipt)
         return None
     if result['dropped']:
         recarry(result['accepted'])

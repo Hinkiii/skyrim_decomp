@@ -28,8 +28,13 @@ class EnrollmentLane(unittest.TestCase):
 
     def unenroll(self):
         data = flow.inventory(self.root)
+        # Enrollment evidence must be committed content of the published base.
+        (self.root / 'findings').mkdir(exist_ok=True)
+        (self.root / 'findings/synthetic.md').write_text('# synthetic\n')
+        for fn in data['functions']:
+            fn['evidence'] = 'findings/synthetic.md'
         (self.root / af.PROGRESS).write_text(json.dumps(dict(data, functions=[])))
-        git(self.root, 'add', '--', af.PROGRESS)
+        git(self.root, 'add', '--', af.PROGRESS, 'findings/synthetic.md')
         git(self.root, 'commit', '--quiet', '-m', 'synthetic public base without enrollment')
         git(self.root, 'push', '--quiet', 'origin', 'main')
         (self.root / af.PROGRESS).write_text(json.dumps(data))
@@ -63,6 +68,45 @@ class EnrollmentLane(unittest.TestCase):
         result = self.lane(push=False)
         self.assertFalse(result['dropped'])
         self.assertEqual(result['integrated']['accepted'], 3)
+
+    def mark_untracked_evidence(self, data, rva):
+        (self.root / 'findings/untracked.md').write_text('# never committed\n')
+        for fn in data['functions']:
+            if fn['rva'] == rva:
+                fn['evidence'] = 'findings/untracked.md'
+        (self.root / af.PROGRESS).write_text(json.dumps(data))
+
+    def events(self):
+        path = self.fdir / 'events.jsonl'
+        return [json.loads(line) for line in path.read_text().splitlines()] if path.is_file() else []
+
+    def test_untracked_evidence_drops_only_its_own_item(self):
+        data = self.unenroll()
+        self.mark_untracked_evidence(data, 0x1000)
+        self.enqueue(self.names[:2])
+        result = self.lane(push=False)
+        self.assertEqual(len(result['dropped']), 1)
+        self.assertIn('findings/untracked.md', result['dropped'][0]['reason'])
+        self.assertEqual(result['integrated']['accepted'], 1)
+        rows = {fn['rva'] for fn in flow.inventory(Path(result['tree']))['functions']}
+        self.assertIn(0x2000, rows)
+        self.assertNotIn(0x1000, rows)
+        self.assertFalse(any(e.get('event') == 'lane-all-dropped' for e in self.events()))
+
+    def test_run_that_drops_everything_logs_an_event_and_fails_the_command(self):
+        data = self.unenroll()
+        self.mark_untracked_evidence(data, 0x1000)
+        lane.enqueue(self.root, self.fdir, 'review', [self.names[1]])
+        result = self.lane()
+        self.assertEqual(result['state'], 'done')
+        self.assertTrue(lane.nothing_published(result))
+        self.assertTrue(any(e.get('event') == 'lane-all-dropped' and e.get('lane') == result['id']
+                            for e in self.events()))
+        lane.enqueue(self.root, self.fdir, 'review', [self.names[1]], name='again')
+        with patch.object(sys, 'stdout'), patch.object(sys, 'stderr'):
+            status = flow.main(['--root', str(self.root), '--flow-dir', str(self.fdir), 'lane-run',
+                                '--min-free-gb', '0'])
+        self.assertEqual(status, 1)
 
     def test_unrelated_new_rows_stay_out_of_the_lane_selection(self):
         data = self.unenroll()
