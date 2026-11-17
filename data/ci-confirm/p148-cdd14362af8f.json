@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "base_sha": "59479c2f38538f9cf1016004f95ddee110312fab",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_2/PlayerCharacter.cpp": "c324f8ffe45e69725b072c842bad238fc6a07fa599791b93d6700a840c3a2e07",
+    "reconstruction/actor207_2/PlayerCharacter.h": "2ff8d6cbca77613e539a753169e9f7bc9135ac99193271cff58c52cdef910c8a",
+    "reconstruction/actor207_2/PlayerCharacterMembers.h": "f1d8261add823d612ee97a446362cdef4b678be582ac27b7b57e1cdd1122f881",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/PlayerCharacterTargetMembers.h": "147358603b9a1c74872a9e976a28c024e7c21780e78f2bbb6ff88535cf1cdf8d",
+    "reconstruction/actor207_2/PlayerCharacterCleanup.cpp": "609a89f4a4c2d5d129c0b83c450b2277602aaeba228039a292cec46aa24e8a87",
+    "reconstruction/actor207_2/PlayerCharacterCleanup.h": "705bdd914e08e71712bdc42b79873da15b06611e8abe7ad54bd6249eb3806e39",
+    "reconstruction/actor207_2/PlayerCombatView.cpp": "9ff1d12b289e2bf722199cb82cae47f31aa5bcbd90f0d2cf9ae9c0b44fb64ba7",
+    "reconstruction/actor207_2/PlayerCombatView.h": "2489d994c88dfab8e62cab503cc58566cb3f4f313b5e62bfe70eb76900a7c0ed",
+    "reconstruction/actor207_solretry/ActorForward.cpp": "06e1d1cb67daf2e4564314eb57a1c27c38406de035de5296b883ba46553d357f",
+    "reconstruction/actor207_solretry/ActorForward.h": "27e0abed54a81bfbc65fa61d0e3bc1c98233c31f2f093c56070c3bc05e7e8141",
+    "reconstruction/actor207_solretry/NiPoint3.h": "a645695eb099d33e1bd8782123a09b7c36f0b2db045893d239a50aa6324de351",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actor207_solretry/ActorVector.cpp": "0d45f03db22b8418668fbf162e8cc7d76a9d844f849ee3426ce3fdd2f74dcd98",
+    "reconstruction/actor207_solretry/ActorVector.h": "45ffb74969472cba1c7f293b5bfa6bc907ca456a158b85310d6e0cab0d4bb5e5",
+    "reconstruction/actor207_3/MagicTarget.cpp": "f22ca68d6bfebdb4ab8eb516a52946975bc89206424972a0d3a714c347ceb1f9",
+    "reconstruction/actor207_3/MagicTarget.h": "b4e09756ee2e332ecead27945bc99c9d3831d9ba03fb61f9827f939df4ddbc5a",
+    "reconstruction/actor207_3_component/PlayerCharacter.cpp": "a71d157f3d651e0f65a2d6d8ec8801a02205397fe56f14ab10589110d088f27a",
+    "reconstruction/actor207_3_component/PlayerCharacter.h": "8e861ed3f6530dc18f1cdaffe9ff18be879350488bf1df6cc23ad5109b006727"
+  },
+  "units": [
+    {
+      "task_id": "r246-fix-r2-01",
+      "unit": "reconstruction/actor207_2/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCharacter.cpp",
+        "reconstruction/actor207_2/PlayerCharacter.h",
+        "reconstruction/actor207_2/PlayerCharacterMembers.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/PlayerCharacterTargetMembers.h"
+      ],
+      "source_sha256": "46d2b16ea724bff00cb06fdab14fb7f96a9889d01b2293b9aa24e58f800a177d",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7641568,
+          "size": 47,
+          "symbol": "?UseSkill@PlayerCharacter@P2072@@QEAAXW4ActorValue@2@MPEAVTESForm@2@W4SKILL_ACTION@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "189ba68df8afac672f1d53a14bc075e7d44de0b0d4f39cdd90273445f0e77830",
+      "first_content_sha256": "add099134bcd9da13bf73d8e1955fb90c3878f34ef0f7e3f83630f923c0fb9a7"
+    },
+    {
+      "task_id": "r246-fix-r2-02",
+      "unit": "reconstruction/actor207_2/PlayerCharacterCleanup.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCharacterCleanup.cpp",
+        "reconstruction/actor207_2/PlayerCharacterCleanup.h",
+        "reconstruction/actor207_2/PlayerCharacterMembers.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/PlayerCharacterTargetMembers.h"
+      ],
+      "source_sha256": "c0c06d071f97e7bf5718e41a9d1abe635d9ee98e4cefaacff97cb61c8c542dc1",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7834416,
+          "size": 43,
+          "symbol": "?ClearVats@PlayerCharacterCleanup@P2072@@QEAAXXZ"
+        },
+        {
+          "rva": 7834480,
+          "size": 43,
+          "symbol": "?ClearDynamic@PlayerCharacterCleanup@P2072@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "346be1d53d45d337e896c33d1651c3d30e12669ae9337c8b6e7ccb7ab65f913b",
+      "first_content_sha256": "76afa3532968e6f366bc1264df7963e50e1dd7f77f8efb80e9a125925ebb18d6"
+    },
+    {
+      "task_id": "r246-fix-r2-03",
+      "unit": "reconstruction/actor207_2/PlayerCombatView.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCharacterMembers.h",
+        "reconstruction/actor207_2/PlayerCombatView.cpp",
+        "reconstruction/actor207_2/PlayerCombatView.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/PlayerCharacterTargetMembers.h"
+      ],
+      "source_sha256": "35bad3d746d62d1f6f691ecbe78c10c8a26e496743babe823f14df3076b30d29",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7825984,
+          "size": 46,
+          "symbol": "?ClearCombat@PlayerCombatView@P2072@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "358605ec3736bfe92a69ff7c339a1de40c9daec8b09eb5131cb2f9abaa233c42",
+      "first_content_sha256": "b64fb29cbc6f445a010bad8d481acd55ce66f66443f5522691ea4822cd6b0bf1"
+    },
+    {
+      "task_id": "r246-fix-r2-04",
+      "unit": "reconstruction/actor207_solretry/ActorForward.cpp",
+      "closure": [
+        "reconstruction/actor207_solretry/ActorForward.cpp",
+        "reconstruction/actor207_solretry/ActorForward.h",
+        "reconstruction/actor207_solretry/NiPoint3.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "5748e09b976e7c4b4c3b1d49baa0913a824d6c3be3e8f20215aa43448145a2d5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6974240,
+          "size": 62,
+          "symbol": "?ForwardValues@ActorForward@P207SolRetry@@QEAAXAEBVNiPoint3@2@MMM@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "455183fd8782ff68a6481841a2f4cb94a03aa6e034c55338b8ae2635fc0f5cb1",
+      "first_content_sha256": "5c55421e98cab686474dae2bda7d5eeaa0994022d2906b6bdfecf0498303a394"
+    },
+    {
+      "task_id": "r246-fix-r2-05",
+      "unit": "reconstruction/actor207_solretry/ActorVector.cpp",
+      "closure": [
+        "reconstruction/actor207_solretry/ActorVector.cpp",
+        "reconstruction/actor207_solretry/ActorVector.h",
+        "reconstruction/actor207_solretry/NiPoint3.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "ed817a694a5ed713c055eb9b29e09cecc9a268f25bd1e7f5affb1ebaed2db245",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6975568,
+          "size": 61,
+          "symbol": "?ReadVector@ActorVector@P207SolRetry@@QEAA?AVNiPoint3@2@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "5d4dbefcdf7b3304990c576c6981e4a69ce21d0989e4a831b9dddff394c32724",
+      "first_content_sha256": "ed7f5564cff3c0c2938d09a5efb1145536f7c73b31e44a28f2b487e00194ed29"
+    },
+    {
+      "task_id": "r246-fix-r2-06",
+      "unit": "reconstruction/actor207_3/MagicTarget.cpp",
+      "closure": [
+        "reconstruction/actor207_3/MagicTarget.cpp",
+        "reconstruction/actor207_3/MagicTarget.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "1cfd3543df88cb95b9ba08bf630aabc98022694bd3ddc837db17f3b254ae7d21",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7644416,
+          "size": 41,
+          "symbol": "?IsInvulnerable@MagicTarget@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "3944d8fddade249b6d58fb5745c2a70b890a51ee94dae7be26db21a2f596ecb8",
+      "first_content_sha256": "a8e0dcb307def5c99a8dbde0d917787cfd301ade076f351662184bbac94b247d"
+    },
+    {
+      "task_id": "r246-fix-r2-07",
+      "unit": "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+        "reconstruction/actor207_3_component/PlayerCharacter.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/PlayerCharacterTargetMembers.h"
+      ],
+      "source_sha256": "7c21bcee102f993a5fa058f2da7ae92c527c436ab2f515823e09df961c6be988",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7660992,
+          "size": 49,
+          "symbol": "?ProcessComponent@PlayerCharacter@P2073@@UEAAXPEAVComponentInput@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "mac-wine",
+        "machine": "maintainer-mac",
+        "loader": "wine",
+        "os": "macos"
+      },
+      "first_object_sha256": "6f4653ae413f8e66abd4ee0bc370f75386b8dfc77425285ac89e7c3ee28a79d6",
+      "first_content_sha256": "449fd06938b8f3fbaa6af5547ae69187458b48f76144866588ecbb71331a523a"
+    }
+  ]
+}
