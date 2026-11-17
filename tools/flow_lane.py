@@ -1535,6 +1535,10 @@ def run_lane(root, fdir, branch='main', push=True, ci_wait=600, python=sys.execu
     if fdir.is_dir():
         flow_cleanup.automatic_retention(root, fdir)
     python = lane_python(python)
+    if not resume and push and fdir.is_dir():
+        import flow_reconcile
+        recovered = flow_reconcile.reconcile(root, fdir, branch, python)['resume']
+        resume = recovered[0] if recovered else None
     if resume and receipt_path(fdir, resume).parent.name == 'tooling':
         f.refuse(push, 'tooling resume requires push/CI mode; use tooling-push --resume ' + resume)
         return publish_tooling(root, fdir, branch, ci_wait, python, resume=resume,

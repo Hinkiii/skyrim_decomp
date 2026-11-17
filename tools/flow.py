@@ -1524,6 +1524,13 @@ def detach_functions(root, fdir, name, selected, reason):
 
 def next_actions(root, fdir, branch='main', now=None, online=True):
     """[(kind, text)] with kind 'stop', 'run', 'dispatch', 'wait' or 'done', in the order to do them."""
+    if online:
+        # A dead publisher's receipts would otherwise misreport the lane; origin decides their outcome.
+        try:
+            import flow_reconcile
+            flow_reconcile.reconcile(root, fdir, branch)
+        except (FlowError, OSError, ValueError, KeyError):
+            pass
     live = Path(fdir) / 'lane-live.json'
     service_enabled = ((Path(fdir) / 'lane/service/config.json').is_file()
                        or (live.is_file() and json.loads(live.read_text()).get('service_enabled', False)))

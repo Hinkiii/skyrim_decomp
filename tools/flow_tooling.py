@@ -43,11 +43,22 @@ def enqueue(root, fdir, branch):
         return item
 
 
+def reconciled(fdir, item):
+    path = Path(fdir) / 'lane/tooling-queue' / (item['id'] + '.json')
+    try:
+        current = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return False
+    return current.get('state') == 'done' and bool((current.get('integrated') or {}).get('reconciled'))
+
+
 def save_items(fdir, receipt, finished=False):
     import flow_lane as lane
     dropped = {d['item']: d['reason'] for d in receipt.get('tooling_dropped', [])}
     accepted = {i['id'] for i in receipt.get('tooling_accepted', [])}
     for item in receipt.get('tooling', []):
+        if reconciled(fdir, item):
+            continue  # origin already decided this request; a retired run must not rewrite it
         previous = item['state']
         item['run'] = receipt['id']
         item['state'] = ('dropped' if item['id'] in dropped else
