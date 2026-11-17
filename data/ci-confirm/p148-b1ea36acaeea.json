@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "base_sha": "fa39e65b4faf113d8b8ea8c0a8288d33624fcb7b",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/bsengine/BSMasterParticleSystem.cpp": "b760a94e4fbdb2c9fa404e8ffce97fb1abe340826f1e0350051bb0d969d09030",
+    "reconstruction/bsengine/BSMasterParticleSystem.h": "8c5c43867283469fd8c210c6c67ccc7ae0ee3975c38b8b1cf01af25d8b9232d1"
+  },
+  "units": [
+    {
+      "task_id": "contrib-pr93-d50c8787-0-squash-ffb470",
+      "unit": "reconstruction/bsengine/BSMasterParticleSystem.cpp",
+      "closure": [
+        "reconstruction/bsengine/BSMasterParticleSystem.cpp",
+        "reconstruction/bsengine/BSMasterParticleSystem.h"
+      ],
+      "source_sha256": "a731d685e2a6ea0866640dbe14f40f696d93d7ef3579512ebff4d44aeb0d0e0a",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2.json",
+      "recipe_sha256": "923a7ef7ea6d9792a66669014f059f40af29e111b065f2ae6b0a6835d7f4e838",
+      "functions": [
+        {
+          "rva": 16757872,
+          "size": 3,
+          "symbol": "?IsEqual@BSMasterParticleSystem@@UEAA_NPEAVNiObject@@@Z"
+        }
+      ],
+      "mac_object_sha256": "52391b579da8eb53661b6b613918bcb68b8b895837bbb70cd0fc43c16e21119b",
+      "mac_content_sha256": "fe115e21ea2a3dbccfa117099d99b39f984928e6cafc826923e2e36d6bea1265"
+    }
+  ]
+}
