@@ -1,0 +1,467 @@
+{
+  "schema": 1,
+  "base_sha": "2cc810a374eb52a50807dc6caa863031be4b6a40",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_1/ActorCache.cpp": "e740d90d6232430075e0d9ab228ab5fc471d2e640c39b7a04dc7b90c554814d8",
+    "reconstruction/actor207_1/ActorCache.h": "fe54e984510874fb884655c7438c3324bf628760fdbc1a014835f70f1334907f",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actors/ActorValueTargetPrefix.h": "a2b69d80addbd5d6131b45bf56e732001d919ec58ceb9170ef0b6e80545ca72e",
+    "reconstruction/actor207_1/ForwardTarget.cpp": "ded64e5acd2d8b9b7e44f5a276050e674fd230d079e37ccea41955c395a0e847",
+    "reconstruction/actor207_1/ForwardTarget.h": "18395095e839a9be3dcdbc0ed2ded82360d8d16794ce5eee1c1625d618620d84",
+    "reconstruction/actor207_1/PackageProcess.cpp": "af8f196662c4484dacacde8134e95fb969999999ff053a4702a6beb73a6874bd",
+    "reconstruction/actor207_1/PackageProcess.h": "93c971a1f12e5d3a25cc032df20efcc356202919b62e839685fd5d01d4daff51",
+    "reconstruction/actor207_1/SceneActor.cpp": "92596d719ea6060231ce0a5819a020a071f8f4e0e0626115adadf3aa38be1762",
+    "reconstruction/actor207_1/SceneActor.h": "81fd8794fa404ee8b7865f690233cf6a704bf8b300606885ef5a573dcc524a6d",
+    "reconstruction/actors/ActorPrimaryTargetPrefix.h": "9f4cad2440775aa5bb2d9fc455866f568f479af2df3e55bb4ac7437f6880202b",
+    "reconstruction/actor207_1/ActorSpeedPrefix.cpp": "ed0f08077118d116e4a739384cf86672e3f68de7fa0f6737d970d17293af05ca",
+    "reconstruction/actor207_1/ActorSpeedPrefix.h": "3aa0df68f62c45100cbdc6266ef48b2605ab2ccb389279100c5fc1780e74b1cf",
+    "reconstruction/actor207_1/ActorSpeedBlend.cpp": "d96e1b438d65ed27969f1ff13682d09c83f549f73d8c01eefa94a90cb858dd58",
+    "reconstruction/actor207_1/ActorSpeedBlend.h": "9675d798572393a4914f25f3744ac28d272b82352bdc24715fc434434cc93793",
+    "reconstruction/actor207_1/StateRelated.cpp": "a15d2b5e260a82ccacfa61074b50ca95445c6f3c263422d6a17fa5283720d38a",
+    "reconstruction/actor207_1/StateRelated.h": "ae6f6aa426f5cd1ea67a80f7708bc917004b43371c9284a2dfc1ad7a7d0aa61c",
+    "reconstruction/actor207_1/AIProcess207Pass.cpp": "def2784d2f04051ab6ea70f21b7a1f65fc2eee193932074c399d863eed1b7d03",
+    "reconstruction/actor207_1/AIProcess207Pass.h": "15a9034e031448ce3812c2a568df8f72a38d72a570b2c684dc5644dbf0a471e7",
+    "reconstruction/actor207_1/ChangeActor.cpp": "72200e9ac791d6bd90457ef7bef348ad3b178783617493af4d8c2750d1ad9695",
+    "reconstruction/actor207_1/ChangeActor.h": "1b90426556ed36adc48ffa72b97d3643869fda05459f8098f979beb2448cbbd2",
+    "reconstruction/actor207_1/CombatActor.cpp": "1c0f0ad704ae1803c5a34e625c88845666feb6c2f03b585cfebd017dfc7bc5f0",
+    "reconstruction/actor207_1/CombatActor.h": "8ea9b842b801d0f5bb5637906dfd28531c61a00be23c06fa55cbaad14a581873",
+    "reconstruction/actor207_1/EquippedActor.cpp": "7a0d9cb812f25886ffd34cef006481c64ab4156702f5c3f84a013db2b757631b",
+    "reconstruction/actor207_1/EquippedActor.h": "d06dfcb22bbdd3eea2ef5cdf5ec6a93368719ceb05cd7a36b72596266339f7dc",
+    "reconstruction/actor207_1/LimbActor.cpp": "09884befd0ef5a4e5ecea8e2d8651b659b22b9164b82297b94bc2fd8b8192551",
+    "reconstruction/actor207_1/LimbActor.h": "684eca29e18721024312812bb07a70a02ee6129b09f7ab245e2056abce2c8993",
+    "reconstruction/actor207_1/ArrestProcess.cpp": "88a68491fe191ed96a3b2c0bc0c094759c2f07476062eb64c967fe0fffd40bc2",
+    "reconstruction/actor207_1/ArrestProcess.h": "e3af8cbb34ec58389421c4f1ea79bcf61d54cf5f1f80dc14526b161a994b818f",
+    "reconstruction/actor207_1/QueryProcess.cpp": "55cbb8fff86601f4f363ccd171068b0c35f17e2f30bc85ada4024c50f93e9122",
+    "reconstruction/actor207_1/QueryProcess.h": "083ea69c6616937e85499d790998d1fa67f967ac72c6cf0961f6fd19ebc15b08"
+  },
+  "units": [
+    {
+      "task_id": "p207-1-actorcache",
+      "unit": "reconstruction/actor207_1/ActorCache.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ActorCache.cpp",
+        "reconstruction/actor207_1/ActorCache.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "3e2288d376b903797dae1920c2e29d24ce28f07ddec8f3e41695b32e6f118d9a",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6934816,
+          "size": 58,
+          "symbol": "?InvalidateCache@ActorCache@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "e1b57df948f54be21ad4626cdfb2fccccd6f86e4dd699c1672ff289be4a4ae12",
+      "first_content_sha256": "e7e58f738d87ebd30d5455e22228e58a58c9c81680870774097adb86cb60f8a0"
+    },
+    {
+      "task_id": "p207-1-actorforwardpass",
+      "unit": "reconstruction/actor207_1/ForwardTarget.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ForwardTarget.cpp",
+        "reconstruction/actor207_1/ForwardTarget.h"
+      ],
+      "source_sha256": "ecd71715c70d54a5f4396bd04361a1cb53bc471aa039d08fdbc2a762d8bb063b",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6973952,
+          "size": 54,
+          "symbol": "?ActorForwardPredicate@P2071@@YA_NPEAVActorForwardInput@1@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "6b1bb13f0450f87b52da8d59e9df4ffcdc13e674b9cc2fca35477fdfb1cf8566",
+      "first_content_sha256": "7fe73af171272048745adafe1202274b84e1e28b2e742c49f4b2901cd8f988b7"
+    },
+    {
+      "task_id": "p207-1-actorpackagequery",
+      "unit": "reconstruction/actor207_1/PackageProcess.cpp",
+      "closure": [
+        "reconstruction/actor207_1/PackageProcess.cpp",
+        "reconstruction/actor207_1/PackageProcess.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "87ae6dcf90bf130eed476746f4140b4899a380aea7dcc4a2ea0b154d2a22abab",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6768928,
+          "size": 63,
+          "symbol": "?HasPackageType29@P2071@@YA_NPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VPackageProcess@P2071@@VMovementControllerNPC@2@@P206Target@@@Z"
+        },
+        {
+          "rva": 10489376,
+          "size": 52,
+          "symbol": "?ScriptIsAlarmed@P2071@@YA_NPEAXIPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VPackageProcess@P2071@@VMovementControllerNPC@2@@P206Target@@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "185f98ec49d79817d2f80a3d3d92e083d6c89cef46c00cb43e47d8699eda79bf",
+      "first_content_sha256": "09f4e13102ff7ea57136508d616d3a878a4be9abd8371389f43f5330bdc59a31"
+    },
+    {
+      "task_id": "p207-1-actorscene",
+      "unit": "reconstruction/actor207_1/SceneActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/SceneActor.cpp",
+        "reconstruction/actor207_1/SceneActor.h",
+        "reconstruction/actors/ActorPrimaryTargetPrefix.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "8413ba9f05c3887cabb073a27384f6cb5b0703779bdb8cc8482e99b7f082be78",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3041968,
+          "size": 54,
+          "symbol": "?UpdateScene@SceneActor@P2071@@QEAAXI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "4ad4088b6a5a270e4e22d022dece22780398d4e8af77e485ed0ec4c4fc5a9a2b",
+      "first_content_sha256": "2594da930503addd2c351564f6784bb2fa31b9d010fead0ad3254c9f91211f14"
+    },
+    {
+      "task_id": "p207-1-actorspeed",
+      "unit": "reconstruction/actor207_1/ActorSpeedPrefix.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ActorSpeedPrefix.cpp",
+        "reconstruction/actor207_1/ActorSpeedPrefix.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "27135e69b5ad107e3fc40cd7aeeb03f1f017db58a51719f54e76b402b7bd3d45",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6978784,
+          "size": 61,
+          "symbol": "?UpdateFastWalkCache@ActorSpeedPrefix@P2071@@QEAAXXZ"
+        },
+        {
+          "rva": 6978864,
+          "size": 61,
+          "symbol": "?UpdateJogCache@ActorSpeedPrefix@P2071@@QEAAXXZ"
+        },
+        {
+          "rva": 6978944,
+          "size": 61,
+          "symbol": "?UpdateRunCache@ActorSpeedPrefix@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "c23898a670ad0c739a2fca303b26f492c8b45c715a005e3a627bf11acf07749a",
+      "first_content_sha256": "d27900ddaf686b5ea1d6d1f9d1a290f2c42c9521c1b317d39ecd6c44df7761a4"
+    },
+    {
+      "task_id": "p207-1-actorspeedblend",
+      "unit": "reconstruction/actor207_1/ActorSpeedBlend.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ActorSpeedBlend.cpp",
+        "reconstruction/actor207_1/ActorSpeedBlend.h"
+      ],
+      "source_sha256": "36ebf77d4c6fce3d2556779800b26280756e9f426715c89e42e6d7d83d1b3182",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6891120,
+          "size": 57,
+          "symbol": "?GetJogSpeed@ActorSpeedBlend@P2071@@QEAAMXZ"
+        },
+        {
+          "rva": 6891184,
+          "size": 57,
+          "symbol": "?GetFastWalkSpeed@ActorSpeedBlend@P2071@@QEAAMXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "ace07419701c13a8178761c8c5c5ca4f4283cba62dbfde06b79196b0da6b1c57",
+      "first_content_sha256": "f873bd05e3c34140782376ddaceb748182899f41083f954896245b0da86ae760"
+    },
+    {
+      "task_id": "p207-1-actorstatequery",
+      "unit": "reconstruction/actor207_1/StateRelated.cpp",
+      "closure": [
+        "reconstruction/actor207_1/StateRelated.cpp",
+        "reconstruction/actor207_1/StateRelated.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "ef299de58af122bba6185e79ed1c335ea396c807bd3035d053a3dab431e712ef",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6974432,
+          "size": 56,
+          "symbol": "?QueryActorState@P2071@@YA_NPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VAIProcess@2@VMovementControllerNPC@2@@P206Target@@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "2a804ea1b5045e15f1e9df69d8b856c7088392e01facde7f17e66760361cdc90",
+      "first_content_sha256": "6cdb00db1674c29e35e58139b6ae95229970d2be665d9822d27f71efedc6d8a6"
+    },
+    {
+      "task_id": "p207-1-aiprocess207pass",
+      "unit": "reconstruction/actor207_1/AIProcess207Pass.cpp",
+      "closure": [
+        "reconstruction/actor207_1/AIProcess207Pass.cpp",
+        "reconstruction/actor207_1/AIProcess207Pass.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "2a45412585d1cc96e4f1c94f193b6d3698b1611b73cf4d928f89a68e9b8f4fd5",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7349152,
+          "size": 18,
+          "symbol": "?SetHighFloat@AIProcess207Pass@P2071@@QEAAXM@Z"
+        },
+        {
+          "rva": 7242608,
+          "size": 44,
+          "symbol": "?UpdateTimeBits@AIProcess207Pass@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "b1cabb5a2ea9c7def5be762d1b05c1949667f8e51b30fb4486cb45277c9f00ab",
+      "first_content_sha256": "8d91a43e6820a22f3d94a7d7505a710d636b6db34c39d9d263475feea1608c6d"
+    },
+    {
+      "task_id": "p207-1-changeactor",
+      "unit": "reconstruction/actor207_1/ChangeActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ChangeActor.cpp",
+        "reconstruction/actor207_1/ChangeActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "cfd10b2035e426452e0fd131dc59fd4c8d4159fe1f537afd2dd9cdee6478839d",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7110752,
+          "size": 60,
+          "symbol": "?ResetActorChange@ChangeActor@P2071@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "eb4e925aae95c114a79ffafe3b5e91f68d59b625f98127aa6e085331058ca5b1",
+      "first_content_sha256": "f008539072da93bf79e7aef9f687f4a7572a48f277a10b66ec52752c4f5afa3d"
+    },
+    {
+      "task_id": "p207-1-combatactor",
+      "unit": "reconstruction/actor207_1/CombatActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/CombatActor.cpp",
+        "reconstruction/actor207_1/CombatActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "b4824a5a56fe2cce309255bcfa5898b92ee3cf654e0b9fc711dec609eb6c3d2e",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7116912,
+          "size": 59,
+          "symbol": "?EngagingInCombat@CombatActor@P2071@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "600b24daa70ec1ef58bdcab18237e56e29ca31e3fa9e6ae7be5f5375c03451fe",
+      "first_content_sha256": "f84f2ca8ff57373f5ca473d0f8aed51dfc4a6a85464fd648d14dc5b49e37ddf3"
+    },
+    {
+      "task_id": "p207-1-equippedactor",
+      "unit": "reconstruction/actor207_1/EquippedActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/EquippedActor.cpp",
+        "reconstruction/actor207_1/EquippedActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "fabdeae42b262c50ab8cd1ab72bca77643821f41f068c03e23c8d9b7b0ee9c98",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7036640,
+          "size": 61,
+          "symbol": "?CalcEquippedWeight@EquippedActor@P2071@@QEAAMXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "54a5226c2eaf8097358bfd7e561a6bc75d9cc0bddb16810ca6fbd0540a687c89",
+      "first_content_sha256": "c2de55aee53a48fbef585b058b314f014c79d5e4985ad2cfb0ce7f7e110f2432"
+    },
+    {
+      "task_id": "p207-1-limbactor",
+      "unit": "reconstruction/actor207_1/LimbActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/LimbActor.cpp",
+        "reconstruction/actor207_1/LimbActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "492fac95808bcdd1ee201ce7a55358afd534dc5da71f0b16bd501ea29ca5ddec",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3077984,
+          "size": 43,
+          "symbol": "?IsLimbGone@LimbActor@P2071@@QEAA_NI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "dbfbe5c9502d7c08aef85a75c83207f7fc330304c5a35b383fc2cf308e22cbf4",
+      "first_content_sha256": "3c1c90726d9d5f2752472381de035dc7d0ec2135697927be6eb5a002c9b0a5e8"
+    },
+    {
+      "task_id": "p207-1-papyrusactor",
+      "unit": "reconstruction/actor207_1/ArrestProcess.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ArrestProcess.cpp",
+        "reconstruction/actor207_1/ArrestProcess.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "2563cf28691b8ba60a23574802c441d75787b7d39e82e9eaf313c55fd2015e0e",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 10489456,
+          "size": 39,
+          "symbol": "?PapyrusIsArrested@P2071@@YA_NPEAXIPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VArrestProcess@P2071@@VMovementControllerNPC@2@@P206Target@@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "2a24025e2b1fa6ba16d55b2b3746055da6f071a69b0a446af128eae39dca17c4",
+      "first_content_sha256": "3f5dd8916cd73428df82686434a3d9653fbae51d3eab928a60e51d189866863a"
+    },
+    {
+      "task_id": "p207-1-processquery",
+      "unit": "reconstruction/actor207_1/QueryProcess.cpp",
+      "closure": [
+        "reconstruction/actor207_1/QueryProcess.cpp",
+        "reconstruction/actor207_1/QueryProcess.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "b7f13cc1059e7e9233c086d6d5a9a01eb7bf2206f8af6744858ed8cc7098d0c1",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 8818304,
+          "size": 60,
+          "symbol": "?QueryProcessFlag15@P2071@@YA_NPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VQueryProcess@P2071@@VMovementControllerNPC@2@@P206Target@@@Z"
+        },
+        {
+          "rva": 8818384,
+          "size": 60,
+          "symbol": "?QueryProcessFlag1@P2071@@YA_NPEAU?$ActorTargetPrefix@UExtraDataListPrefix@P206Target@@VQueryProcess@P2071@@VMovementControllerNPC@2@@P206Target@@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "f3faebe4b7cffe45ba1d211c01a624f57db2211437a9ddd225720916a6e74bc1",
+      "first_content_sha256": "dae6eb87b3d11d8752ace2131c9a9e160eaa5cae21a4e1a5bedc88fc508fec51"
+    }
+  ]
+}
