@@ -1,0 +1,508 @@
+{
+  "schema": 1,
+  "base_sha": "2cc810a374eb52a50807dc6caa863031be4b6a40",
+  "build_id": "sse-steam-1-7-104",
+  "files": {
+    "reconstruction/actor207_1/RotationActor.cpp": "9bee886bdedf42dd5968245a6489e91a5e9337bcca128f1b2629533617cb10c2",
+    "reconstruction/actor207_1/RotationActor.h": "71eab1f65982d58bdf741800276424f7c47dd78696826c525e1f3c8506b54669",
+    "reconstruction/actors/ActorTargetInterfaces.h": "6ee4400fdc7a40b4abb607c9fe4ea0242629fa8e5fd8f60b9962bec40284bfb4",
+    "reconstruction/actors/ActorTargetPrefix.h": "4533e3b022ca3373ecfc02c8def122371332c051c83ecf7cb952a0dd8c689688",
+    "reconstruction/actors/ActorValueTargetPrefix.h": "a2b69d80addbd5d6131b45bf56e732001d919ec58ceb9170ef0b6e80545ca72e",
+    "reconstruction/actor207_1/ScriptActor.cpp": "67bd605f2055d3d9d18b340f554820c6ea0b346d0b3746f55f9a89f989005ca0",
+    "reconstruction/actor207_1/ScriptActor.h": "28f0bf6a81d2249d8fe700fe87ffcbd7c246ef011ba5052825b96a8eb4ee4187",
+    "reconstruction/actor207_1/RelationshipActor.cpp": "a3118939ffdc0c715efd95419f011c2ea6cff61abb8197b93820ca186514f1a8",
+    "reconstruction/actor207_1/RelationshipActor.h": "fe79a7e5b317f45675860714b8dead4e1255bd2f1a92d92b976d6fa780f821e1",
+    "reconstruction/actor207_2/PlayerCharacter.cpp": "f34e42dd88fc9ca84f4c5e6459f673bc37ddfcae24332e6feb1fc5bc76849b9b",
+    "reconstruction/actor207_2/PlayerCharacter.h": "9597fa39986774b6403381604a4929691294501cb02590c0d6601412a775c38d",
+    "reconstruction/actor207_2/PlayerCharacterCleanup.cpp": "3cd31a545cfb4557b5a876640cb57f181b0724baa56ac9c3ab4606e7e90121dd",
+    "reconstruction/actor207_2/PlayerCharacterCleanup.h": "3ae401c2ccd50ceb13f7797563c2fe8c240020f1104a362a1f98c0c72bd62fae",
+    "reconstruction/actor207_2/PlayerCombatView.cpp": "2840288667bd14c9109a4d56e5991c7c689e27542196f57630c87dda2284c615",
+    "reconstruction/actor207_2/PlayerCombatView.h": "4a41e485cd5e87801bd1f03b2c6047f6856586881fab78f935056d275347682b",
+    "reconstruction/actor207_3/ActorState.cpp": "60575418b2e324b672505c7d27b8082d37ef7adf886a35b4eff60eb6f04fbce0",
+    "reconstruction/actor207_3/ActorState.h": "30e1daf5bafdd865ec4d7953c461eaa13074e2c74e739b5de06a5a98adb66a53",
+    "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp": "c1088b9de4a21ddba86df8318953a14f2e73c3585143fb2f72a02cf48025b27d",
+    "reconstruction/actor207_3_aggregate/TESObjectREFR.h": "e4b616abac4804718a98edbf0c88439055de99e675d807863b994ec0b546c151",
+    "reconstruction/actor207_3_component/PlayerCharacter.cpp": "929d0d99ccceb90c808b73e61d21806c1e44f5b3db02b001e6c042a4eea3232a",
+    "reconstruction/actor207_3_component/PlayerCharacter.h": "8e2265d9376db86dce97f4dc31106573ff2c8948722ef689b11b039cfbbdd464",
+    "reconstruction/actor207_3_crime/PlayerCharacter.cpp": "14c5a5da91923b9596b9444202bf339d1a250e87073ce3ede6697e55b95ff9bd",
+    "reconstruction/actor207_3_crime/PlayerCharacter.h": "6ec4510b9137c8e5d059df355a9dc0fddc9562b83eba721195f0259289df2294",
+    "reconstruction/actor207_3_decals/TESObjectREFR.cpp": "a39c1e715dde46b56fb3657a1bf564cddacc0564a195a9aa1ad52ffbe4b3c923",
+    "reconstruction/actor207_3_decals/TESObjectREFR.h": "0fbb500aa1cf2f4822f207fa6cf951b42aa901ddede947fbc4356e282a809008",
+    "reconstruction/actor207_3_dispatch/Dispatcher.cpp": "e89a914fe00465ef2542760f2404112ab8368d14239c7341963679e3c4fe815a",
+    "reconstruction/actor207_3_dispatch/Dispatcher.h": "33851e99a534ceb69c77738f17db6b8c4c5bbbc1f952dcfdfd9278df6b951f96",
+    "reconstruction/actor207_3_extra/Actor.cpp": "7adad3d92627e672e8ebc3d35c6175b43871dea9a6570857adda66f7dc000a19",
+    "reconstruction/actor207_3_extra/Actor.h": "e0667ffbb0f19e9ef6ec33aace9e3006b2cb622bc3bffbb0c11438c9aade8a95",
+    "reconstruction/actor207_3_group/Actor.cpp": "8d82bfb6d21d513feff12da9048da504cca833a01f2a8210f4afad12be026c38",
+    "reconstruction/actor207_3_group/Actor.h": "c1620a7cd24d4413abec28e2c6133f1e1b1a43ee413586084813781d313bbd6b",
+    "reconstruction/actor207_3/MagicTarget.cpp": "d2c1dd583fbdf87f21d2baeb8d7946277794d72ceacc752645eb8613f6dad90f",
+    "reconstruction/actor207_3/MagicTarget.h": "b8f8b6dce358fb9d59facf81c687b66d51ef776095825a0b683ddab694dd98c6",
+    "reconstruction/actor207_3_nodes/TESObjectREFR.cpp": "64102116d3a4e07aab684afa7ad678c66269262df8eff0530653f2cc53e1a536",
+    "reconstruction/actor207_3_nodes/TESObjectREFR.h": "dc50dbe2db7c8e57206256e102c6d4228a008bf74c39a81f9b590b2ca9baef8c",
+    "reconstruction/actor207_3/PlayerCharacter.cpp": "9b35c12f255b22c218f4c3dd5d36e96e8a11f25b2fbad306810c38b6e65aa937",
+    "reconstruction/actor207_3/PlayerCharacter.h": "1994312d26cf1dd872dc4e559e833192d3d30d76ba4d8be2897d24caae3506bd"
+  },
+  "units": [
+    {
+      "task_id": "p207-1-rotationactor",
+      "unit": "reconstruction/actor207_1/RotationActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/RotationActor.cpp",
+        "reconstruction/actor207_1/RotationActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h",
+        "reconstruction/actors/ActorValueTargetPrefix.h"
+      ],
+      "source_sha256": "903d35e5bfa2a91e73f539a03b17d8fba18d312ce4f8350839e5a2e79a29d8ca",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6767120,
+          "size": 53,
+          "symbol": "?ModifyRotationZ@RotationActor@P2071@@QEAAXM@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "b09cebce5558dd9c593da27f9ef204a3cbc552b2eaf0243e2bb9f21ec8c81429",
+      "first_content_sha256": "837411e9835fadefd070048f743dead75bb3f74964743bd860f129945a4fb950"
+    },
+    {
+      "task_id": "p207-1-scriptactorcontrols",
+      "unit": "reconstruction/actor207_1/ScriptActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/ScriptActor.cpp",
+        "reconstruction/actor207_1/ScriptActor.h"
+      ],
+      "source_sha256": "872df63cb51ff97d96fb83563fe5835c872388269bd7a55550c04b349e0daadf",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 10496800,
+          "size": 52,
+          "symbol": "?ScriptSetRestrained@P2071@@YAXPEAXIPEAVScriptActor@1@_N@Z"
+        },
+        {
+          "rva": 10496864,
+          "size": 52,
+          "symbol": "?ScriptSetDontMove@P2071@@YAXPEAXIPEAVScriptActor@1@_N@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "b91081a524f738348e64d6ca22077d8d6b691e3a3e7280aa467e6d4d15cd0bdf",
+      "first_content_sha256": "f0b596453e503543946d14e86721ddd1b53933de24c8dbcac177020bf5870afb"
+    },
+    {
+      "task_id": "p207-1-scriptrelationshippass",
+      "unit": "reconstruction/actor207_1/RelationshipActor.cpp",
+      "closure": [
+        "reconstruction/actor207_1/RelationshipActor.cpp",
+        "reconstruction/actor207_1/RelationshipActor.h",
+        "reconstruction/actors/ActorTargetInterfaces.h",
+        "reconstruction/actors/ActorTargetPrefix.h"
+      ],
+      "source_sha256": "9fbaf0a9198869ffcb9dccb989fc6f0005e16774ab8c33b1bb6408ab1377e3d8",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 10488416,
+          "size": 49,
+          "symbol": "?HighestRank@P2071@@YAHPEAXIPEAVRelationshipActor@1@@Z"
+        },
+        {
+          "rva": 10488784,
+          "size": 49,
+          "symbol": "?LowestRank@P2071@@YAHPEAXIPEAVRelationshipActor@1@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "6f3af680adce052200d2c4beb5e1f76598ead0a39e9d318a01576259c7f21273",
+      "first_content_sha256": "38a116ded0b12ae9d7d142201e0bc18b96437f1a5d6a624e1ec72ef9260fe9c5"
+    },
+    {
+      "task_id": "p207-2-playercharacter",
+      "unit": "reconstruction/actor207_2/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCharacter.cpp",
+        "reconstruction/actor207_2/PlayerCharacter.h"
+      ],
+      "source_sha256": "6d99276fd23be4d35cbd30439f0a7af322986306c9bddf6c1e92b2e9a7c56c25",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7641568,
+          "size": 47,
+          "symbol": "?UseSkill@PlayerCharacter@P2072@@QEAAXW4ActorValue@2@MPEAVTESForm@2@W4SKILL_ACTION@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "fcc1b950bf7e5b9fee98139b0d66eaaa77569fd657f46cce11d4100ff4f29440",
+      "first_content_sha256": "5b827cb7df501eac44ca817badc627a19b938096d06ac18b04b7d66395fb59d3"
+    },
+    {
+      "task_id": "p207-2-playercharactercleanup",
+      "unit": "reconstruction/actor207_2/PlayerCharacterCleanup.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCharacterCleanup.cpp",
+        "reconstruction/actor207_2/PlayerCharacterCleanup.h"
+      ],
+      "source_sha256": "d5ee10c1e8d568204da6748539283c80e3d6fffaac2652a8a0e8469ddae01f02",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7834416,
+          "size": 43,
+          "symbol": "?ClearVats@PlayerCharacterCleanup@P2072@@QEAAXXZ"
+        },
+        {
+          "rva": 7834480,
+          "size": 43,
+          "symbol": "?ClearDynamic@PlayerCharacterCleanup@P2072@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "52a79b350c39a765b8a5ae652479e54ab87c971f079da4f311775ae47f9f800e",
+      "first_content_sha256": "bb7746725312b1e1afb92422e90d1d369006273541e2598e144d6d0cdcf7965f"
+    },
+    {
+      "task_id": "p207-2-playercombatview",
+      "unit": "reconstruction/actor207_2/PlayerCombatView.cpp",
+      "closure": [
+        "reconstruction/actor207_2/PlayerCombatView.cpp",
+        "reconstruction/actor207_2/PlayerCombatView.h"
+      ],
+      "source_sha256": "ef0467194c4e911efa37ca78836aa249d86692b17c71ea4c6f9039ff95263393",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7825984,
+          "size": 46,
+          "symbol": "?ClearCombat@PlayerCombatView@P2072@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "9a777812a098923f34e01bfee5c70e6db8e7e171a99abdecce90725fd2e863eb",
+      "first_content_sha256": "ae0097f02cd4f566ba3a4a61fb0986e0b7a33cfedadc43e47a8ddcda6f9a1e7b"
+    },
+    {
+      "task_id": "p207-3-actorstate",
+      "unit": "reconstruction/actor207_3/ActorState.cpp",
+      "closure": [
+        "reconstruction/actor207_3/ActorState.cpp",
+        "reconstruction/actor207_3/ActorState.h"
+      ],
+      "source_sha256": "d31eded03f29f20ea4c427d1db6453bac00c36a946702fdb905795806dc9d685",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7726240,
+          "size": 59,
+          "symbol": "?Transition@ActorState@P2073@@UEAA_NI@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "c5a326da4b92f67e9d1448e5d0bc545ae5b1369253be4e282be1b8790804893e",
+      "first_content_sha256": "46424a18e8ea7713d79fda391883759cfc3f2c0673c40a7b1a08b9b807023293"
+    },
+    {
+      "task_id": "p207-3-aggregate",
+      "unit": "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_aggregate/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_aggregate/TESObjectREFR.h"
+      ],
+      "source_sha256": "4dd57111b51b9e1f28bcd5be389486d92eea57ff5cd6140cdfa34674ded6c81a",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3017104,
+          "size": 49,
+          "symbol": "?ForwardRequest@TESObjectREFR@P2073@@QEAAXPEAVRequestTarget@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "c3b50e267a25fba4add3a0f25d0658247f3ad95b6df926d6b5984c1eabd594b5",
+      "first_content_sha256": "7ba407a2f811177683d907146524684c34c2a800b4cbd4a0c9302dce6ebae43e"
+    },
+    {
+      "task_id": "p207-3-component",
+      "unit": "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3_component/PlayerCharacter.cpp",
+        "reconstruction/actor207_3_component/PlayerCharacter.h"
+      ],
+      "source_sha256": "ce263048f08e0608add96237e68d713d3bfdfb44ff19ec9a7eba2e7f49af2a57",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7660992,
+          "size": 49,
+          "symbol": "?ProcessComponent@PlayerCharacter@P2073@@UEAAXPEAVComponentInput@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "bf3f6eb061482beef41ff1c30164a0cc55f8ff727eb29b5a47777ec49b403808",
+      "first_content_sha256": "66ead2bc918b305ae72260e99a21e9bcbd63a4e7caa0b0f49d1e31cc8850f604"
+    },
+    {
+      "task_id": "p207-3-crime",
+      "unit": "reconstruction/actor207_3_crime/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3_crime/PlayerCharacter.cpp",
+        "reconstruction/actor207_3_crime/PlayerCharacter.h"
+      ],
+      "source_sha256": "741f2a77866880fc04eef9cee084bb805673acb1bfb434e0075bcd06ccf4ae1f",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7711760,
+          "size": 59,
+          "symbol": "?ScaledCrime@PlayerCharacter@P2073@@QEAAHPEBVTESFaction@2@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "ed833059ad9c44f16f7b6e25ca962af03f3b52f4dc81c2467580f3be2d92fa4c",
+      "first_content_sha256": "fb134e1bbf57fdd82b145265586ece05dc57bb0c09a447ef74fcd20fddc118c8"
+    },
+    {
+      "task_id": "p207-3-decals",
+      "unit": "reconstruction/actor207_3_decals/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_decals/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_decals/TESObjectREFR.h"
+      ],
+      "source_sha256": "38ee1aed6703e892563cbab9715872cf5fd7d1727c41609c074a4a0a42b6d763",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 3031168,
+          "size": 53,
+          "symbol": "?ClearDecals@TESObjectREFR@P2073@@QEAAXXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "c9ecaa29210c16543588b1d9e1578b19cfbb25371fd9f695944b55eefc168457",
+      "first_content_sha256": "198cb05a7e097775db45fda2bb5761ef5921229aff9adaa06086420c0b7d3509"
+    },
+    {
+      "task_id": "p207-3-dispatch",
+      "unit": "reconstruction/actor207_3_dispatch/Dispatcher.cpp",
+      "closure": [
+        "reconstruction/actor207_3_dispatch/Dispatcher.cpp",
+        "reconstruction/actor207_3_dispatch/Dispatcher.h"
+      ],
+      "source_sha256": "bdc6a111026bdb59ed95be10b270b519ac14b677db2a6ec916d87319a782ad88",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7581520,
+          "size": 36,
+          "symbol": "?DispatchCharacterValue@P2073@@YAXPEAVCharacter@1@I@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "967a069171a95ea837a22f8c4e7ef918e87df6b386c1adeb7b7ead0f8cce8202",
+      "first_content_sha256": "c539554e0640b5e645711d6710c18402e7922b687c18853a732f4b9fe7ffc29f"
+    },
+    {
+      "task_id": "p207-3-extra",
+      "unit": "reconstruction/actor207_3_extra/Actor.cpp",
+      "closure": [
+        "reconstruction/actor207_3_extra/Actor.cpp",
+        "reconstruction/actor207_3_extra/Actor.h"
+      ],
+      "source_sha256": "0e1d3b723fcd2250c2aa29802dc346a07228d10592238f32e1b4012da719101e",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 6998464,
+          "size": 50,
+          "symbol": "?UpdateExtra@Actor@P2073@@QEAAX_N@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "70ae7267ae7d2eedf721779d74d742059e4a0a027c0f2377c73d050a9efe9e26",
+      "first_content_sha256": "319e683eea29d18a34f01dd8f52e4935982a61979355195cd71ecae21e721b95"
+    },
+    {
+      "task_id": "p207-3-group",
+      "unit": "reconstruction/actor207_3_group/Actor.cpp",
+      "closure": [
+        "reconstruction/actor207_3_group/Actor.cpp",
+        "reconstruction/actor207_3_group/Actor.h"
+      ],
+      "source_sha256": "240b0f026b7bce91e9721cf5d8b1badb72e57e4fea23243dc395160e1981c5e8",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7114816,
+          "size": 35,
+          "symbol": "?FindGroupActor@Actor@P2073@@QEAAPEAV12@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "616836cbaeedd47711ea0aefcdcfd09c1da5453c2a32f13690434db8a43399f6",
+      "first_content_sha256": "83934a00553f2918615c1be5720fe1ea0e0fda48a3930be1c7619db61ace8fa3"
+    },
+    {
+      "task_id": "p207-3-magictarget",
+      "unit": "reconstruction/actor207_3/MagicTarget.cpp",
+      "closure": [
+        "reconstruction/actor207_3/MagicTarget.cpp",
+        "reconstruction/actor207_3/MagicTarget.h"
+      ],
+      "source_sha256": "e7e3e40bf917aa084c86035831fd76dd900099c832db29b482618fc32b730cca",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7644416,
+          "size": 41,
+          "symbol": "?IsInvulnerable@MagicTarget@P2073@@QEAA_NXZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "01220faef31f1230339e66b8c668c3933f8f831b6a50ba144ec9de168b0556d5",
+      "first_content_sha256": "5c7b0cbc85885af936bfc3c0850892db387582eec1fdd3c67923e801bdac36e2"
+    },
+    {
+      "task_id": "p207-3-nodes",
+      "unit": "reconstruction/actor207_3_nodes/TESObjectREFR.cpp",
+      "closure": [
+        "reconstruction/actor207_3_nodes/TESObjectREFR.cpp",
+        "reconstruction/actor207_3_nodes/TESObjectREFR.h"
+      ],
+      "source_sha256": "717d9a3e2319bc3f5c08e8a4a0301df4ad8acf5aebe5bbb431602ede1a8b7b4b",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 2732880,
+          "size": 50,
+          "symbol": "?FindNodeValue@P2073@@YAPEAXPEAVTESObjectREFR@1@@Z"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "d3f37b2525811f907d7ead5112c5d45ff09b0fa96d174e1e585cada795cb86a7",
+      "first_content_sha256": "135ff42a0d3856f2b74864a3b05135beea38d65d856d044d72526fb359fb9cac"
+    },
+    {
+      "task_id": "p207-3-playercharacter",
+      "unit": "reconstruction/actor207_3/PlayerCharacter.cpp",
+      "closure": [
+        "reconstruction/actor207_3/PlayerCharacter.cpp",
+        "reconstruction/actor207_3/PlayerCharacter.h"
+      ],
+      "source_sha256": "9b9049bf959416c1ed7136cf1a065aa791de277ccdef7de16463c0d756c3a24f",
+      "recipe": "reconstruction/recipes/msvc-19.16.27054-o2-reconstruction.json",
+      "recipe_sha256": "1698d9007b615136ca0b49cc9429352698c68e3ff6b29a322f01b867d3d843d2",
+      "functions": [
+        {
+          "rva": 7724432,
+          "size": 35,
+          "symbol": "?PositionOrAlternate@PlayerCharacter@P2073@@QEAAPEBUNiPoint3@2@XZ"
+        }
+      ],
+      "first_host": {
+        "host_id": "winpc-native",
+        "machine": "maintainer-winpc",
+        "loader": "native",
+        "os": "windows"
+      },
+      "first_object_sha256": "81c7bd03880dc6f8e705b5dfedb3ff172da92d201cb8152157e991f2e04c6be2",
+      "first_content_sha256": "d2706b73ba9c9410eb3d4d0361336e56aa629552f301ef08ee69c1f5ded61464"
+    }
+  ]
+}
