@@ -3,8 +3,7 @@
 // AlchemyItem partial declarations.
 // Build sse-steam-1-7-104.
 // Labels: v2
-// Source exposure: mixed (pinned image listing and authorized sibling hints).
-// Drafted by gpt-6.1-terra
+// Source exposure: mixed (names and declarations from community headers; the listing of the pinned image).
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
 // Evidence: findings/ghidra-import.md
 // unknown00, cost, flags, InitializeMagicData, RemoveAllEffects, ClearFormData: STANDIN GUESS(low)
