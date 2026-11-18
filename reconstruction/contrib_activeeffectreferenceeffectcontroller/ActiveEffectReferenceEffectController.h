@@ -2,9 +2,7 @@
 // Adapted declarations: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); paths listed below.
 // Labels: v2
 // Source exposure: mixed.
-// Origin: original reconstruction from independently decoded target and anonymous sibling.
 // Code origin: declarations adapted from the community headers and extended by hand from the local listings.
-// Drafted by gpt-6.1-terra. Evidence: findings/ghidra-import.md
 // Adapted declarations: CommonLibSSE-NG b93280e832f263dbef44e44cbe2936622a02f91a, include/RE/A/ActiveEffect.h, ActiveEffectReferenceEffectController.h and RE/R/ReferenceEffectController.h.
 // Declarations and field names: GUESS; selected offsets and call slots corroborated by target.
 /*
