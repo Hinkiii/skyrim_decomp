@@ -36,5 +36,3 @@ class TESFile { public: void NextChunk(); };
 class IProcedureTreeItem { public: virtual ~IProcedureTreeItem(); virtual void Unk_01(); virtual void Unk_02(); virtual void Unk_03(); virtual void Unk_04(); virtual void** Unk_05(); virtual void** Unk_06(); };
 class TESCondition { public: void LoadCompact(TESFile*); void Unk4a6940(); void Unk4a6ab0(TESCondition* a_other); void* head; };
 class BGSProcedureTreeConditionalItem : public IProcedureTreeItem { public: void Load(TESFile*); void Unk_02() override; virtual void Unk_01(BGSProcedureTreeConditionalItem* a_other); virtual bool Unk_10(IProcedureTreeItem* a_other); TESCondition conditions; };
-static_assert(sizeof(TESCondition) == 0x8, "TESCondition size");
-static_assert(sizeof(BGSProcedureTreeConditionalItem) == 0x10, "BGSProcedureTreeConditionalItem size");

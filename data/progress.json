@@ -68603,12 +68603,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 1395952,
       "size": 8,
-      "status": "mapped",
+      "status": "matched",
       "name": "SpellItem::GetData2",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 109. RVA 0x154cf0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x154cf0.json",
+      "report": "reports/sse-steam-1-7-104/0x154cf0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x154d10",
@@ -68629,24 +68630,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 1396000,
       "size": 7,
-      "status": "mapped",
+      "status": "matched",
       "name": "SpellItem::GetDelivery",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 87. RVA 0x154d20; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x154d20.json",
+      "report": "reports/sse-steam-1-7-104/0x154d20.json"
     },
     {
       "id": "sse-steam-1-7-104-0x154d30",
       "build_id": "sse-steam-1-7-104",
       "rva": 1396016,
       "size": 46,
-      "status": "mapped",
+      "status": "matched",
       "name": "SpellItem::GetFixedCastDuration",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 89. RVA 0x154d30; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x154d30.json",
+      "report": "reports/sse-steam-1-7-104/0x154d30.json"
     },
     {
       "id": "sse-steam-1-7-104-0x154ee0",
@@ -68709,12 +68712,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 1397600,
       "size": 26,
-      "status": "mapped",
+      "status": "matched",
       "name": "SpellItem::IgnoresResistance",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 91. RVA 0x155360; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x155360.json",
+      "report": "reports/sse-steam-1-7-104/0x155360.json"
     },
     {
       "id": "sse-steam-1-7-104-0x155380",
@@ -77569,7 +77573,7 @@
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 0. RVA 0x213ab0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-normal-selection.md",
+      "evidence": "reports/sse-steam-1-7-104/0x213ab0.json",
       "report": "reports/sse-steam-1-7-104/0x213ab0.json"
     },
     {
@@ -97129,12 +97133,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 4501472,
       "size": 73,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSAttackData::~BGSAttackData",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 0. RVA 0x44afe0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x44afe0.json",
+      "report": "reports/sse-steam-1-7-104/0x44afe0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x44b170",
@@ -105457,24 +105462,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 4760336,
       "size": 13,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSProcedureTreeConditionalItem::Unk_01",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 1. RVA 0x48a310; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x48a310.json",
+      "report": "reports/sse-steam-1-7-104/0x48a310.json"
     },
     {
       "id": "sse-steam-1-7-104-0x48a330",
       "build_id": "sse-steam-1-7-104",
       "rva": 4760368,
       "size": 9,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSProcedureTreeConditionalItem::Unk_02",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 2. RVA 0x48a330; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x48a330.json",
+      "report": "reports/sse-steam-1-7-104/0x48a330.json"
     },
     {
       "id": "sse-steam-1-7-104-0x48a340",
@@ -105495,12 +105502,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 4760496,
       "size": 54,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSProcedureTreeConditionalItem::Unk_10",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 16. RVA 0x48a3b0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x48a3b0.json",
+      "report": "reports/sse-steam-1-7-104/0x48a3b0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x48a490",
@@ -116005,36 +116013,39 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 6146512,
       "size": 3,
-      "status": "mapped",
+      "status": "matched",
       "name": "ActiveEffectReferenceEffectController::GetManagerHandlesSaveLoad",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 14. RVA 0x5dc9d0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x5dc9d0.json",
+      "report": "reports/sse-steam-1-7-104/0x5dc9d0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x5dcae0",
       "build_id": "sse-steam-1-7-104",
       "rva": 6146784,
       "size": 5,
-      "status": "mapped",
+      "status": "matched",
       "name": "ActiveEffectReferenceEffectController::GetWindPoint",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 31. RVA 0x5dcae0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x5dcae0.json",
+      "report": "reports/sse-steam-1-7-104/0x5dcae0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x5dcb70",
       "build_id": "sse-steam-1-7-104",
       "rva": 6146928,
       "size": 15,
-      "status": "mapped",
+      "status": "matched",
       "name": "ActiveEffectReferenceEffectController::LoadGame",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 34. RVA 0x5dcb70; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x5dcb70.json",
+      "report": "reports/sse-steam-1-7-104/0x5dcb70.json"
     },
     {
       "id": "sse-steam-1-7-104-0x5dd150",
@@ -118376,24 +118387,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 6572240,
       "size": 12,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSMoviePlayer::Unk_07",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 7. RVA 0x6448d0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x6448d0.json",
+      "report": "reports/sse-steam-1-7-104/0x6448d0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x644910",
       "build_id": "sse-steam-1-7-104",
       "rva": 6572304,
       "size": 7,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSMoviePlayer::Unk_09",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 9. RVA 0x644910; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x644910.json",
+      "report": "reports/sse-steam-1-7-104/0x644910.json"
     },
     {
       "id": "sse-steam-1-7-104-0x644920",
@@ -118406,7 +118419,7 @@
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 10. RVA 0x644920; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md",
+      "evidence": "reports/sse-steam-1-7-104/0x644920.json",
       "report": "reports/sse-steam-1-7-104/0x644920.json"
     },
     {
@@ -118414,24 +118427,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 6572336,
       "size": 8,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSMoviePlayer::Unk_0B",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 11. RVA 0x644930; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x644930.json",
+      "report": "reports/sse-steam-1-7-104/0x644930.json"
     },
     {
       "id": "sse-steam-1-7-104-0x644940",
       "build_id": "sse-steam-1-7-104",
       "rva": 6572352,
       "size": 17,
-      "status": "mapped",
+      "status": "matched",
       "name": "BGSMoviePlayer::Unk_0C",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 12. RVA 0x644940; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x644940.json",
+      "report": "reports/sse-steam-1-7-104/0x644940.json"
     },
     {
       "id": "sse-steam-1-7-104-0x644a90",
@@ -118500,7 +118515,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0x645120.json",
       "report": "reports/sse-steam-1-7-104/0x645120.json"
     },
     {
@@ -118514,7 +118529,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0x645130.json",
       "report": "reports/sse-steam-1-7-104/0x645130.json"
     },
     {
@@ -135420,24 +135435,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 8360608,
       "size": 3,
-      "status": "mapped",
+      "status": "matched",
       "name": "Projectile::IsMissileProjectile",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: powerof3/CommonLibSSE commit 654e55f7979c1733033d5dbef176e43827bac944 (GPL-3.0), virtual slot comment of the class header, joined through the image RTTI vftable slot 162. RVA 0x7f92a0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x7f92a0.json",
+      "report": "reports/sse-steam-1-7-104/0x7f92a0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x7f92b0",
       "build_id": "sse-steam-1-7-104",
       "rva": 8360624,
       "size": 3,
-      "status": "mapped",
+      "status": "matched",
       "name": "Projectile::IsGrenadeProjectile",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: powerof3/CommonLibSSE commit 654e55f7979c1733033d5dbef176e43827bac944 (GPL-3.0), virtual slot comment of the class header, joined through the image RTTI vftable slot 163. RVA 0x7f92b0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x7f92b0.json",
+      "report": "reports/sse-steam-1-7-104/0x7f92b0.json"
     },
     {
       "id": "sse-steam-1-7-104-0x7f9e30",
@@ -157840,24 +157857,26 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 9772288,
       "size": 9,
-      "status": "mapped",
+      "status": "matched",
       "name": "MagicItemData::GetName",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: powerof3/CommonLibSSE commit 654e55f7979c1733033d5dbef176e43827bac944 (GPL-3.0), virtual slot comment of the class header, joined through the image RTTI vftable slot 1. RVA 0x951d00; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x951d00.json",
+      "report": "reports/sse-steam-1-7-104/0x951d00.json"
     },
     {
       "id": "sse-steam-1-7-104-0x951d10",
       "build_id": "sse-steam-1-7-104",
       "rva": 9772304,
       "size": 22,
-      "status": "mapped",
+      "status": "matched",
       "name": "MagicItemData::GetEquipState",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: powerof3/CommonLibSSE commit 654e55f7979c1733033d5dbef176e43827bac944 (GPL-3.0), virtual slot comment of the class header, joined through the image RTTI vftable slot 3. RVA 0x951d10; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-small-upstream-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0x951d10.json",
+      "report": "reports/sse-steam-1-7-104/0x951d10.json"
     },
     {
       "id": "sse-steam-1-7-104-0x951e40",
@@ -176349,12 +176368,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 14756816,
       "size": 39,
-      "status": "mapped",
+      "status": "matched",
       "name": "BSWin32KeyboardDevice::Release",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 3. RVA 0xe12bd0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-refill-held-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0xe12bd0.json",
+      "report": "reports/sse-steam-1-7-104/0xe12bd0.json"
     },
     {
       "id": "sse-steam-1-7-104-0xe12c00",
@@ -176379,7 +176399,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0xe12c20.json",
       "report": "reports/sse-steam-1-7-104/0xe12c20.json"
     },
     {
@@ -176393,7 +176413,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0xe12c30.json",
       "report": "reports/sse-steam-1-7-104/0xe12c30.json"
     },
     {
@@ -176740,7 +176760,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0xe7b050.json",
       "report": "reports/sse-steam-1-7-104/0xe7b050.json"
     },
     {
@@ -176766,7 +176786,7 @@
       "name_origin": "GUESS",
       "name_source": "GUESS(low): primitive interval stand-in; original signature and owning system unknown.",
       "owner": "awarebayes",
-      "evidence": "findings/ghidra-import.md",
+      "evidence": "reports/sse-steam-1-7-104/0xe7b080.json",
       "report": "reports/sse-steam-1-7-104/0xe7b080.json"
     },
     {
@@ -195198,7 +195218,7 @@
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 24. RVA 0xfce870; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/queue-normal-selection.md",
+      "evidence": "reports/sse-steam-1-7-104/0xfce870.json",
       "report": "reports/sse-steam-1-7-104/0xfce870.json"
     },
     {
@@ -195246,12 +195266,13 @@
       "build_id": "sse-steam-1-7-104",
       "rva": 16575152,
       "size": 18,
-      "status": "mapped",
+      "status": "matched",
       "name": "BSMultiBoundAABB::SetCenter",
       "name_origin": "COMMUNITY",
       "name_source": "Community name, not verified: CharmedBaryon/CommonLibSSE-NG commit b93280e832f263dbef44e44cbe2936622a02f91a (MIT), virtual slot comment of the class header, joined through the image RTTI vftable slot 45. RVA 0xfceab0; size from the comparator v2 extent.",
       "owner": "awarebayes",
-      "evidence": "findings/p92-unit-supply-selection.md"
+      "evidence": "reports/sse-steam-1-7-104/0xfceab0.json",
+      "report": "reports/sse-steam-1-7-104/0xfceab0.json"
     },
     {
       "id": "sse-steam-1-7-104-0xfceba0",
@@ -430588,7 +430609,7 @@
     "notes": "Inventory and exclusions have not been established. No completion percentage is meaningful yet."
   },
   "target_build_id": "sse-steam-1-7-104",
-  "updated_at": "2026-11-18T11:26:16Z",
+  "updated_at": "2026-11-18T12:39:06Z",
   "work_items": [
     {
       "id": "pin-target",

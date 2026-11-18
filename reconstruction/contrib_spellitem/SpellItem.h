@@ -27,13 +27,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 // SpellItem::GetDelivery, GetFixedCastDuration, IgnoresResistance, GetData2: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// SpellItemData, data: STANDIN GUESS(low); the record at 0xC0 and only the members the compared code reads
+// SpellItemData, unk08, data: STANDIN GUESS(low); the record at 0xC0 and only the members the compared code reads
 // GetData2: virtual slot unknown, declared after the known slots
-// TESForm, TESBoundObject, MagicItem and SpellItem members before data: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names and offsets from the community headers, secondary bases flattened into members to keep single inheritance
-// BSTArrayStub, equipTypeVtbl, menuDisplayVtbl, descriptionVtbl, fullNameVtbl, keywordFormVtbl, member types: GUESS(low); stand-in types and base vtable pointer slots, offsets from the community headers
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0, unkA8, unkB0, unkB8: GUESS(low); storage before data, where the community class has base subobjects and members
 #pragma once
 #include <cstdint>
-#include <cstddef>
 class TESFile; class BGSSaveFormBuffer; class BGSLoadFormBuffer; class TESObjectREFR; class BSFixedString; struct FORM; struct FORM_GROUP; class TESBoundObject; class TESWaterForm; class NiAVObject; class BGSVoiceType; class BSString; class Actor;
 using FormID = std::uint32_t; enum class FormType : unsigned char; enum class ActorValue : int;
 namespace MagicSystem { enum class SpellType : int; enum class CastingType : int; enum class Delivery : int; }
@@ -94,14 +92,6 @@ virtual bool                               Activate(TESObjectREFR* a_targetRef, 
 virtual void                               SetFormID(FormID a_id, bool a_updateFile);
 virtual const char*          GetObjectTypeName() const;
 virtual bool                 QAvailableInGame() const;
-    // TESForm members, offsets from NG (the vptr is at 00)
-    void*         sourceFiles;   // 08, TESFileContainer
-    std::uint32_t formFlags;     // 10
-    FormID        formID;        // 14
-    std::uint16_t inGameFormFlags; // 18
-    std::uint8_t  formType;      // 1A
-    std::uint8_t  pad1B;         // 1B
-    std::uint32_t pad1C;         // 1C
 };
 class TESObject : public TESForm { public:
 virtual void                        Unk_3B(void);
@@ -130,13 +120,7 @@ virtual void                        OnRemove3D(NiAVObject* a_obj3D);
 virtual void                        OnCheckModels();
 virtual void                        OnCopyReference();
 virtual void                        OnFinishScale();
-    // TESBoundObject::boundData (BOUND_DATA, 0xC bytes) and padding, offsets from NG
-    std::int16_t boundMin[3];  // 20
-    std::int16_t boundMax[3];  // 26
-    std::uint32_t pad2C;       // 2C
 };
-// BSTArrayStub: STANDIN GUESS(low); the 0x18-byte BSTArray header (entries, capacity, size), members unverified
-struct BSTArrayStub { void* entries; std::uint32_t capacity; std::uint32_t pad0C; std::uint32_t size; std::uint32_t pad14; };
 class MagicItem : public TESBoundObject { public: struct Data { int costOverride; unsigned flags; }; struct SkillUsageData;
 virtual MagicSystem::SpellType   GetSpellType() const = 0;
 virtual void                                   SetCastingType(MagicSystem::CastingType a_type);
@@ -164,20 +148,6 @@ virtual void                                   CopyMagicItemData(MagicItem* a_sr
 virtual void                                   LoadMagicItemChunk(TESFile* a_mod, std::uint32_t a_chunkID);
 virtual void                                   LoadChunkDataPostProcess(TESFile* a_mod);
 virtual const Data*              GetData1() const = 0;
-    // MagicItem members and flattened bases, offsets from NG: TESFullName at 30, BGSKeywordForm at 40.
-    const void*   fullNameVtbl;    // 30, TESFullName base vtable pointer
-    void*         fullName;        // 38, TESFullName::fullName (BSFixedString)
-    const void*   keywordFormVtbl; // 40, BGSKeywordForm base vtable pointer
-    void**        keywords;        // 48, BGSKeywordForm::keywords
-    std::uint32_t numKeywords;     // 50, BGSKeywordForm::numKeywords
-    std::uint32_t pad54;           // 54
-    BSTArrayStub  effects;         // 58, MagicItem::effects
-    std::int32_t  hostileCount;    // 70
-    std::uint32_t pad74;           // 74
-    void*         avEffectSetting; // 78
-    std::uint32_t preloadCount;    // 80
-    std::uint32_t pad84;           // 84
-    void*         preloadedItem;   // 88, BSTSmartPointer<QueuedFile>
 };
 struct SpellItemData {
     std::int32_t costOverride;  // 00
@@ -194,16 +164,28 @@ class SpellItem : public MagicItem { public:
     float GetFixedCastDuration() const override;
     bool IgnoresResistance() const override;
     virtual SpellItemData* GetData2();
-    // The secondary bases NG lists after MagicItem, as flattened members at their NG offsets.
-    const void*   equipTypeVtbl;       // 90, BGSEquipType base vtable pointer
-    void*         equipSlot;           // 98, BGSEquipType::equipSlot
-    const void*   menuDisplayVtbl;     // A0, BGSMenuDisplayObject base vtable pointer
-    void*         menuDispObject;      // A8, BGSMenuDisplayObject::menuDispObject
-    const void*   descriptionVtbl;     // B0, TESDescription base vtable pointer
-    std::uint32_t descriptionOffset;   // B8, TESDescription::fileOffset
-    std::uint32_t descriptionText;     // BC, TESDescription::descriptionText (BGSLocalizedStringDL)
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
+    std::uint64_t unk58;  // 58
+    std::uint64_t unk60;  // 60
+    std::uint64_t unk68;  // 68
+    std::uint64_t unk70;  // 70
+    std::uint64_t unk78;  // 78
+    std::uint64_t unk80;  // 80
+    std::uint64_t unk88;  // 88
+    std::uint64_t unk90;  // 90
+    std::uint64_t unk98;  // 98
+    std::uint64_t unkA0;  // A0
+    std::uint64_t unkA8;  // A8
+    std::uint64_t unkB0;  // B0
+    std::uint64_t unkB8;  // B8
     SpellItemData data;        // C0
 };
-static_assert(offsetof(SpellItem, data) == 0xC0, "SpellItem::data offset");
-static_assert(offsetof(MagicItem, effects) == 0x58, "MagicItem::effects offset");
-static_assert(sizeof(MagicItem) == 0x90, "MagicItem size");

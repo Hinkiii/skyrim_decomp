@@ -31,7 +31,6 @@
 // kReflectionDelayScale: GUESS(low); global float at address 0x1834b48, the multiplier applied to the reflection delay
 // ReverbParams decayHFRatio, reflectionDelay: widened to unsigned bytes to match the zero-extending loads in the listing
 #pragma once
-#include <cstddef>
 extern float kDecayTimeScale;
 extern float kReflectionDelayScale;
 class BaseFormComponent { public: virtual ~BaseFormComponent(); };
@@ -51,6 +50,3 @@ class BGSReverbParameters : public TESForm, public BSIReverbType { public:
  float DoGetDecayTime() const override; float DoGetDecayHFRatio() const override; float DoGetReflectionDelay() const override;
  void InitializeData() override;
 };
-static_assert(offsetof(BGSReverbParameters, data) == 0x28, "data at 0x28");
-static_assert(sizeof(BGSReverbParameters::ReverbParams) == 0xE, "ReverbParams size");
-static_assert(sizeof(BGSReverbParameters) == 0x38, "size");

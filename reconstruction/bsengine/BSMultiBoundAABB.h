@@ -10,6 +10,7 @@
 // (it stores that vftable and decrements the object counter), so NiRefObject and NiObject are
 // declared here with inline destructors instead of including the shared NiObject.h, whose
 // out-of-line destructors would add a call.
+// Code origin: declarations generated from a tools/skeleton.py skeleton and extended by hand from the local listings; names follow the community headers.
 // BSMultiBoundAABB: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT) EXE_RTTI
 // BSMultiBoundShape: STANDIN EXE_RTTI
 // BSMultiBoundAABB::GetLength, BSMultiBoundAABB::~BSMultiBoundAABB, BSMultiBoundAABB::LoadBinary, BSMultiBoundAABB::Unk_2B, BSMultiBoundAABB::GetWithinPoint, BSMultiBoundAABB::Unk_2A, BSMultiBoundAABB::Unk_28: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
@@ -38,6 +39,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+// BSMultiBoundAABB::RegisterStreamables, BSMultiBoundAABB::SetCenter: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); names only, the bodies are written from the target listing
+// RegisterStreamablesBase: GUESS(low); address 0xfe4f30, takes the object and the stream and returns a byte that RegisterStreamables turns into a bool
 #pragma once
 
 #include <intrin.h>
@@ -168,6 +171,8 @@ struct BSMultiBoundPlanes
 };
 static_assert(sizeof(BSMultiBoundPlanes) == 0x64, "BSMultiBoundPlanes size");
 
+std::uint8_t RegisterStreamablesBase(NiObject* a_self, NiStream& a_stream);
+
 class BSMultiBoundShape : public NiObject
 {
 public:
@@ -184,6 +189,8 @@ public:
     virtual float GetLength();  // compared: 0x213c70
     virtual ~BSMultiBoundAABB();  // compared: 0x213ab0 (scalar deleting destructor)
     virtual void LoadBinary(NiStream& a_stream);  // compared: 0xfce870
+    bool RegisterStreamables(NiStream& a_stream) override;  // compared: 0xfce8c0
+    virtual void SetCenter(const NiPoint3& a_center);  // compared: 0xfceab0
     virtual void Unk_2B(float* a_sphere);  // compared: 0xfcf150; writes center x, y, z and radius
     virtual bool GetWithinPoint(const NiPoint3& a_pos);  // compared: 0xfcf1a0
     virtual bool Unk_2A(const BSMultiBoundPlanes& a_planes);  // compared: 0xfcf0a0

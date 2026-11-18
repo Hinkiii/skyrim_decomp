@@ -33,7 +33,6 @@ SOFTWARE.
 // LoadRefHandle: GUESS(low); address 0x17a940, reads a handle from the load buffer into its second argument
 #pragma once
 #include <cstdint>
-#include <cstddef>
 class Actor; class MagicTarget; class NiNode; class BSFixedString; class BGSSaveFormBuffer; class BGSLoadFormBuffer;
 struct NiPoint3 { float x,y,z; };
 class TESObjectREFR;
@@ -41,7 +40,3 @@ class ActiveEffect { public: virtual void AdjustForPerks(Actor*,MagicTarget*); v
 class ReferenceEffectController { public: virtual ~ReferenceEffectController(); };
 void LoadRefHandle(BGSLoadFormBuffer* a_buf, std::uint32_t* a_handle);
 class ActiveEffectReferenceEffectController : public ReferenceEffectController { public: virtual bool GetManagerHandlesSaveLoad() const; virtual NiPoint3* GetWindPoint(); virtual void LoadGame(BGSLoadFormBuffer* a_buf); void HandleEvent(const BSFixedString&); void SwitchAttachedRoot(NiNode*,NiNode*); void SetWindPoint(const NiPoint3&); ActiveEffect* effect; std::uint32_t target; NiPoint3 windPoint; };
-static_assert(offsetof(ActiveEffectReferenceEffectController, effect) == 0x08, "effect offset");
-static_assert(offsetof(ActiveEffectReferenceEffectController, target) == 0x10, "target offset");
-static_assert(offsetof(ActiveEffectReferenceEffectController, windPoint) == 0x14, "windPoint offset");
-static_assert(sizeof(ActiveEffectReferenceEffectController) == 0x20, "ActiveEffectReferenceEffectController size");

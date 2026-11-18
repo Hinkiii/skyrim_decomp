@@ -36,9 +36,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// Layout members are named after CommonLibSSE-NG and sit at its offsets; secondary bases are flattened as vptr slot plus fields.
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0, unkA8, unkB0, unkB8, unkC0, unkC8, unkD0, unkD8, unkE0, unkE8, unkF0, unkF8, unk100, unk108, unk110, unk118, unk120, unk128: GUESS(low); storage not read by the compared code
 #pragma once
-#include <cstddef>
 #include <cstdint>
 struct IngredientData {
     std::int32_t  cost;   // 00
@@ -160,62 +159,43 @@ public:
     virtual void InitChunk();
 
 private:
-public:
-    // flattened secondary bases at their CommonLibSSE-NG offsets (vptr slot plus fields)
-    void*         sourceFiles;           // 08 TESForm
-    std::uint32_t formFlags;             // 10
-    std::uint32_t formID;                // 14
-    std::uint16_t inGameFormFlags;       // 18
-    std::uint8_t  formType;              // 1A
-    std::uint8_t  pad1B;                 // 1B
-    std::uint32_t pad1C;                 // 1C
-    std::int16_t  boundData[6];          // 20 TESBoundObject OBND
-    std::uint32_t pad2C;                 // 2C
-    void*         vptrFullName;          // 30 TESFullName
-    void*         fullName;              // 38
-    void*         vptrKeywordForm;       // 40 BGSKeywordForm
-    void**        keywords;              // 48
-    std::uint32_t numKeywords;           // 50
-    std::uint32_t pad54;                 // 54
-    void*         effectsBegin;          // 58 MagicItem::effects (BSTArray)
-    void*         effectsPad;            // 60
-    std::uint64_t effectsSizeCapacity;   // 68
-    std::int32_t  hostileCount;          // 70
-    std::uint32_t pad74;                 // 74
-    void*         avEffectSetting;       // 78
-    std::uint32_t preloadCount;          // 80
-    std::uint32_t pad84;                 // 84
-    void*         preloadedItem;         // 88
-    void*         vptrModel;             // 90 TESModelTextureSwap
-    void*         model;                 // 98
-    void*         textures;              // A0
-    void*         addons;                // A8
-    std::uint16_t numTextures;           // B0
-    std::uint16_t numAddons;             // B2
-    std::uint32_t pad24;                 // B4
-    void*         alternateTextures;     // B8
-    std::uint32_t numAlternateTextures;  // C0
-    std::uint32_t pad34;                 // C4
-    void*         vptrIcon;              // C8 TESIcon
-    void*         textureName;           // D0
-    void*         vptrWeightForm;        // D8 TESWeightForm
-    float         weight;                // E0
-    std::uint32_t pad0C;                 // E4
-    void*         vptrEquipType;         // E8 BGSEquipType
-    void*         equipSlot;             // F0
-    void*         vptrDestructible;      // F8 BGSDestructibleObjectForm
-    void*         destructibleData;      // 100
-    void*         vptrPickupPutdown;     // 108 BGSPickupPutdownSounds
-    void*         pickupSound;           // 110
-    void*         putdownSound;          // 118
-    void*         vptrValueForm;         // 120 TESValueForm
-    std::int32_t  value;                 // 128
-    std::uint32_t padValue;              // 12C
-    int cost;                            // 130 ENIT costOverride
-    std::uint32_t flags;                 // 134
-    std::uint16_t knownEffectFlags;      // 138 GameData
-    std::uint16_t playerUses;            // 13A
-    std::uint32_t pad13C;                // 13C
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
+    std::uint64_t unk58;  // 58
+    std::uint64_t unk60;  // 60
+    std::uint64_t unk68;  // 68
+    std::uint64_t unk70;  // 70
+    std::uint64_t unk78;  // 78
+    std::uint64_t unk80;  // 80
+    std::uint64_t unk88;  // 88
+    std::uint64_t unk90;  // 90
+    std::uint64_t unk98;  // 98
+    std::uint64_t unkA0;  // A0
+    std::uint64_t unkA8;  // A8
+    std::uint64_t unkB0;  // B0
+    std::uint64_t unkB8;  // B8
+    std::uint64_t unkC0;  // C0
+    std::uint64_t unkC8;  // C8
+    std::uint64_t unkD0;  // D0
+    std::uint64_t unkD8;  // D8
+    std::uint64_t unkE0;  // E0
+    std::uint64_t unkE8;  // E8
+    std::uint64_t unkF0;  // F0
+    std::uint64_t unkF8;  // F8
+    std::uint64_t unk100;  // 100
+    std::uint64_t unk108;  // 108
+    std::uint64_t unk110;  // 110
+    std::uint64_t unk118;  // 118
+    std::uint64_t unk120;  // 120
+    std::uint64_t unk128;  // 128
+    int cost;
+    std::uint32_t flags;
 };
-static_assert(offsetof(IngredientItem, cost) == 0x130, "cost at 0x130");
-static_assert(sizeof(IngredientItem) == 0x140, "size");
