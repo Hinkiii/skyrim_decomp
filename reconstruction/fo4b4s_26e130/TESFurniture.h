@@ -32,8 +32,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 // TESFurniture::InitializeData, TESFurniture::Clone3D: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// g_furnitureCloneFlag: GUESS(low); global byte at RVA 0x20b6130 that gates the extra step in Clone3D
-// TESFurniture::Unk26f900: GUESS(low); RVA 0x26f900, called with the cloned node when the flag is set
+// g_furnitureCloneFlag: GUESS(low); global byte at address 0x20b6130 that gates the extra step in Clone3D
+// TESFurniture::Unk26f900: GUESS(low); address 0x26f900, called with the cloned node when the flag is set
 // dwordE4, qwordE8, unkE0: GUESS(low); members the compared InitializeData clears
 #pragma once
 class Component { public: virtual ~Component(); };
