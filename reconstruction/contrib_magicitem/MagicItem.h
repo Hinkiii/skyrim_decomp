@@ -34,59 +34,45 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// EffectSetting, Effect, MagicItemData, MagicItem members: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names and offsets as declared there, bases flattened, types simplified
+// unk00, unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0, unkA8, unkB0, unkB8: GUESS(low); storage not read by the compared code
+// unk00, unk08: GUESS(low); storage not read by the compared code
+// unk00: GUESS(low); storage not read by the compared code
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50: GUESS(low); storage not read by the compared code
 #pragma once
-#include <cstddef>
 #include <cstdint>
 
 struct EffectSetting {
-    // Prefix of NG EffectSetting up to data.archetype; bases flattened at their NG offsets.
-    void*         vtbl;                       // 00
-    void*         sourceFiles;                // 08
-    std::uint32_t formFlags;                  // 10
-    std::uint32_t formID;                     // 14
-    std::uint16_t inGameFormFlags;            // 18
-    std::uint8_t  formType;                   // 1A
-    std::uint8_t  pad1B;                      // 1B
-    std::uint32_t pad1C;                      // 1C
-    void*         vtblTESFullName;            // 20
-    void*         fullName;                   // 28
-    void*         vtblBGSMenuDisplayObject;   // 30
-    void*         menuDispObject;             // 38
-    void*         vtblBGSKeywordForm;         // 40
-    void**        keywords;                   // 48
-    std::uint32_t numKeywords;                // 50
-    std::uint32_t pad54;                      // 54
-    void*         filterValidationFunction;   // 58
-    void*         filterValidationItem;       // 60
-    std::uint32_t dataFlags;                  // 68
-    float         baseCost;                   // 6C
-    void*         associatedForm;             // 70
-    std::int32_t  associatedSkill;            // 78
-    std::int32_t  resistVariable;             // 7C
-    std::int16_t  numCounterEffects;          // 80
-    std::uint16_t pad82;                      // 82
-    std::uint32_t pad84;                      // 84
-    void*         light;                      // 88
-    float         taperWeight;                // 90
-    std::uint32_t pad94;                      // 94
-    void*         effectShader;               // 98
-    void*         enchantShader;              // A0
-    std::int32_t  minimumSkill;               // A8
-    std::int32_t  spellmakingArea;            // AC
-    float         spellmakingChargeTime;      // B0
-    float         taperCurve;                 // B4
-    float         taperDuration;              // B8
-    float         secondAVWeight;             // BC
-    std::int32_t  archetype;                  // C0
+    std::uint64_t unk00;  // 00
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
+    std::uint64_t unk58;  // 58
+    std::uint64_t unk60;  // 60
+    std::uint64_t unk68;  // 68
+    std::uint64_t unk70;  // 70
+    std::uint64_t unk78;  // 78
+    std::uint64_t unk80;  // 80
+    std::uint64_t unk88;  // 88
+    std::uint64_t unk90;  // 90
+    std::uint64_t unk98;  // 98
+    std::uint64_t unkA0;  // A0
+    std::uint64_t unkA8;  // A8
+    std::uint64_t unkB0;  // B0
+    std::uint64_t unkB8;  // B8
+    std::int32_t unkC0;        // C0
 };
 
 struct Effect {
-    float          magnitude;   // 00
-    std::uint32_t  area;        // 04
-    std::uint32_t  duration;    // 08
-    std::uint32_t  pad0C;       // 0C
-    EffectSetting* baseEffect;  // 10
+    std::uint64_t unk00;  // 00
+    std::uint64_t unk08;  // 08
+    EffectSetting* baseEffect;   // 10
 };
 
 struct EffectArray {
@@ -98,8 +84,8 @@ struct EffectArray {
 };
 
 struct MagicItemData {
-    std::uint32_t costOverride;  // 00
-    std::uint32_t flags;         // 04
+    std::uint32_t unk00;  // 00
+    std::uint8_t unk04;     // 04
 };
 
 class MagicItem
@@ -222,26 +208,15 @@ public:
     float GetFixedCastDuration() const;
     float GetRange() const;
 
-    // Bases TESBoundObject (TESForm 08, bound 20), TESFullName 30 and BGSKeywordForm 40 flattened at NG offsets.
-    void*         sourceFiles;       // 08
-    std::uint32_t formFlags;         // 10
-    std::uint32_t formID;            // 14
-    std::uint16_t inGameFormFlags;   // 18
-    std::uint8_t  formType;          // 1A
-    std::uint8_t  pad1B;             // 1B
-    std::uint32_t pad1C;             // 1C
-    std::int16_t  boundMin[3];       // 20
-    std::int16_t  boundMax[3];       // 26
-    std::uint32_t pad2C;             // 2C
-    void*         vtblTESFullName;   // 30
-    void*         fullName;          // 38
-    void*         vtblBGSKeywordForm;  // 40
-    void**        keywords;          // 48
-    std::uint32_t numKeywords;       // 50
-    std::uint32_t pad54;             // 54
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
     EffectArray  effects;      // 58
 };
-static_assert(offsetof(MagicItem, effects) == 0x58, "layout");
-static_assert(offsetof(Effect, baseEffect) == 0x10, "layout");
-static_assert(offsetof(EffectSetting, archetype) == 0xC0, "layout");
-static_assert(sizeof(MagicItemData) == 0x8, "layout");
