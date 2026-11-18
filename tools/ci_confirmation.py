@@ -12,8 +12,12 @@ from pathlib import Path
 import compare
 from pecoff import CoffObject
 import target_hashes
+from digest_v2 import run_revision
 
 WORKFLOW = '.github/workflows/ci-confirm.yml'
+PR_WORKFLOW = '.github/workflows/pr-check.yml'
+PR_JOB = 'hash'
+CI_HOST = dict(host_id='github-windows-native', machine='github-hosted-windows', loader='native', os='windows')
 TOOLS = (WORKFLOW, 'tools/ci_confirm_batch.py', 'tools/ci_confirmation.py',
          'tools/ci_toolchain.py', 'tools/ci_hash_check.py', 'tools/lint_reconstruction.py',
          'tools/target_hashes.py', 'tools/pecoff.py', 'tools/contrib.py', 'tools/source_digest.py',
@@ -66,9 +70,101 @@ def require(value, reason):
         raise ValueError('CI confirmation: ' + reason)
 
 
+def first_host_check(record, c):
+    """The comparator runs must come from one machine that is independent of the CI host."""
+    first = c.get('first_host')
+    if first is None:  # Existing Mac attestations keep their original identity and field names.
+        first = dict(host_id='mac-wine', machine='maintainer-mac', loader='wine', os='macos')
+    require(isinstance(first, dict) and isinstance(first.get('host_id'), str)
+            and isinstance(first.get('machine'), str) and bool(first['machine'])
+            and first['host_id'] != c['host_id'] and first['machine'] != c['machine'],
+            'first host is not an independent machine')
+    require((first.get('loader'), first.get('os')) in {('wine', 'macos'), ('wine', 'linux'), ('native', 'windows')},
+            'first host loader/OS differs')
+    runs = record['runs']
+    require({r['compiled_on'] for r in runs} == {first['host_id']}
+            and {r['compared_on'] for r in runs} == {first['host_id']}, 'first host differs from comparator runs')
+
+
+def is_sha(value):
+    return isinstance(value, str) and re.fullmatch('[0-9a-f]{40}', value) is not None
+
+
+def pr_check_evidence(root, run, report, row, map_status, first_host):
+    """The record's `ci_confirmation` from one pr-check.yml `hash` run.
+
+    `run` is what the GitHub API says about the run and its job, `report` and `row` come from the
+    run's own artifact and `map_status` from its per-function status map. Anything that does not
+    agree with the revision the bot reviewed raises, so no confirmation is written for it.
+    """
+    require(map_status == 'pass' and row.get('status') == 'pass' and row.get('result') == 'hash-match',
+            'the hash run did not pass this function')
+    require(isinstance(row.get('symbols'), list) and row['symbols'] and all(isinstance(n, str) for n in row['symbols']),
+            'the hash run names no matching function')
+    require(is_sha(run.get('head_sha')) and report.get('head_sha') == run['head_sha'],
+            'artifact belongs to another revision than the run')
+    require(is_sha(report.get('base_sha')) and 'error' not in report and report.get('toolset') == 'MATCH',
+            'hash run did not complete on a verified toolset')
+    manifest = target_hashes.load_manifest(root)
+    target = next((r for r in manifest['functions'] if r['rva'] == int(row['rva'], 16)), None)
+    require(target is not None, 'no published target hash')
+    return dict(schema=2, kind='pr-check-hash', **CI_HOST, workflow=PR_WORKFLOW, job=PR_JOB,
+                event=run['event'], conclusion=run['conclusion'], run_id=run['run_id'],
+                run_attempt=run['run_attempt'], head_sha=run['head_sha'], base_sha=report['base_sha'],
+                build_id=manifest['build_id'], rva=row['rva'], unit=row['unit'], status='pass',
+                map_status=map_status, result=row['result'], toolset='MATCH',
+                compiler_pins_sha256=report.get('compiler_pins_sha256'),
+                symbols=sorted(row['symbols']),
+                source_sha256=row.get('source_sha256'), recipe_sha256=row.get('recipe_sha256'),
+                target=target, normalized_sha256=target['normalized_sha256'],
+                layout_sha256=target['layout_sha256'], first_host=first_host)
+
+
+def validate_pr_check(root, record, fn, target, c):
+    """The pr-check.yml `hash` job as the second host: a pass bound to one run, one head and the source.
+
+    The run compiled the PR head and compared published target commitments; the bot builds this
+    evidence only after checking that the run's head is the revision it reviewed and merged. The
+    source and recipe digests come from the run's own rows, so they must equal what the first
+    host compared, which is how both hosts are tied to the same source content.
+    """
+    require({k: c.get(k) for k in CI_HOST} == CI_HOST and c.get('kind') == 'pr-check-hash', 'unapproved host')
+    require(c.get('workflow') == PR_WORKFLOW and c.get('job') == PR_JOB and c.get('event') == 'pull_request'
+            and c.get('conclusion') == 'success', 'workflow job did not succeed')
+    require(type(c.get('run_id')) is int and c['run_id'] > 0
+            and type(c.get('run_attempt')) is int and c['run_attempt'] > 0, 'invalid run identity')
+    require(is_sha(c.get('head_sha')) and is_sha(c.get('base_sha')) and c['head_sha'] != c['base_sha'],
+            'invalid revision')
+    ancestry = subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor',
+                               c['base_sha'], 'HEAD'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    require(ancestry.returncode == 0, 'CI tools revision is not an ancestor')
+    require(c.get('build_id') == target['build_id'] and c.get('rva') == hex(fn['rva'])
+            and c.get('unit') == record['source']['compiled'], 'function or unit binding differs')
+    require(c.get('status') == c.get('map_status') == 'pass' and c.get('result') == 'hash-match',
+            'hash did not pass')
+    require(c.get('toolset') == 'MATCH' and c.get('compiler_pins_sha256') ==
+            sha((root / 'tools/verifier/pinned.sha256').read_bytes()), 'compiler pins differ')
+    manifest = target_hashes.load_manifest(root)
+    row = next((r for r in manifest['functions'] if r['rva'] == fn['rva']), None)
+    require(row is not None and row['size'] == fn['size'] and row['extraction'] != 'unmasked-unsupported',
+            'no supported published target hash')
+    require(c.get('target') == row and c.get('normalized_sha256') == row['normalized_sha256']
+            and c.get('layout_sha256') == row['layout_sha256'], 'target binding differs')
+    require(c.get('source_sha256') == run_revision(record['source'])
+            and c.get('recipe_sha256') == record['recipe']['sha256'], 'source or recipe differs')
+    # CI found the function by hash, so it must be the one the first host's comparator bound.
+    symbols = {(run['report'].get('function') or {}).get('symbol') for run in record['runs']}
+    require(isinstance(c.get('symbols'), list) and len(symbols) == 1 and symbols <= set(c['symbols']),
+            'CI matched another function than the first host compared')
+    require(isinstance(c.get('first_host'), dict), 'first host is not named')
+    first_host_check(record, c)
+
+
 def validate(root, record, fn, target):
     """Validate explicit CI evidence in addition to every ordinary local comparator check."""
     c = record.get('ci_confirmation')
+    if isinstance(c, dict) and c.get('schema') == 2:
+        return validate_pr_check(root, record, fn, target, c)
     require(isinstance(c, dict) and c.get('schema') == 1, 'unknown evidence schema')
     require(c.get('kind') == 'ci-hash' and c.get('host_id') == 'github-windows-native'
             and c.get('machine') == 'github-hosted-windows' and c.get('loader') == 'native'
@@ -93,7 +189,7 @@ def validate(root, record, fn, target):
     require(row is not None and row['size'] == fn['size'] and row['extraction'] != 'unmasked-unsupported',
             'no supported published target hash')
     require(c.get('target') == row and c.get('build_id') == target['build_id'], 'target binding differs')
-    require(c.get('source_sha256') == record['source']['digest']
+    require(c.get('source_sha256') == run_revision(record['source'])
             and c.get('unit') == record['source']['compiled']
             and c.get('recipe_sha256') == record['recipe']['sha256'], 'source or recipe differs')
     require(c.get('result') == 'hash-match' and c.get('deterministic') is True,
