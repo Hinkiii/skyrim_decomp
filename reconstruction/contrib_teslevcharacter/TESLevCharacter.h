@@ -2,8 +2,6 @@
 // Labels: v2
 // Code origin: declarations extended by hand from the local listings; names follow the community headers.
 // Source exposure: mixed
-// Origin: independently decoded target and anonymous sibling; declarations adapted from community headers.
-// Drafted by gpt-6.1-terra
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
 // Evidence: findings/ghidra-import.md
 // names: GUESS(low); names and signatures are hypotheses.
