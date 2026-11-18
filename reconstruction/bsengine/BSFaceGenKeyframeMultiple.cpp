@@ -5,7 +5,7 @@
 // Code origin: GetModifierName, Unk_08 and Unk_09 bodies written from the local listings; declarations added to the existing unit header.
 // Source exposure: mixed (names and declarations from community headers; the listing of the pinned
 // image).
-// Declarations derived from powerof3/CommonLibSSE are GPL-3.0 (its licence).
+// Declarations derived from powerof3/CommonLibSSE are GPL-3.0.
 // MIT License
 //
 // Copyright (c) 2018 Ryan-rsm-McKenzie
@@ -27,7 +27,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// Declarations derived from powerof3/CommonLibSSE are GPL-3.0-or-later.
+// Declarations derived from powerof3/CommonLibSSE are GPL-3.0.
 // This file is free software: you can redistribute it and/or modify it under the terms
 // of the GNU General Public License as published by the Free Software Foundation,
 // either version 3 of the License, or (at your option) any later version.
