@@ -31,8 +31,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 // DoGetRoomLevel, DoGetRoomHFLevel, DoGetReflectionLevel, DoGetReverbLevel, DoGetDiffusion, DoGetDensity, DoGetHFReference, DoGetDecayTime, DoGetDecayHFRatio, DoGetReflectionDelay, InitializeData: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// kDecayTimeScale: GUESS(low); global float at RVA 0x1b5bdc4, the multiplier applied to the decay time
-// kReflectionDelayScale: GUESS(low); global float at RVA 0x1834b48, the multiplier applied to the reflection delay
+// kDecayTimeScale: GUESS(low); global float at address 0x1b5bdc4, the multiplier applied to the decay time
+// kReflectionDelayScale: GUESS(low); global float at address 0x1834b48, the multiplier applied to the reflection delay
 // ReverbParams decayHFRatio, reflectionDelay: widened to unsigned bytes to match the zero-extending loads in the listing
 #pragma once
 extern float kDecayTimeScale;
