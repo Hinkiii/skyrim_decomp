@@ -1,43 +1,12 @@
-// AlchemyItem declarations for build sse-steam-1-7-104 (standalone unit for the functions compared in the matching .cpp).
 // Code origin: declarations written by hand from the local listings and the community headers; the bodies are in the matching .cpp.
-// AlchemyItem partial declarations.
-// Build sse-steam-1-7-104.
-// Labels: v2
 // Source exposure: mixed (names and declarations from community headers; the listing of the pinned image).
-// Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
-// Evidence: findings/ghidra-import.md
 // unknown00, cost, flags, InitializeMagicData, RemoveAllEffects, ClearFormData: STANDIN GUESS(low)
 // GetData2, IsMedicine, IsPoison, IsFood: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // GetData: GUESS(low); virtual slot 0x6C (byte offset 0x360), returns the record whose flags the three tests read
 // Unk_61: GUESS(low); virtual slot 0x61 (byte offset 0x308), a bool test called by IsFood
 // Unk_NN: GUESS(low); placeholders that only keep Unk_61 and GetData at the vtable offsets the image encodes
 // AlchemyData: STANDIN GUESS(low); the first two members of the record at 0x138 (cost, flags)
-// Names, signatures, and layout are unverified.
-// The MIT notice below covers only the names and declarations taken from
-// CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a; the other code in this file
-// is covered by the repository licence and the provenance labels above.
-// MIT License
-//
-// Copyright (c) 2018 Ryan-rsm-McKenzie
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-// Layout members are named after CommonLibSSE-NG and sit at its offsets; Secondary bases are flattened as vptr slot plus fields.
+// SPDX-License-Identifier: MIT (CommonLibSSE-NG declarations, Copyright (c) 2018 Ryan-rsm-McKenzie; full text: licenses/CommonLibSSE-NG.txt)
 #pragma once
 #include <cstddef>
 #include <cstdint>
