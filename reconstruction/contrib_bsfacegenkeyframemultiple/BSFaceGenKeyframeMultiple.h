@@ -38,13 +38,15 @@
 // The image takes an index and returns a name pointer, so the declarations below follow the image.
 // BSFaceGenKeyframeMultiple::Unk_0E, BSFaceGenKeyframeMultiple::Unk_0B, BSFaceGenKeyframeMultiple::Unk_09, BSFaceGenKeyframeMultiple::Unk_08: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // The image's Unk_0E takes an index and returns a bool, and Unk_0B, Unk_09 and Unk_08 return values where the community declares void; the declarations below follow the image.
-// BSFaceGenKeyframe::~BSFaceGenKeyframe, unknown08: GUESS(low)
+// BSFaceGenKeyframe::~BSFaceGenKeyframe: GUESS(low)
 // values, count, isUpdated, pad1D: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // Unk_01 to Unk_07, Unk_0A, Unk_0C: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); void placeholders that keep the image's vtable index of the call at 0x70
 // Unk_0D: GUESS(low); a void placeholder at vtable index 0x0D
 // g_customNameTable, g_expressionNameTable, g_phonemeNameTable: GUESS(low); the image's name tables at 0x20b0828, 0x20b0830 and 0x20b0950
 // BSFaceGenKeyframeMultiple::GetModifierName: COMMUNITY(powerof3/CommonLibSSE@654e55f7979c1733033d5dbef176e43827bac944, GPL-3.0); name only, the body is written from the target listing
 // g_modifierNameTable: GUESS(low); table of names at address 0x20b08c0 indexed by GetModifierName
+// unk08: GUESS(low); storage after the vtable pointer, not read by the compared code
+// pad1E: GUESS(low); the last two bytes of the community's three-byte pad1D
 #pragma once
 
 #include <cstdint>
@@ -54,7 +56,7 @@ class BSFaceGenKeyframe
 {
 public:
     virtual ~BSFaceGenKeyframe() = default;
-    std::uint8_t unknown08[0x8];  // 08
+    std::uint64_t unk08;  // 08
 };
 static_assert(sizeof(BSFaceGenKeyframe) == 0x10, "BSFaceGenKeyframe size");
 
@@ -89,6 +91,7 @@ public:
     float*        values;     // 10
     std::uint32_t count;      // 18
     bool          isUpdated;  // 1C
-    std::uint8_t  pad1D[3];   // 1D
+    std::uint8_t  pad1D;      // 1D
+    std::uint16_t pad1E;      // 1E
 };
 static_assert(sizeof(BSFaceGenKeyframeMultiple) == 0x20, "BSFaceGenKeyframeMultiple size");
