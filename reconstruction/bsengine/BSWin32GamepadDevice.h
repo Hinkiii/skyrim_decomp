@@ -13,8 +13,8 @@
 // BSWin32GamepadDevice::Release, BSWin32GamepadDevice::SetRumble: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // BSIInputDevice::~BSIInputDevice, unknown08, unknown70, unknownD0, unknownD8: GUESS(low)
 // BSWin32GamepadDevice::Reset, BSWin32GamepadDevice::Initialize: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// g_gamepadManager: GUESS(low); global pointer at RVA 0x31a5690 that Initialize calls through
-// GamepadManager, Unk_ceed20: GUESS(low); RVA 0xceed20, called on that pointer with zero
+// g_gamepadManager: GUESS(low); global pointer at address 0x31a5690 that Initialize calls through
+// GamepadManager, Unk_ceed20: GUESS(low); address 0xceed20, called on that pointer with zero
 // state: GUESS(low); the 0x50 bytes at offset 0xD8 that Reset and Initialize clear
 // The MIT notice below covers only the names and declarations taken from
 // CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a; the other code in this file
