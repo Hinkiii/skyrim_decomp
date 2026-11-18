@@ -48,7 +48,7 @@
 // Sibling source: fo4-private@1b765c70 src/Shared/TESForms/Objects/TESObject.cpp:92
 // Sibling source: fo4-private@1b765c70 src/Shared/TESForms/Objects/TESObject.cpp:105
 // TESObject and TESBoundObject: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); adapted declarations.
-// RVA 0x277e00, 13 bytes; RVA 0x278e00, 47 bytes.
+// RVA 0x277e00, 13 bytes.
 // MIT License
 // 
 // Copyright (c) 2018 Ryan-rsm-McKenzie
