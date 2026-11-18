@@ -3,8 +3,9 @@
 // Labels: v2
 // Task: p177fb-ec14f6c6
 // Source exposure: mixed (names and declarations from community headers; the listing of the pinned image).
-// TESObjectACTI, TESObjectACTI::InitializeData: GUESS(low)
-// TESObjectACTI fields: STANDIN GUESS(low)
+// TESObjectACTI, TESObjectACTI::InitializeData: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); InitializeData is declared here as a non-virtual member, the community declaration is a virtual override
+// soundLoop, soundActivate, waterForm, flags: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names and order as declared there, the types here are guesses
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0: GUESS(low); storage before soundLoop, where the community class has base subobjects
 // Supporting types: STANDIN GUESS(low)
 // GetWaterType, GetIgnoredBySandbox, IsWater: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); signatures as declared there
 // TESWaterForm: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
@@ -38,5 +39,26 @@
 class TESWaterForm;
 class TESObjectACTI {
 public: virtual TESWaterForm* GetWaterType() const; virtual bool GetIgnoredBySandbox() const; virtual bool IsWater() const; void InitializeData();
-private: std::uint8_t pad[0xa0]; void* soundLoop; void* soundActivate; TESWaterForm* waterForm; std::uint16_t flags;
+private:
+  std::uint64_t unk08;
+  std::uint64_t unk10;
+  std::uint64_t unk18;
+  std::uint64_t unk20;
+  std::uint64_t unk28;
+  std::uint64_t unk30;
+  std::uint64_t unk38;
+  std::uint64_t unk40;
+  std::uint64_t unk48;
+  std::uint64_t unk50;
+  std::uint64_t unk58;
+  std::uint64_t unk60;
+  std::uint64_t unk68;
+  std::uint64_t unk70;
+  std::uint64_t unk78;
+  std::uint64_t unk80;
+  std::uint64_t unk88;
+  std::uint64_t unk90;
+  std::uint64_t unk98;
+  std::uint64_t unkA0;
+  void* soundLoop; void* soundActivate; TESWaterForm* waterForm; std::uint16_t flags;
 };
