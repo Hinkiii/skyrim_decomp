@@ -37,7 +37,7 @@
 //   SOFTWARE.
 //
 // BSLightingShaderMaterialSnow::SaveBinary, BSLightingShaderMaterialSnow::LoadBinary: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// SnowData::SaveStream, SnowData::LoadStream: GUESS(low); RVAs 0xef32b0 and 0xef31c0, called on the member at offset 0xA0 with the stream
+// SnowData::SaveStream, SnowData::LoadStream: GUESS(low); addresses 0xef32b0 and 0xef31c0, called on the member at offset 0xA0 with the stream
 #pragma once
 
 #include <cstdint>
