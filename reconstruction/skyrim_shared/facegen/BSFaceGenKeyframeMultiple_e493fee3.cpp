@@ -9,6 +9,7 @@
 const char* BSFaceGenKeyframeMultiple::GetModifierName(std::uint32_t a_index)
 {
     if (a_index <= 0x10) {
+        // The public unsigned input has been bounded; its signed table index is representable.
         const std::int32_t tableIndex = static_cast<std::int32_t>(a_index);
         return g_modifierNameTable[tableIndex];
     }
