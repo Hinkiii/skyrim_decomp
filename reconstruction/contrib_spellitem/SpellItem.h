@@ -1,8 +1,6 @@
 // SpellItem declarations for build sse-steam-1-7-104 (standalone unit for the functions compared in the matching .cpp).
 // Labels: v2
 // Source exposure: mixed
-// Origin: independently decoded target, anonymous sibling and public declarations.
-// Drafted by gpt-6.1-terra
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
 // Evidence: findings/ghidra-import.md
 // SpellItem, MagicItem: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); declarations adapted from include/RE/S/SpellItem.h, include/RE/M/MagicItem.h, include/RE/T/TESBoundObject.h, include/RE/T/TESForm.h, include/RE/T/TESFullName.h and include/RE/B/BGSKeywordForm.h, include/RE/B/BGSEquipType.h, include/RE/B/BGSMenuDisplayObject.h and include/RE/T/TESDescription.h.
