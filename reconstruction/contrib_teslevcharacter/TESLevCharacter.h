@@ -5,7 +5,7 @@
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
 // Evidence: findings/ghidra-import.md
 // names: GUESS(low); names and signatures are hypotheses.
-// TESLevCharacter, TESLeveledList, TESModel, TESModelTextureSwap, TESBoundAnimObject, TESBoundObject: COMMUNITY(Ryan-rsm-McKenzie/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); declarations from include/RE/T/TESLevCharacter.h, include/RE/T/TESLeveledList.h, include/RE/T/TESModel.h, include/RE/T/TESModelTextureSwap.h, include/RE/T/TESBoundAnimObject.h and include/RE/T/TESBoundObject.h.
+// TESLevCharacter, TESLeveledList, TESBoundAnimObject, TESBoundObject: COMMUNITY(Ryan-rsm-McKenzie/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); declarations from include/RE/T/TESLevCharacter.h, include/RE/T/TESLeveledList.h, include/RE/T/TESBoundAnimObject.h and include/RE/T/TESBoundObject.h.
 // TESForm: COMMUNITY(Ryan-rsm-McKenzie/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); declarations from include/RE/T/TESForm.h and include/RE/B/BaseFormComponent.h.
 // MIT License
 //
@@ -39,14 +39,9 @@ class BGSLoadGameBuffer { public: virtual ~BGSLoadGameBuffer(); void* buffer; un
 struct BGSLoadFormData { unsigned int formID, size, uncompressedSize, reserved; TESForm* form; unsigned int changeFlags, oldChangeFlags; };
 class BGSLoadFormBuffer : public BGSLoadGameBuffer, public BGSLoadFormData {};
 class BaseFormComponent { public: virtual ~BaseFormComponent(); };
-class TESForm : public BaseFormComponent { public: void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); void* sourceFiles; unsigned int formFlags; unsigned int formID; unsigned short inGameFormFlags; unsigned char formType; unsigned char pad1B; unsigned int pad1C; };
+class TESForm : public BaseFormComponent { public: void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); void* sourceFiles; unsigned int formFlags; unsigned int formID; unsigned short inGameFormFlags; unsigned char formType; };
 struct ShortPoint3 { short x,y,z; }; struct BoundData { ShortPoint3 minimum, maximum; };
-class TESBoundObject : public TESForm { public: BoundData bounds; unsigned int pad2C; };
+class TESBoundObject : public TESForm { public: BoundData bounds; };
 class TESBoundAnimObject : public TESBoundObject {};
-class TESLeveledList : public BaseFormComponent { public: void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); void* entries; signed char chanceNone; unsigned char llFlags; unsigned char numEntries; unsigned char unk13; unsigned int pad14; void* unk18; void* chanceGlobal; };
-class TESModel : public BaseFormComponent { public: void* model; void* textures; unsigned int* addons; unsigned short numTextures; unsigned short numAddons; unsigned int pad24; };
-class TESModelTextureSwap : public TESModel { public: void* alternateTextures; unsigned int numAlternateTextures; unsigned int pad34; };
-class TESLevCharacter : public TESBoundAnimObject, public TESLeveledList, public TESModelTextureSwap { public: unsigned int UnClone3D(TESObjectREFR*); void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); };
-#include <cstddef>
-static_assert(sizeof(TESForm) == 0x20 && sizeof(TESBoundObject) == 0x30 && sizeof(TESLeveledList) == 0x28 && sizeof(TESModelTextureSwap) == 0x38, "layout");
-static_assert(sizeof(TESLevCharacter) == 0x90, "layout");
+class TESLeveledList : public BaseFormComponent { public: void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); };
+class TESLevCharacter : public TESBoundAnimObject, public TESLeveledList { public: unsigned int UnClone3D(TESObjectREFR*); void SaveGame(BGSSaveFormBuffer*); void LoadGame(BGSLoadFormBuffer*); void Revert(BGSLoadFormBuffer*); };

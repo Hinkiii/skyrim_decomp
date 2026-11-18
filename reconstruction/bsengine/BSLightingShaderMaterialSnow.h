@@ -1,6 +1,7 @@
 // BSLightingShaderMaterialSnow declarations for build sse-steam-1-7-104.
 //
 // Labels: v2
+// Code origin: declarations extended by hand from the local listings; names follow the community headers.
 // Task: q2-s10-bslightingshadermaterialsnow
 // Source exposure: mixed (names and declarations from community headers; base classes, sizes and
 // the compared functions from the pinned image).
@@ -35,6 +36,8 @@
 //   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //   SOFTWARE.
 //
+// BSLightingShaderMaterialSnow::SaveBinary, BSLightingShaderMaterialSnow::LoadBinary: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
+// SnowData::SaveStream, SnowData::LoadStream: GUESS(low); addresses 0xef32b0 and 0xef31c0, called on the member at offset 0xA0 with the stream
 #pragma once
 
 #include <cstdint>
@@ -118,9 +121,13 @@ public:
     virtual std::uint32_t ComputeCRC32();  // compared: 0x15280d0
 
     struct SnowData {
+        void SaveStream(NiStream& a_stream);  // 0xef32b0 (declared only)
+        void LoadStream(NiStream& a_stream);  // 0xef31c0 (declared only)
         std::uint64_t first;
         std::uint64_t second;
     };
+    void SaveBinary(NiStream& a_stream) override;  // compared: 0x1528120
+    void LoadBinary(NiStream& a_stream) override;  // compared: 0x1528160
     SnowData unknownA0;  // A0
 };
 static_assert(sizeof(BSLightingShaderMaterialSnow) == 0xB0, "BSLightingShaderMaterialSnow size");
