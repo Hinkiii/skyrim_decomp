@@ -2,8 +2,6 @@
 // Labels: v2
 // Code origin: declarations extended by hand from the local listings; names follow the community headers.
 // Source exposure: mixed
-// Origin: independently decoded target, anonymous sibling and public declarations.
-// Drafted by gpt-6.1-sol
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
 // Evidence: findings/ghidra-import.md
 // TESFurniture, TESObjectACTI: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); declarations adapted from include/RE/T/TESObjectACTI.h, include/RE/T/TESBoundObject.h, include/RE/T/TESForm.h and public component headers.
