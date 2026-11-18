@@ -13,7 +13,7 @@
 // BSWin32KeyboardDevice::Unk_09, BSWin32KeyboardDevice::Unk_0A: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // BSIInputDevice::~BSIInputDevice, unknown08, unknown70: GUESS(low)
 // BSWin32KeyboardDevice::Reset, BSWin32KeyboardDevice::Release, BSDirectInputManager::ReleaseDevice: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// g_directInputManager: GUESS(low); global pointer at RVA 0x32309d0, the manager the device is released through
+// g_directInputManager: GUESS(low); global pointer at address 0x32309d0, the manager the device is released through
 // device, keyState: GUESS(low); members at 0x70 and 0x168 read by the compared bodies
 // The MIT notice below covers only the names and declarations taken from
 // CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a; the other code in this file
