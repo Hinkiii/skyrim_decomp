@@ -61,7 +61,7 @@ class NiTexture : public NiObject
 {
 public:
     const NiRTTI* GetRTTI() const override;  // 02
-    virtual std::uint64_t Unk_25(void);  // 25 (result type GUESS(low))
+    virtual std::uint64_t Unk_25(void);  // 25 (result type is a low-confidence guess)
     virtual void Unk_26(void);  // 26
     virtual void Unk_27(void);  // 27
     virtual void Unk_28(void);  // 28

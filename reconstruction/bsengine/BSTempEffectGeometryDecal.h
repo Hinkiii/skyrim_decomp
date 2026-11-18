@@ -37,7 +37,7 @@
 // NiRTTI: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // NiPointer, NiMatrix3, NiPoint3, BSTSmartPointer, BSGeometry, NiAVObject, NiNode, BGSTextureSet, QueuedTempEffect: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // BSTempEffectGeometryDecal::decal, attachedGeometry, attachedGeometryParent, decalNode, queuedDecal, texSet, texSet2, rotation, origin, direction, width, unkA8, flags, unkB0: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
-// NiPointer::_ptr, BSTSmartPointer::_ptr, NiMatrix3::entry, NiPoint3::x, NiPoint3::y, NiPoint3::z: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT) member names; pointer-only stand-ins are guesses
+// NiPointer::_ptr, BSTSmartPointer::_ptr, NiMatrix3::entry, NiPoint3::x, NiPoint3::y, NiPoint3::z: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); member names, the pointer-only stand-ins are low-confidence guesses
 #pragma once
 
 #include <cstdint>

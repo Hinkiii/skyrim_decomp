@@ -31,7 +31,7 @@
 // The MIT notice above covers only the names and declarations taken from CommonLibSSE-NG.
 // TESObjectDOOR, TESObjectDOOR::InitializeData, ::~TESObjectDOOR, ::ClearData, ::Load, ::InitItemImpl, ::Activate, ::Clone3D, ::GetActivateText, ::CalculateDoFavor, ::unk90, ::openSound, ::closeSound, ::loopSound, ::flags, ::padB1, ::padB2, ::padB4, ::randomTeleports, TESBoundAnimObject, TESBoundObject, TESBoundObject::boundData, TESObject, TESForm and its virtual functions and members (sourceFiles, formFlags, formID, inGameFormFlags, formType): COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // TESFullName, TESModel, TESModelTextureSwap, BGSDestructibleObjectForm, BGSOpenCloseForm, BGSKeywordForm, BaseFormComponent and their members: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); secondary bases of TESObjectDOOR flattened into members at their NG offsets (BGSOpenCloseForm::HandleOpen is not declared)
-// BSTArray: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); NG's template reduced to its 0x18 byte layout for pointer elements, with the field names _data, _capacity, _size and pads GUESS(low)
+// BSTArray: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); NG's template reduced to its 0x18 byte layout for pointer elements, with the field names _data, _capacity, _size and pads are low-confidence guesses
 // BSFixedString, BSString, TESFileArray, TESFile, TESObjectREFR, Actor, TESWaterForm, NiAVObject, BGSVoiceType, BGSSoundDescriptorForm, BGSKeyword: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); forward declarations or a pointer-sized reduction
 #pragma once
 

@@ -32,9 +32,9 @@
 // Base form: shared header declarations/NiAVObject.h for NiAVObject.
 // BSFadeNode, BSFadeNode::BSFadeNode (NG's ctor), ::~BSFadeNode, ::GetRTTI, ::AsFadeNode, ::CreateClone, ::LoadBinary, ::LinkObject, ::RegisterStreamables, ::SaveBinary, ::IsEqual, ::UpdateSelectedDownwardPass, ::OnVisible, ::AsTreeNode, ::AsLeafAnimNode, and the members unk128, unk12C, currentFade, unk134, unk138, unk13C, unk140, unk144, unk148, unk14C, unk150, unk152, unk153, unk154, unk155, unk156: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // NiNode, NiNode::NiNode, NiNode::children and NiNode's virtual overrides: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); defined here because the shared declarations/NiNode.h keeps the children array as opaque storage and has no constructor
-// NiTObjectArray, NiTArray: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); reduced to the 0x18 byte layout for pointer elements, with field names GUESS(low)
+// NiTObjectArray, NiTArray: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); reduced to the 0x18 byte layout for pointer elements, field names are low-confidence guesses
 // BSTreeNode, BSLeafAnimNode, NiAVObject, NiPointer: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); forward declarations
-// BSFadeNode::UpdateCollisionObject: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT) name only; NG declares no such function, its parameter and body are STANDIN GUESS(low)
+// BSFadeNode::UpdateCollisionObject: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); name only, NG declares no such function and its parameter and body are low-confidence guesses
 // BSFadeNode::SetCollisionState (address 0x106b870): STANDIN GUESS(low); a non-virtual helper taking the value by reference
 // BSFadeNode::InitRuntimeData (address 0x14e5eb0): STANDIN GUESS(low); a non-virtual helper called at the end of the constructor
 #pragma once

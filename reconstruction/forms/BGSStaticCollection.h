@@ -37,8 +37,8 @@
 // TESObject, TESBoundObject, TESWaterForm, NiAVObject, BGSVoiceType, BSString, Actor: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // BSFixedString, TESModel, TESModelTextureSwap, BGSTextureSet, NiNPShortPoint3, BOUND_DATA: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // TESBoundObject::boundData, pad2C, BOUND_DATA::boundMin, boundMax, NiNPShortPoint3::x, y, z, TESModel::model, textures, addons, numTextures, numAddons, pad24, TESModelTextureSwap::alternateTextures, numAlternateTextures, pad34, AlternateTexture::textureSet, index3D, unk0C, name3D: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
-// BSFixedString::_data, BSResource::ID: GUESS(low) STANDIN (layout-only placeholders)
-// MemoryContextScope, g_memoryContext: GUESS(low) STANDIN (the thread-local context value the compared function saves, sets and restores)
+// BSFixedString::_data, BSResource::ID: STANDIN GUESS(low); layout-only placeholders
+// MemoryContextScope, g_memoryContext: STANDIN GUESS(low); the thread-local context value the compared function saves, sets and restores
 #pragma once
 
 #include <cstdint>

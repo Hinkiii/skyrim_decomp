@@ -66,10 +66,12 @@ public:
         T* object = a_rhs.pointer;
         if (old != object) {
             if (object) {
+                // Locked refcount increment, as the compared NiPointer assignment does.
                 _InterlockedIncrement(reinterpret_cast<volatile long*>(&object->_refCount));
             }
             pointer = object;
             if (old) {
+                // Locked refcount decrement, as the compared NiPointer assignment does.
                 if (_InterlockedDecrement(reinterpret_cast<volatile long*>(&old->_refCount)) == 0) {
                     old->DeleteThis();
                 }

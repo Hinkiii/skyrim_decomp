@@ -33,7 +33,7 @@
 // Base form: shared header declarations/NiRefObject.h for NiRefObject.
 // BGSAttackDataMap, BGSAttackDataMap::GetAttackData, BGSAttackDataMap::~BGSAttackDataMap: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // BSTHashMap, BGSAttackData, BSFixedString, TESRace, BGSAttackDataMap::attackDataMap, BGSAttackDataMap::defaultDataRace: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
-// BSTHashMap members _pad00, _pad08, _capacity, _free, _good, _sentinel, _allocator pad and entries: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT) (BSTScatterTable and its allocator flattened, non-template)
+// BSTHashMap::_pad00, BSTHashMap::_pad08, BSTHashMap::_capacity, BSTHashMap::_free, BSTHashMap::_good, BSTHashMap::_sentinel, BSTHashMap::_allocator, BSTHashMap::_entries: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); BSTScatterTable and its allocator flattened, non-template
 // BGSAttackDataMap::GetAttackData parameters and result: GUESS(low); the body only forwards its arguments
 #pragma once
 

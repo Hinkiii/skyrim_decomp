@@ -36,7 +36,7 @@
 // BGSPerk, BGSPerk::InitializeData, BGSPerk::~BGSPerk, BGSPerk::ClearData, BGSPerk::Load, BGSPerk::InitItemImpl: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // TESFullName, TESDescription, TESTexture, TESIcon, TESCondition, BSFixedString, BSTArray, BGSPerkEntry, PerkData: STANDIN COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
 // TESFullName::fullName, TESDescription::fileOffset, TESDescription::descriptionText, TESTexture::textureName, PerkData::trait, PerkData::level, PerkData::numRanks, PerkData::playable, PerkData::hidden, BGSPerk::data, BGSPerk::pad55, BGSPerk::pad56, BGSPerk::perkConditions, BGSPerk::perkEntries, BGSPerk::nextPerk: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT)
-// BSFixedString::_data, TESCondition::head, BSTArray::_data, BSTArray::_capacity, BSTArray::_pad0C, BSTArray::_size, BSTArray::_pad14: GUESS(low) STANDIN (layout-only placeholders)
+// BSFixedString::_data, TESCondition::head, BSTArray::_data, BSTArray::_capacity, BSTArray::_pad0C, BSTArray::_size, BSTArray::_pad14: STANDIN GUESS(low); layout-only placeholders
 #pragma once
 
 #include <cstdint>

@@ -59,6 +59,7 @@ bool BSOrderedNode::RegisterStreamables(NiStream& a_stream)
 void BSOrderedNode::OnVisible(NiCullingProcess& a_process)
 {
     volatile long* counter = reinterpret_cast<volatile long*>(reinterpret_cast<char*>(&a_process) + kCullingVisitCounterOffset);
+    // The compared function does a locked increment of the culling counter, so the intrinsic is needed.
     int visitIndex = _InterlockedIncrement(counter);
     NiNodeOnVisibleIndexed(this, a_process, visitIndex);
 }
