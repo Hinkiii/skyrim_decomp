@@ -36,6 +36,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+// unk00, unk08, unk10, unk18, unk20: GUESS(low); storage before unk28, not read by the compared code
 #pragma once
 
 #include <cstdint>
@@ -64,7 +65,11 @@ void InitMoviePlayerObject(void* a_object);
 class Main {
 public:
     static Main* singleton;
-    std::uint8_t unknown00[0x28];  // 00
+    std::uint64_t unk00;  // 00
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
     std::uint32_t unk28;           // 28
 };
 
