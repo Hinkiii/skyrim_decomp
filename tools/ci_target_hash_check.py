@@ -18,8 +18,12 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import ci_hash_check as public
 import contrib
 import lint_reconstruction as lint
-from pecoff import Reject
-from source_digest import include_closure, tu_digest
+import compare
+from pecoff import CoffObject, Reject
+from rva_headers import claimed_rvas
+from source_digest import include_closure
+import digest_v2
+from digest_v2 import tu_digest
 import target_hashes as hashes
 
 DEFAULT_RECIPE = 'reconstruction/recipes/msvc-19.16.27054-o2.json'
@@ -27,6 +31,9 @@ DEFAULT_RECIPE = 'reconstruction/recipes/msvc-19.16.27054-o2.json'
 # claim about which public target to try, never evidence of identity or acceptance.
 REQUEST = re.compile(r'^// CI hash: (0x[0-9a-fA-F]+) (\S+)\s*$', re.M)
 SHA = re.compile(r'[0-9a-f]{40}')
+UNIT_RECIPE = re.compile(r'\breconstruction/recipes/[a-zA-Z0-9_.-]+\.json')
+# A header can claim any number of RVAs; each claim costs a scan of the unit's object.
+MAX_CLAIMS_PER_UNIT = 64
 CI_INPUTS = ('data/target-hashes/', 'tools/toolchain/', 'tools/ci_',
              'tools/target_hashes.py', 'tools/contrib.py', 'tools/contributor_standing.py',
              'tools/build_leaderboard.py', 'tools/build_model_trend.py', '.gitattributes',
@@ -45,6 +52,21 @@ def trusted_inputs(root):
                 compiler_pins_sha256=hashes.digest((root / 'tools/verifier/pinned.sha256').read_bytes()))
 
 
+def comment_only_change(root, base, name, blob):
+    """Whether head's `blob` equals the base file at `name` once prose comments are removed.
+
+    Provenance comments stay in the compared text, and anything the comment scan cannot classify
+    counts as a real change, so this can only skip a compile whose result cannot differ.
+    """
+    old = subprocess.run(['git', '-C', str(root), 'show', f'{base}:{name}'], capture_output=True)
+    if old.returncode != 0:
+        return False
+    try:
+        return digest_v2.strip_comments(old.stdout, name) == digest_v2.strip_comments(blob, name)
+    except ValueError:
+        return False
+
+
 def prepare(root, base, head, work):
     if not SHA.fullmatch(base) or not SHA.fullmatch(head):
         raise ValueError('revision must be a full SHA')
@@ -52,7 +74,7 @@ def prepare(root, base, head, work):
         raise ValueError('tools must be from the trusted base revision')
     merge_base = git(root, 'merge-base', base, head).decode().strip()
     diff = git(root, 'diff', '--no-renames', '--name-status', '-z', merge_base, head).split(b'\0')
-    rows = []
+    rows, comment_only = [], set()
     for i in range(0, len(diff) - 1, 2):
         status, name = diff[i].decode('ascii'), diff[i + 1].decode('utf-8')
         if not contrib.UNIT_PATH.fullmatch(name):
@@ -73,6 +95,8 @@ def prepare(root, base, head, work):
             raise ValueError('source is not text')
         blob.decode('utf-8-sig')
         rows.append((name, blob))
+        if status == 'M' and comment_only_change(root, merge_base, name, blob):
+            comment_only.add(name)
     if not rows:
         return root, []
     tree = work / 'source'
@@ -87,7 +111,9 @@ def prepare(root, base, head, work):
     for name, _blob in rows:
         if lint.lint_file(tree, name, target):
             raise ValueError('contributor source lint failed')
-    return tree, [name for name, _ in rows]
+    # A file whose text differs from base only in comments (digest_v2.strip_comments) compiles to the
+    # same code, so it asks for no compile of its own; it is still linted and still in the tree above.
+    return tree, [name for name, _ in rows if name not in comment_only]
 
 
 def bindings(root):
@@ -138,11 +164,43 @@ def requests(tree, changed, known):
             value = int(rva, 16)
             if value not in entries:
                 entries[value] = dict(rva=value, symbol=symbol, recipe=DEFAULT_RECIPE)
+        # A new function has no accepted record to name its symbol. Its header claims the RVA and
+        # the object is searched for the function whose hash equals that published target, so the
+        # symbol is found by the comparison, never taken from the PR.
+        recipe = (UNIT_RECIPE.search((tree / unit).read_text(encoding='utf-8-sig')) or [DEFAULT_RECIPE])[0]
+        stem = unit.rsplit('.', 1)[0]
+        texts = [(tree / (stem + ext)).read_text(encoding='utf-8-sig') for ext in ('.h', '.cpp')
+                 if (tree / (stem + ext)).is_file()]
+        for value in sorted(claimed_rvas(texts))[:MAX_CLAIMS_PER_UNIT]:
+            entries.setdefault(value, dict(rva=value, symbol=None, recipe=recipe))
         if not entries:
             result.append(dict(unit=unit, rva=None, symbol=None, recipe=DEFAULT_RECIPE))
         else:
             result += [dict(unit=unit, **r) for r in entries.values()]
     return result
+
+
+def matching_symbols(blob, target):
+    """Names of the object's functions whose normalized hash and layout equal the published target.
+
+    Only sections of the target's size are hashed. The validator requires the first host's symbol
+    to be among these names, so a small function that shares bytes with another cannot stand in.
+    """
+    obj = CoffObject(blob)
+    names = set()
+    for sym in obj.symbols.values():
+        if sym.section > 0 and sym.storage == compare.STORAGE_EXTERNAL:
+            sec = obj.section(sym.section)
+            if sec.data is not None and len(sec.data) == target['size']:
+                names.add(sym.name)
+    found = []
+    for name in sorted(names):
+        try:
+            if hashes.candidate(blob, name, target) == 'hash-match':
+                found.append(name)
+        except (ValueError, Reject):
+            continue
+    return found
 
 
 def compile_requests(root, tree, requests_, bindir, work, manifest):
@@ -171,11 +229,21 @@ def compile_requests(root, tree, requests_, bindir, work, manifest):
                 built[key] = None
         if built[key] is None:
             row['result'], row['reason'] = 'mismatch', 'compile-failed'
-        elif target is None or ref['symbol'] is None or target['extraction'] == 'unmasked-unsupported':
+        elif target is None or (ref['symbol'] is None and ref['rva'] is None) \
+                or target['extraction'] == 'unmasked-unsupported':
             row['reason'] = 'published-target-or-binding-unavailable'
         else:
             try:
-                row['result'] = hashes.candidate(built[key], ref['symbol'], target)
+                if ref['symbol'] is None:
+                    symbols = matching_symbols(built[key], target)
+                    row['result'] = 'hash-match' if symbols else 'mismatch'
+                    if not symbols:
+                        row['reason'] = 'no-matching-function'
+                else:
+                    row['result'] = hashes.candidate(built[key], ref['symbol'], target)
+                    symbols = [ref['symbol']]
+                if row['result'] == 'hash-match':
+                    row['symbols'] = symbols
                 row['source_sha256'] = tu_digest(tree, include_closure(tree, ref['unit']))
                 row['recipe_sha256'] = hashes.digest((root / ref['recipe']).read_bytes())
             except (ValueError, Reject):
@@ -194,12 +262,46 @@ def sample(root, bindir, work, manifest):
             for row, other in zip(first, second)]
 
 
+def classify(head_rows, base_rows):
+    """Label each head row against the same unit/RVA compiled from the base tree.
+
+    Only `regressed` (hash-match at base, no match at head) may block; debt that already failed
+    at base and functions that are new in the PR are reported, not enforced.
+    """
+    base = {(r['unit'], r['rva']): r['result'] for r in base_rows}
+    rows = []
+    for row in head_rows:
+        before = base.get((row['unit'], row['rva']))
+        if row['result'] == 'hash-match':
+            status = 'pass'
+        elif row['result'] == 'no-target':
+            status = 'unverified'
+        elif before == 'hash-match':
+            status = 'regressed'
+        elif before == 'mismatch':
+            status = 'preexisting-fail'
+        else:
+            status = 'fail'
+        rows.append(dict(row, status=status, base=before))
+    return rows
+
+
+def regress(root, tree, refs, bindir, work, manifest):
+    head = compile_requests(root, tree, refs, bindir, work / 'head', manifest)
+    # Units absent from the base tree are new; compiling them there would only add noise.
+    old = [r for r in refs if (root / r['unit']).is_file()]
+    base = compile_requests(root, root, old, bindir, work / 'base', manifest) if old else []
+    return classify(head, base)
+
+
 def summary_text(report):
     lines = ['Advisory target hash results; acceptance not evaluated. The current acceptance rule',
              'still requires its independent hosts and Reviewer. Hash equality omits reference identity.',
              '', '| Function RVA | Unit | Result |', '| --- | --- | --- |']
     for row in report.get('functions', []):
         result = {'hash-match': 'PASS (hash only)', 'mismatch': 'FAIL', 'no-target': 'UNVERIFIED'}.get(row['result'], 'ERROR')
+        if row.get('status'):
+            result = row['status'].upper()
         lines.append(f'| {row["rva"] or "unbound"} | {row["unit"]} | {result} |')
     if report.get('error'):
         lines += ['', 'Check could not complete: ' + report['error'] + '. No strike.']
@@ -208,12 +310,13 @@ def summary_text(report):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('command', choices=('prepare', 'check', 'sample'))
+    p.add_argument('command', choices=('prepare', 'check', 'regress', 'sample'))
     p.add_argument('--base')
     p.add_argument('--head')
     p.add_argument('--bin', type=Path)
     p.add_argument('--work', type=Path, required=True)
     p.add_argument('--out', type=Path, required=True)
+    p.add_argument('--map-out', type=Path, help='regress: write {rva-or-unit: status} for the PR bot')
     a = p.parse_args(argv)
     report = dict(schema=1, kind='target-hash-check', head_sha=a.head,
                   base_sha=a.base, normalization_version=hashes.VERSION, acceptance='not-evaluated')
@@ -236,6 +339,13 @@ def main(argv=None):
             report['toolset'] = 'MATCH'
             if a.command == 'sample':
                 report['functions'] = sample(ROOT, a.bin, a.work, manifest)
+            elif a.command == 'regress':
+                refs = json.loads((a.work / 'requests.json').read_text())
+                report['functions'] = regress(ROOT, a.work / 'source', refs, a.bin, a.work / 'objects', manifest)
+                if a.map_out:
+                    a.map_out.parent.mkdir(parents=True, exist_ok=True)
+                    a.map_out.write_text(json.dumps({r['rva'] or r['unit']: r['status'] for r in report['functions']},
+                                                    indent=2, sort_keys=True) + '\n')
             else:
                 refs = json.loads((a.work / 'requests.json').read_text())
                 report['functions'] = compile_requests(ROOT, a.work / 'source', refs, a.bin,
@@ -249,6 +359,8 @@ def main(argv=None):
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
             summary.write(summary_text(report))
+    if a.command == 'regress':
+        return int('error' in report or any(r['status'] == 'regressed' for r in report.get('functions', [])))
     return int('error' in report or any(r['result'] == 'mismatch' for r in report.get('functions', []))
                or (a.command == 'sample' and any(not r['deterministic'] for r in report['functions'])))
 

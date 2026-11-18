@@ -175,7 +175,7 @@ Tier 2 is per function, because status, records and naming findings are per func
 label check runs on the function's whole translation unit, since labels live in the unit's
 files. A `matched` function is `named` when its Reviewer record lists no open naming finding
 (an empty `naming_findings`, schema 3) and `tools/check_labels.py` reports nothing for every file
-of its unit, each of which declares `Labels: v2`. It is the field `named` (`true` or `false`)
+of its unit, each of which is under the label grammar (every unit file except eight legacy ones). It is the field `named` (`true` or `false`)
 beside `status` in `data/progress.json`, set only by `tools/accept_function.py` (on every
 acceptance and with `--refresh-named`); absent means not assessed. It is not a status value, so
 the `matched` counts are unaffected; `reconstruction/INDEX.md`, the progress picture and the
@@ -293,7 +293,7 @@ Match record, recomputed from the tree:
   matches a repository path only case-insensitively or through a symlink, or contains `..`, it is
   refused; otherwise it is a toolchain or SDK header, bound by the pinned toolchain hash, not by
   the source digest. Directives inside `#if 0` are still counted, which can only over-include. The
-  digest definition (`tu-sha256-v1`) is unchanged. The digest of that unit equals the record's, and every report
+  digest definition (`tu-sha256-v1`) is unchanged and `tu-sha256-v2` (below) is accepted beside it. The digest of that unit equals the record's, and every report
   names that digest and the compiled file's path. `tools/verifier/tu_task.py` applies the same
   closure rule, so a verifier task cannot be built from an incomplete unit.
   Build-path checks on the verifier host (`tools/verifier/unit_build.py`, used by
@@ -642,7 +642,7 @@ codegen intrinsics; GPL (any case) named in the leading comment of a file with a
 spelling and licence word on any label for a known community repository, compared without case
 (`COMMUNITY_LICENCES`); every MIT licence notice in a comment complete (copyright line, then
 the permission and disclaimer text matching a stored hash, and the cited repository's whole
-LICENSE where its pinned clone is under `.local/sources/`); the name-origin label grammar in files that declare `Labels: v2`;
+LICENSE where its pinned clone is under `.local/sources/`); the name-origin label grammar in every unit file except eight legacy ones (`FREEFORM_LABEL_FILES`); the one-line `SPDX-License-Identifier: MIT (CommonLibSSE-NG ...)` notice, whose full text lives once in `licenses/CommonLibSSE-NG.txt`, and, for units a PR adds or changes (`tools/header_check.py`, pr-check `scope`), the compact-header budget (no licence text, at most 6 header lines besides labels, sources and compared functions);
 `SIBLING(...)` labels in every file and `Sibling source:` lines limited to an allowed sibling at
 its pin, the latter with no `..` path component; the header comment fields of
 `reconstruction/README.md`; the one-class-per-pair layout; and include style (quoted repository
@@ -680,6 +680,26 @@ consistency, not represent that check as an independent comparison to Skyrim. On
 private worker exists, define credential isolation and publish only reviewed metadata. Never run
 untrusted PR code on a self-hosted machine that has private game inputs or account credentials.
 
+## What a byte match claims
+
+A byte match shows that the source and recipe produce the checked code. It does not verify the
+community names, and it does not show that the original source looked like this. This is stated
+once here; unit headers do not repeat it.
+
+## Source digest methods
+
+`tu-sha256-v1` hashes the raw bytes of every file of the translation unit. `tu-sha256-v2`
+(`tools/digest_v2.py`) hashes each file with its comments removed, except comments that carry
+provenance (a name-origin label, `Source exposure`, `Code origin`, `Adapted bodies`, `Sibling
+source` and similar fields, and anything with a label token the label checker reads); strings and
+code are hashed as written, so trimming prose never reopens a match while a changed label does.
+New records use v2 and every validator accepts both. A record migrated from v1 keeps the v1
+digest of the source its comparator runs were made on as `source.run_digest`; the embedded
+reports name that revision, and a review of that v1 digest binds the migrated record. The
+migration (`tools/migrate_digest_v2.py`) only touches a record whose v1 digest equals the tree it
+migrates from. v1 stays in `tools/source_digest.py` unchanged because the comparator's own version
+hash covers that file.
+
 ## Behavior and names
 
 Behavior claims require controlled original-game observations, test conditions and alternative
@@ -716,3 +736,18 @@ unsupported target hashes are unconfirmable. Cache verification failure, compile
 non-reproduction or nondeterminism produces no confirmation. Candidate source travels on a
 separate batch branch; trusted tools and target hashes come from the dispatched main revision.
 Only sanitized JSON results are uploaded as artifacts. The review and acceptance steps still apply. No function is accepted by this machinery change.
+
+PR path: the `hash` job of `pr-check.yml` is admitted as this CI host in place of a per-function
+dispatch. `ci_confirmation` schema 2 (`tools/ci_confirmation.py`) records the run id and attempt,
+the job's `success`, the PR head SHA the run compiled, the trusted-tools base SHA (an ancestor of
+the tree being validated), the function's `pass` in the run's status map and rows, and the
+`source_sha256` and `recipe_sha256` from those rows. The validator requires them to equal the
+source digest and recipe the first host's comparator report is bound to, which ties both hosts
+to the same source content, and the published target row and compiler pins to be the current ones.
+For a function with no accepted record the run finds its symbol itself: the unit header's RVA claim
+only selects a published target row (the row and hash always come from the base checkout, never the
+PR), and the object is searched for the function whose normalized hash and relocation layout equal
+that row. The evidence lists the matching names and the validator requires the first host's compared
+symbol to be among them, so both hosts are bound to the same function. The bot builds the evidence only from a run whose head is the revision it reviewed and merged. Only
+`pass` counts: `regressed`, `fail`, `preexisting-fail` and `unverified` give no confirmation, and a
+record without both hosts is refused as before.
