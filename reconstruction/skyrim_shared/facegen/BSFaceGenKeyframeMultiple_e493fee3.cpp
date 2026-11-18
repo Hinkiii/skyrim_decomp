@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT (CommonLibSSE-NG declarations, Copyright (c) 2018 Ryan-rsm-McKenzie; full text: licenses/CommonLibSSE-NG.txt)
 // Adapted bodies: none
 // 0x43acc0 BSFaceGenKeyframeMultiple::GetModifierName
-#include "BSFaceGenKeyframeMultiple.h"
+#include "BSFaceGenKeyframeMultiple_e493fee3.h"
 const char* BSFaceGenKeyframeMultiple::GetModifierName(std::uint32_t a_index)
 {
     if (a_index <= 0x10) {
