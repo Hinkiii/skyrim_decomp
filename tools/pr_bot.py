@@ -136,6 +136,9 @@ def decide(functions, host1, host2, review, leak_hits=(), leak='no', companions=
                 companions=companions)
 
 
+CONFLICT_COMMENT = 'This PR conflicts with main; merge main into your branch and push.'
+
+
 def merge_command(number, sha, subject, body):
     return ['gh', 'pr', 'merge', str(number), '-R', REPOSITORY, '--squash', '--match-head-commit', sha,
             '--subject', subject, '--body', body]
@@ -443,6 +446,12 @@ class Bot:
         recipe = re.search(r'\breconstruction/recipes/[a-zA-Z0-9_.-]+\.json', text)
         recipe = recipe.group(0) if recipe else 'reconstruction/recipes/msvc-19.16.27054-o2.json'
         recipe_sha = hashlib.sha256((tree / recipe).read_bytes()).hexdigest() if (tree / recipe).is_file() else None
+        # The CI job compiles an RVA requested by a `// CI hash:` line with its default recipe, whatever
+        # recipe the unit names, so the second host's hash is compared with the recipe that job selects.
+        import ci_target_hash_check as ci_job
+        requested = {int(r, 16) for r, _ in ci_job.REQUEST.findall(text[:8192])}
+        ci_file = tree / ci_job.DEFAULT_RECIPE if rva in requested else tree / recipe
+        ci_recipe_sha = hashlib.sha256(ci_file.read_bytes()).hexdigest() if ci_file.is_file() else None
         report = None
         if evidence.get('report'):
             try:
@@ -468,7 +477,7 @@ class Bot:
         if row:
             lines.append(f'  second-host run {run.get("run_id")} (CI hash job, which compares the published target hashes) on head {str(run.get("head_sha"))[:12]}: {row.get("status")}; '
                          f'its source digest {"agrees" if row.get("source_sha256") == digest else "DIFFERS"}, '
-                         f'its recipe hash {"agrees" if row.get("recipe_sha256") == recipe_sha else "DIFFERS"}')
+                         f'its recipe hash {"agrees" if ci_recipe_sha is not None and row.get("recipe_sha256") == ci_recipe_sha else "DIFFERS"}')
         else:
             lines.append(f'  second-host run (CI hash job, which compares the published target hashes): {evidence.get("host1")}')
         return lines
@@ -479,7 +488,8 @@ class Bot:
         Both hosts' results are in before the review starts, because checklist item 3 asks whether
         the report binds this source and whether the second-host reproduction is present.
         """
-        from source_digest import include_closure, tu_digest
+        from source_digest import include_closure
+        from digest_v2 import tu_digest
         tree, evidence = self.tree, evidence or {}
         changed = set(changed) if changed is not None else None
         data = json.loads((tree / 'data/progress.json').read_text())
@@ -512,6 +522,8 @@ class Bot:
                         cwd=tree, check=False, timeout=300)
         out += ['', '## Mechanical readiness lint (tools/lint_review_readiness.py on the unit files)',
                 lint.stdout.decode(errors='replace').strip() or 'clean',
+                '', '## Body origin (tools/check_origin.py)',
+                *self.body_origin([f for f in sorted(files) if changed is None or f in changed]),
                 '', '## Private reading', f'Function packs: {", ".join(packs) or "none found"}.',
                 'For the provenance comparison read .local/analysis/fnv_index.jsonl and the pinned FNV source '
                 'files it identifies. ' + EXPOSURE,
@@ -520,8 +532,30 @@ class Bot:
                 'PR changes in full; files marked unchanged from main were accepted with earlier functions, so read '
                 'them as context for how these functions use them, as the runbook does for the rest of a unit. The second-host run '
                 'required by item 3 is the CI hash job listed per function; a function listed as passing on both '
-                'hosts has both. The unit files are in the working directory at the paths above.']
+                'hosts has both. The unit files are in the working directory at the paths above. Provenance (item 2): a clean '
+                'body origin report plus your own spot check of the FNV index is enough when the unit claims no '
+                'adaptation; "unverified" alone is not a ground to reject.']
         return '\n'.join(out)
+
+    def body_origin(self, files):
+        """Lines for the runbook's provenance item, which starts from the list of bodies like a community one."""
+        files = [f for f in files if f.startswith(SCOPE_PREFIX) and f.endswith(('.h', '.cpp'))]
+        if not files:
+            return ['no changed unit files to compare']
+        result = self.run([sys.executable, 'tools/check_origin.py', '--json', *files], cwd=self.tree,
+                          check=False, timeout=600)
+        if result.returncode:
+            return ['check_origin did not complete; the list is unavailable (not a finding)']
+        import check_origin
+        hits, pins = [], 'unknown'
+        for line in result.stdout.decode(errors='replace').splitlines():
+            if line.startswith('{'):
+                hits.append(json.loads(line))
+            elif line.startswith('check_origin: threshold') and ' compared with ' in line:
+                pins = line.split(' compared with ', 1)[1]
+        if not hits:
+            return [f'no same-named community/sibling body found (clone revisions: {pins})']
+        return [f'  {check_origin.describe(h)}' for h in hits] + [f'(clone revisions: {pins})']
 
     def review(self, number, head, base, functions, grep, units=None, evidence=None, changed=None, companions=()):
         diff = self.run(['git', 'diff', f'{base}', head, '--', 'reconstruction'], cwd=self.root).stdout.decode(errors='replace')
@@ -554,7 +588,8 @@ class Bot:
         that closure leaves the record stale, whether or not the PR lists the function. The unit is
         known from the record, which also covers a changed header shared by several units.
         """
-        from source_digest import include_closure, tu_digest
+        from source_digest import include_closure
+        from digest_v2 import tu_digest
         tree = self.tree
         changed = {f['filename'] for f in files}
         target = json.loads((tree / 'builds/target.json').read_text())['build_id']
@@ -570,9 +605,10 @@ class Bot:
             unit = source.get('compiled')
             if not unit or not (unit in units or changed & set(source.get('translation_unit') or ())):
                 continue
-            if unit not in current:
-                current[unit] = tu_digest(tree, include_closure(tree, unit)) if (tree / unit).is_file() else None
-            if current[unit] is not None and current[unit] != source.get('digest'):
+            key = (unit, source.get('digest_method'))
+            if key not in current:
+                current[key] = tu_digest(tree, include_closure(tree, unit), key[1]) if (tree / unit).is_file() else None
+            if current[key] is not None and current[key] != source.get('digest'):
                 out.setdefault(unit, []).append(fn['rva'])
         return {u: sorted(rs) for u, rs in out.items()}
 
@@ -715,7 +751,7 @@ class Bot:
     def warm(self, pr):
         """Start the hash run for a head that will need one, so a queue of PRs waits in parallel, not in turn."""
         number, head = pr['number'], pr['headRefOid']
-        if State(self.work / 'state', number, head).get('done'):
+        if State(self.work / 'state', number, head).get('done') or pr.get('mergeable') == 'CONFLICTING':
             return
         if self.latest_hash_run(head):
             return
@@ -754,12 +790,19 @@ class Bot:
                 # The record must point at a public symbol map; bind freezes this unit's names into an
                 # immutable one without touching the shared map.
                 (task / 'bind-list.txt').write_text(f'{task}\n')
+                # bind fails the whole task for any unbound function, and a debt function of the unit that the
+                # PR does not accept is often one; bind only what is being recorded, then restore the full list.
+                full = info['functions']
+                narrowed = [fn for fn in full if int(str(fn['rva']), 0) in wanted]
+                (task / 'task.json').write_text(json.dumps(dict(info, functions=narrowed), indent=2) + '\n')
                 bound = self.run([sys.executable, 'tools/verifier/bind.py', '--list', task / 'bind-list.txt',
                                   '--unit-maps'], cwd=self.tree, check=False, timeout=self.config['compare_timeout'])
+                info = json.loads((task / 'task.json').read_text())
+                (task / 'task.json').write_text(json.dumps(dict(info, functions=full), indent=2) + '\n')
                 if bound.returncode:
                     failed |= wanted
                     continue
-                info = json.loads((task / 'task.json').read_text())
+                info = dict(info, functions=full)
             for fn in info['functions']:
                 rva = int(str(fn['rva']), 0)
                 if rva not in wanted:
@@ -790,9 +833,13 @@ class Bot:
         state = State(self.work / ('dry' if self.dry_run else 'state'), number, head)
         if state.get('done'):
             return state.data
+        if pr.get('mergeable') == 'CONFLICTING' and not state.get('merged'):
+            return self.conflicting(pr, state)
         started = time.time()
         files = state.once('scope', lambda: self.changed_files(number))
-        if scope_problem(files):
+        # No changed files means the PR's tree equals main's (all of it landed elsewhere): the landed path below
+        # marks it merged with credit instead of calling it out of scope.
+        if scope_problem(files) not in (None, 'empty'):
             decision = dict(blocked='scope', merge=False, verdicts={})
             state.set('decision', decision)
             return self.finish(pr, state, decision, started, comment='This PR changes files outside reconstruction/, '
@@ -934,8 +981,7 @@ class Bot:
             merged = self.run(merge_command(number, head, *squash_message(number, login, uid, matched, again)),
                               check=False)
             if merged.returncode:
-                state.data.clear()
-                raise Stop('merge refused (the head moved); starting over on the next tick')
+                return self.merge_refused(pr, state, summary)
             state.set('merged', True)
         if land and not state.get('merged'):
             outcome = self.merge_landed(pr, land)
@@ -957,6 +1003,32 @@ class Bot:
         self.drop_probe(number)
         state.set('done', True)
         return summary
+
+    def conflicting(self, pr, state):
+        """A PR that cannot merge is not worth a review and two host compares; tell the author once per head.
+
+        The state is per head, so a push that resolves the conflict gets a fresh look.
+        """
+        summary = dict(pr=pr['number'], head=pr['headRefOid'], blocked='conflict', merge=False, verdicts={})
+        if self.dry_run:
+            return summary
+        self.run(['gh', 'pr', 'comment', str(pr['number']), '-R', REPOSITORY, '--body', CONFLICT_COMMENT])
+        state.set('summary', summary)
+        state.set('commented', True)
+        state.set('done', True)
+        return summary
+
+    def merge_refused(self, pr, state, summary):
+        """`gh pr merge --match-head-commit` failed: say why, and keep the paid results unless the head moved."""
+        number, head = pr['number'], pr['headRefOid']
+        now = self.gh_json('pr', 'view', str(number), '-R', REPOSITORY, '--json', 'headRefOid,mergeable,state')
+        if now.get('headRefOid') != head:
+            state.data.clear()
+            raise Stop('merge refused (the head moved); starting over on the next tick')
+        if now.get('mergeable') == 'CONFLICTING':
+            return self.conflicting(pr, state)
+        raise Stop(f'merge refused with the head unchanged (mergeable={now.get("mergeable")}, '
+                   f'state={now.get("state")}); results kept, retrying next tick')
 
     def record(self, pr, state, rvas):
         self.run(['git', 'fetch', '--quiet', 'origin', 'main'], cwd=self.tree)
@@ -985,7 +1057,7 @@ def poll(bot, interval, restart_after=None):
             return 0  # between cycles only; the supervisor restarts it on freshly fetched tools
         try:
             prs = bot.gh_json('pr', 'list', '-R', REPOSITORY, '--state', 'open', '--json',
-                              'number,headRefOid,author,baseRefName,isDraft')
+                              'number,headRefOid,author,baseRefName,isDraft,mergeable')
         except (Stop, subprocess.SubprocessError, ValueError) as exc:
             print('poll: gh failed:', exc, file=sys.stderr)
             prs = []

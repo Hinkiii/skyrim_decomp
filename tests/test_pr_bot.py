@@ -221,6 +221,58 @@ class ProcessTests(unittest.TestCase):
         self.assertEqual((len(bot.seen('review')), len(bot.seen('mac'))), (1, 1))
         self.assertEqual(len(bot.seen('gh', 'pr', 'merge')), 1)
 
+    def test_a_conflicting_pr_is_told_once_per_head_and_costs_no_review_or_compare(self):
+        bot = FakeBot(self.work)
+        pr = dict(PR, mergeable='CONFLICTING')
+        out = bot.process(pr)
+        self.assertEqual((out['blocked'], out['merge']), ('conflict', False))
+        bot.process(pr)
+        self.assertEqual(len(bot.seen('gh', 'pr', 'comment')), 1)
+        self.assertIn('merge main into your branch', bot.seen('gh', 'pr', 'comment')[0][-1])
+        for stage in ('review', 'mac', 'host1', 'changed_files'):
+            self.assertEqual(bot.seen(stage), [])
+        self.assertEqual(bot.seen('gh', 'pr', 'merge'), [])
+        warmed = len(bot.calls)
+        bot.warm(pr)
+        self.assertEqual(len(bot.calls), warmed)
+
+    def test_a_new_head_after_a_conflict_is_processed_normally(self):
+        bot = FakeBot(self.work)
+        bot.process(dict(PR, mergeable='CONFLICTING'))
+        out = bot.process(dict(PR, headRefOid='b' * 40, mergeable='MERGEABLE'))
+        self.assertEqual(out['verdicts'], {'0x10': 'matched', '0x20': 'matched'})
+        self.assertEqual(len(bot.seen('gh', 'pr', 'merge')), 1)
+
+    def test_a_merge_refusal_for_a_conflict_comments_once_and_does_not_redo_the_pipeline(self):
+        bot = FakeBot(self.work)
+        bot.merge_ok = False
+        bot.gh_json = lambda *a: {'id': 99, 'headRefOid': HEAD, 'state': 'OPEN', 'mergeable': 'CONFLICTING'}
+        bot.process(PR)
+        bot.process(PR)
+        self.assertEqual((len(bot.seen('review')), len(bot.seen('mac')), len(bot.seen('gh', 'pr', 'merge'))), (1, 1, 1))
+        self.assertEqual(len(bot.seen('gh', 'pr', 'comment')), 1)
+
+    def test_a_merge_refusal_with_the_head_unchanged_keeps_the_cached_results_and_retries_only_the_merge(self):
+        bot = FakeBot(self.work)
+        bot.merge_ok = False
+        bot.gh_json = lambda *a: {'id': 99, 'headRefOid': HEAD, 'state': 'OPEN', 'mergeable': 'UNKNOWN'}
+        for _ in range(2):
+            with self.assertRaises(pr_bot.Stop):
+                bot.process(PR)
+        self.assertEqual((len(bot.seen('review')), len(bot.seen('mac')), len(bot.seen('host1'))), (1, 1, 1))
+        self.assertEqual(len(bot.seen('gh', 'pr', 'merge')), 2)
+        bot.merge_ok = True
+        bot.process(PR)
+        self.assertEqual((len(bot.seen('review')), len(bot.seen('mac'))), (1, 1))
+
+    def test_a_merge_refusal_because_the_head_moved_is_not_reported_as_a_conflict(self):
+        bot = FakeBot(self.work)
+        bot.merge_ok = False
+        bot.gh_json = lambda *a: {'id': 99, 'headRefOid': 'c' * 40, 'state': 'OPEN', 'mergeable': 'MERGEABLE'}
+        with self.assertRaises(pr_bot.Stop):
+            bot.process(PR)
+        self.assertEqual(bot.seen('gh', 'pr', 'comment'), [])
+
     def test_only_what_both_hosts_passed_is_reviewed_and_nothing_else_costs_a_call(self):
         bot = FakeBot(self.work, h2={0x10: 'pass', 0x20: 'fail'})
         out = bot.process(PR)
@@ -242,6 +294,16 @@ class ProcessTests(unittest.TestCase):
         self.assertEqual(out['blocked'], 'scope')
         self.assertEqual((bot.seen('review'), bot.seen('mac'), bot.seen('gh', 'pr', 'merge')), ([], [], []))
         self.assertEqual(len(bot.seen('gh', 'pr', 'comment')), 1)
+
+    def test_a_pr_with_no_changed_files_is_marked_landed_not_called_out_of_scope(self):
+        bot = FakeBot(self.work, files=[])
+        bot.landed = []
+        out = bot.process(PR)
+        self.assertIsNone(out['blocked'])
+        self.assertEqual((bot.seen('review'), bot.seen('mac'), bot.seen('gh', 'pr', 'merge')), ([], [], []))
+        comment = bot.seen('gh', 'pr', 'comment')
+        self.assertEqual(len(comment), 1)
+        self.assertNotIn('outside reconstruction', comment[0][-1])
 
     def test_grep_hit_blocks_before_any_model_or_host_call(self):
         bot = FakeBot(self.work, grep=(True, ['LG01']))
@@ -472,7 +534,8 @@ class CompanionDiscoveryTests(unittest.TestCase):
         (self.tree / name).write_text(text)
 
     def accept(self, rva, unit, status='matched', digest=None):
-        from source_digest import include_closure, tu_digest
+        from source_digest import include_closure
+        from digest_v2 import tu_digest
         closure = include_closure(self.tree, unit)
         report = f'reports/b/0x{rva:x}.json'
         self.write(report, json.dumps({'source': {'compiled': unit, 'translation_unit': closure,
@@ -756,6 +819,7 @@ class NewFunctionRecordTests(unittest.TestCase):
         self.calls.append(argv)
         code = 0
         if argv[1].endswith('bind.py'):
+            self.bound_rvas = [f['rva'] for f in json.loads((self.task / 'task.json').read_text())['functions']]
             code = self.bind_code
             if not code:
                 public = 'reports/b/unit-symbols/' + 'c' * 64 + '.json'
@@ -787,6 +851,12 @@ class NewFunctionRecordTests(unittest.TestCase):
         sub = json.loads((self.task / 'confirm-0x10/task.json').read_text())
         self.assertTrue(sub['symbols'].startswith('reports/b/unit-symbols/'))
         self.assertEqual(len(self.seen('wine_confirm.py')), 2)
+
+    def test_only_the_functions_being_recorded_are_bound_so_a_debt_function_cannot_refuse_them(self):
+        out, failed = self.build({0x10})
+        self.assertEqual((failed, self.bound_rvas), (set(), ['0x10']))
+        self.assertEqual([f['rva'] for f in json.loads((self.task / 'task.json').read_text())['functions']],
+                         ['0x10', '0x20'])
 
     def test_an_already_public_map_is_not_rebound(self):
         public = 'reports/b/unit-symbols/' + 'd' * 64 + '.json'
@@ -904,6 +974,7 @@ class ReviewContextTests(unittest.TestCase):
             (self.tree / name).parent.mkdir(parents=True, exist_ok=True)
             (self.tree / name).write_text(text)
         self.prompts = []
+        self.origin_out = b'check_origin: threshold 0.75; compared with a/b@1234567\ncheck_origin: 0 hit(s), 0 non-trivial\n'
         bot = pr_bot.Bot(root=ROOT, work=self.tree / '.w')
         bot.tree = self.tree
         bot.run = self.fake_run
@@ -915,10 +986,13 @@ class ReviewContextTests(unittest.TestCase):
             self.prompts.append(kw['input'].decode())
             Path(argv[argv.index('--output-last-message') + 1]).write_text('{}')
         out = b'reconstruction/a/B.h: check provenance: missing origin\n' if 'lint_review_readiness.py' in ' '.join(argv) else b''
+        if 'check_origin.py' in ' '.join(argv):
+            out = self.origin_out
         return subprocess.CompletedProcess(argv, 0, out, b'')
 
     def evidence(self, **report):
-        from source_digest import include_closure, tu_digest
+        from source_digest import include_closure
+        from digest_v2 import tu_digest
         digest = tu_digest(self.tree, include_closure(self.tree, 'reconstruction/a/B.cpp'))
         recipe = self.tree / 'reconstruction/recipes/msvc-19.16.27054-o2.json'
         recipe.parent.mkdir(parents=True, exist_ok=True)
@@ -940,12 +1014,49 @@ class ReviewContextTests(unittest.TestCase):
         self.assertNotIn('DIFFER', prompt)
         self.assertIn('second-host run 555 (CI hash job, which compares the published target hashes) on head ' + HEAD[:12] + ': pass; its source digest agrees, its recipe hash agrees', prompt)
 
+    def test_the_prompt_lists_body_origin_hits_or_says_none_were_found(self):
+        units = {'reconstruction/a/B.cpp': [0x10]}
+        self.bot.review(7, HEAD, BASE, [0x10], (False, []), units, self.evidence())
+        self.assertIn('## Body origin (tools/check_origin.py)\nno same-named community/sibling body found '
+                      '(clone revisions: a/b@1234567)', self.prompts[0])
+        self.assertIn('"unverified" alone is not a ground to reject', self.prompts[0])
+        hit = {'function': 'B::f', 'repo': 'x/ng', 'revision': 'abc', 'path': 'src/B.cpp', 'upstream_line': 3,
+               'similarity': 0.9, 'trivial': False, 'declared': False, 'fork_of': None}
+        self.origin_out = b'check_origin: threshold 0.75; compared with x/ng@abc\n' + json.dumps(hit).encode() + b'\n'
+        self.bot.review(7, HEAD, BASE, [0x10], (False, []), units, self.evidence())
+        self.assertIn('B::f ~ x/ng@abc src/B.cpp:3 similarity 0.90 (adapted; header does NOT name it', self.prompts[1])
+
     def test_the_sheet_marks_which_files_the_pr_changed_and_which_are_unchanged_context(self):
         self.bot.review(7, HEAD, BASE, [0x10], (False, []), {'reconstruction/a/B.cpp': [0x10]}, self.evidence(),
                         {'reconstruction/a/B.cpp'})
         prompt = self.prompts[0]
         self.assertIn('reconstruction/a/B.cpp (changed by this PR), reconstruction/a/B.h (unchanged from main)', prompt)
         self.assertIn('Review the files this PR changes in full', prompt)
+
+    def declare_other_recipe(self, hint):
+        other = self.tree / 'reconstruction/recipes/msvc-19.16.27054-o2-root-includes.json'
+        other.parent.mkdir(parents=True, exist_ok=True)
+        other.write_text('{"x": 1}')
+        head = '// Recipe: reconstruction/recipes/msvc-19.16.27054-o2-root-includes.json\n' + hint
+        (self.tree / 'reconstruction/a/B.cpp').write_text(head + '#include "B.h"\nint f() { return 1; }\n')
+        evidence = self.evidence()
+        return evidence
+
+    def test_a_requested_rva_is_compared_with_the_default_recipe_the_ci_job_selects(self):
+        evidence = self.declare_other_recipe('// CI hash: 0x10 ?f@@YAHXZ\n')
+        self.bot.review(7, HEAD, BASE, [0x10], (False, []), {'reconstruction/a/B.cpp': [0x10]}, evidence)
+        self.assertIn('its recipe hash agrees', self.prompts[0])
+
+    def test_an_unrequested_rva_must_match_the_recipe_the_unit_names(self):
+        evidence = self.declare_other_recipe('')
+        self.bot.review(7, HEAD, BASE, [0x10], (False, []), {'reconstruction/a/B.cpp': [0x10]}, evidence)
+        self.assertIn('its recipe hash DIFFERS', self.prompts[0])
+
+    def test_a_requested_rva_with_another_recipe_hash_still_differs(self):
+        evidence = self.declare_other_recipe('// CI hash: 0x10 ?f@@YAHXZ\n')
+        evidence[0x10]['row']['recipe_sha256'] = hashlib.sha256(b'other').hexdigest()
+        self.bot.review(7, HEAD, BASE, [0x10], (False, []), {'reconstruction/a/B.cpp': [0x10]}, evidence)
+        self.assertIn('its recipe hash DIFFERS', self.prompts[0])
 
     def test_a_report_for_other_source_or_compiler_is_shown_as_differing(self):
         bad = self.evidence(source={'source_revision': '0' * 64, 'path': 'reconstruction/a/B.cpp'})
