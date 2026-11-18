@@ -29,6 +29,7 @@
 // SpellItem::GetDelivery, GetFixedCastDuration, IgnoresResistance, GetData2: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // SpellItemData, unk08, data: STANDIN GUESS(low); the record at 0xC0 and only the members the compared code reads
 // GetData2: virtual slot unknown, declared after the known slots
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0, unkA8, unkB0, unkB8: GUESS(low); storage before data, where the community class has base subobjects and members
 #pragma once
 #include <cstdint>
 class TESFile; class BGSSaveFormBuffer; class BGSLoadFormBuffer; class TESObjectREFR; class BSFixedString; struct FORM; struct FORM_GROUP; class TESBoundObject; class TESWaterForm; class NiAVObject; class BGSVoiceType; class BSString; class Actor;
@@ -163,6 +164,28 @@ class SpellItem : public MagicItem { public:
     float GetFixedCastDuration() const override;
     bool IgnoresResistance() const override;
     virtual SpellItemData* GetData2();
-    std::uint8_t unk08[0xB8];  // 08
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
+    std::uint64_t unk58;  // 58
+    std::uint64_t unk60;  // 60
+    std::uint64_t unk68;  // 68
+    std::uint64_t unk70;  // 70
+    std::uint64_t unk78;  // 78
+    std::uint64_t unk80;  // 80
+    std::uint64_t unk88;  // 88
+    std::uint64_t unk90;  // 90
+    std::uint64_t unk98;  // 98
+    std::uint64_t unkA0;  // A0
+    std::uint64_t unkA8;  // A8
+    std::uint64_t unkB0;  // B0
+    std::uint64_t unkB8;  // B8
     SpellItemData data;        // C0
 };
