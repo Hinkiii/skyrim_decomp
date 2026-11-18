@@ -40,7 +40,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 // BSMultiBoundAABB::RegisterStreamables, BSMultiBoundAABB::SetCenter: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); names only, the bodies are written from the target listing
-// RegisterStreamablesBase: GUESS(low); RVA 0xfe4f30, takes the object and the stream and returns a byte that RegisterStreamables turns into a bool
+// RegisterStreamablesBase: GUESS(low); address 0xfe4f30, takes the object and the stream and returns a byte that RegisterStreamables turns into a bool
 #pragma once
 
 #include <intrin.h>
