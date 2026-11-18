@@ -1,6 +1,7 @@
 // BSWin32KeyboardDevice declarations for build sse-steam-1-7-104.
 //
 // Labels: v2
+// Code origin: declarations extended by hand from the local listings; names follow the community headers.
 // Task: p92-s-bswin32keyboarddevice
 // Source exposure: mixed (names and declarations from community headers; base classes, sizes and
 // the compared functions from the pinned image).
@@ -11,6 +12,9 @@
 // BSIInputDevice, BSInputDevice, BSKeyboardDevice: STANDIN EXE_RTTI
 // BSWin32KeyboardDevice::Unk_09, BSWin32KeyboardDevice::Unk_0A: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT)
 // BSIInputDevice::~BSIInputDevice, unknown08, unknown70: GUESS(low)
+// BSWin32KeyboardDevice::Reset, BSWin32KeyboardDevice::Release, BSDirectInputManager::ReleaseDevice: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
+// g_directInputManager: GUESS(low); global pointer at RVA 0x32309d0, the manager the device is released through
+// device, keyState: GUESS(low); members at 0x70 and 0x168 read by the compared bodies
 #pragma once
 
 #include <cstdint>
@@ -36,13 +40,24 @@ public:
 };
 static_assert(sizeof(BSKeyboardDevice) == 0x70, "BSKeyboardDevice size");
 
+class BSDirectInputManager
+{
+public:
+    void ReleaseDevice(void* a_device);
+};
+extern BSDirectInputManager* g_directInputManager;
+
 class BSWin32KeyboardDevice : public BSKeyboardDevice
 {
 public:
     virtual void Unk_09();  // compared: 0xe12c20
     virtual void Unk_0A();  // compared: 0xe12c30
+    virtual void Reset();  // compared: 0xe12c00
+    virtual void Release();  // compared: 0xe12bd0
 
-    // Padding up to the class size; the compared bodies read no member.
-    std::uint8_t unknown70[0x300];  // 70
+    void* device;                  // 70
+    std::uint8_t unknown78[0xF0];  // 78
+    std::uint8_t keyState[0x200];  // 168
+    std::uint8_t unknown368[0x8];  // 368
 };
 static_assert(sizeof(BSWin32KeyboardDevice) == 0x370, "BSWin32KeyboardDevice size");
