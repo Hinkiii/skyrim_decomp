@@ -13,9 +13,9 @@
 // unknown08: GUESS(low)
 // data18: GUESS(low)
 // MagicItemData::GetName, MagicItemData::GetEquipState: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// PlayerCharacter::singleton: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); global at RVA 0x3230778
-// GetFormNameOf: GUESS(low); RVA 0x1e8460, TESForm::GetFormName reached with the form in the first argument
-// GetPlayerEquipState: GUESS(low); RVA 0x940fc0, takes the player, the form and two zero arguments
+// PlayerCharacter::singleton: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); global at address 0x3230778
+// GetFormNameOf: GUESS(low); address 0x1e8460, TESForm::GetFormName reached with the form in the first argument
+// GetPlayerEquipState: GUESS(low); address 0x940fc0, takes the player, the form and two zero arguments
 // The MIT notice below covers only the names and declarations taken from
 // CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a; the other code in this file
 // is covered by the repository licence and the provenance labels above.
