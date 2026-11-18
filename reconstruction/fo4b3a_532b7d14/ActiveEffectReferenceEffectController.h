@@ -32,7 +32,7 @@ SOFTWARE.
 
 */
 // ActiveEffectReferenceEffectController::GetManagerHandlesSaveLoad, GetWindPoint, LoadGame: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
-// LoadRefHandle: GUESS(low); RVA 0x17a940, reads a handle from the load buffer into its second argument
+// LoadRefHandle: GUESS(low); address 0x17a940, reads a handle from the load buffer into its second argument
 #pragma once
 #include <cstdint>
 class Actor; class MagicTarget; class NiNode; class BSFixedString; class BGSSaveFormBuffer; class BGSLoadFormBuffer;
