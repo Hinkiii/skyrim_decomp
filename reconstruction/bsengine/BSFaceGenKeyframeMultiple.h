@@ -43,7 +43,7 @@
 // Unk_0D: GUESS(low); a void placeholder at vtable index 0x0D
 // g_customNameTable, g_expressionNameTable, g_phonemeNameTable: GUESS(low); the image's name tables at 0x20b0828, 0x20b0830 and 0x20b0950
 // BSFaceGenKeyframeMultiple::GetModifierName: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); name only, the body is written from the target listing
-// g_modifierNameTable: GUESS(low); table of names at RVA 0x20b08c0 indexed by GetModifierName
+// g_modifierNameTable: GUESS(low); table of names at address 0x20b08c0 indexed by GetModifierName
 #pragma once
 
 #include <cstdint>
