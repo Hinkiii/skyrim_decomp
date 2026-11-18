@@ -34,7 +34,7 @@
 // SOFTWARE.
 // BGSProcedureTreeConditionalItem::Unk_01, Unk_02, Unk_10: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // IProcedureTreeItem::Unk_05, Unk_06: GUESS(low); virtual slots at byte offsets 0x28 and 0x30, each returns a pointer to a pointer
-// TESCondition::Unk4a6940, TESCondition::Unk4a6ab0: GUESS(low); RVAs 0x4a6940 and 0x4a6ab0, called on the member at offset 0x8
+// TESCondition::Unk4a6940, TESCondition::Unk4a6ab0: GUESS(low); addresses 0x4a6940 and 0x4a6ab0, called on the member at offset 0x8
 #pragma once
 class TESFile { public: void NextChunk(); };
 class IProcedureTreeItem { public: virtual ~IProcedureTreeItem(); virtual void Unk_01(); virtual void Unk_02(); virtual void Unk_03(); virtual void Unk_04(); virtual void** Unk_05(); virtual void** Unk_06(); };
