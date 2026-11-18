@@ -35,7 +35,7 @@
 // SOFTWARE.
 // TESLevCharacter::UnClone3D, TESLevCharacter::SaveGame: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // UnClone3D return type: GUESS(low); the listing zeroes EAX, the community declaration returns void
-// TESLeveledList::SaveGame: GUESS(low); RVA 0x1ea3a0, called on the base subobject at offset 0x30
+// TESLeveledList::SaveGame: GUESS(low); address 0x1ea3a0, called on the base subobject at offset 0x30
 #pragma once
 class TESForm;
 class BGSSaveFormBuffer;
