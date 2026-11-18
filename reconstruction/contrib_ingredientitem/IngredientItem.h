@@ -11,7 +11,7 @@
 // IngredientItem::GetData2, IngredientItem::IsFood, IngredientItem::InitChunk: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // GetData: GUESS(low); virtual slot 0x6C (byte offset 0x360), returns the record whose flags IsFood reads
 // Unk_NN: GUESS(low); placeholders that only keep GetData at the vtable offset the image encodes
-// IngredientData, unknown08, cost, flags: STANDIN GUESS(low); the first two members of the record at 0x130 (cost, flags)
+// IngredientData, cost, flags: STANDIN GUESS(low); the first two members of the record at 0x130 (cost, flags)
 // The MIT notice below covers only the names and declarations taken from
 // CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a; the other code in this file
 // is covered by the repository licence and the provenance labels above.
@@ -36,6 +36,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+// unk08, unk10, unk18, unk20, unk28, unk30, unk38, unk40, unk48, unk50, unk58, unk60, unk68, unk70, unk78, unk80, unk88, unk90, unk98, unkA0, unkA8, unkB0, unkB8, unkC0, unkC8, unkD0, unkD8, unkE0, unkE8, unkF0, unkF8, unk100, unk108, unk110, unk118, unk120, unk128: GUESS(low); storage not read by the compared code
 #pragma once
 #include <cstdint>
 struct IngredientData {
@@ -158,7 +159,43 @@ public:
     virtual void InitChunk();
 
 private:
-    std::uint8_t unknown08[0x128];  // 08
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
+    std::uint64_t unk18;  // 18
+    std::uint64_t unk20;  // 20
+    std::uint64_t unk28;  // 28
+    std::uint64_t unk30;  // 30
+    std::uint64_t unk38;  // 38
+    std::uint64_t unk40;  // 40
+    std::uint64_t unk48;  // 48
+    std::uint64_t unk50;  // 50
+    std::uint64_t unk58;  // 58
+    std::uint64_t unk60;  // 60
+    std::uint64_t unk68;  // 68
+    std::uint64_t unk70;  // 70
+    std::uint64_t unk78;  // 78
+    std::uint64_t unk80;  // 80
+    std::uint64_t unk88;  // 88
+    std::uint64_t unk90;  // 90
+    std::uint64_t unk98;  // 98
+    std::uint64_t unkA0;  // A0
+    std::uint64_t unkA8;  // A8
+    std::uint64_t unkB0;  // B0
+    std::uint64_t unkB8;  // B8
+    std::uint64_t unkC0;  // C0
+    std::uint64_t unkC8;  // C8
+    std::uint64_t unkD0;  // D0
+    std::uint64_t unkD8;  // D8
+    std::uint64_t unkE0;  // E0
+    std::uint64_t unkE8;  // E8
+    std::uint64_t unkF0;  // F0
+    std::uint64_t unkF8;  // F8
+    std::uint64_t unk100;  // 100
+    std::uint64_t unk108;  // 108
+    std::uint64_t unk110;  // 110
+    std::uint64_t unk118;  // 118
+    std::uint64_t unk120;  // 120
+    std::uint64_t unk128;  // 128
     int cost;
     std::uint32_t flags;
 };
