@@ -22,7 +22,6 @@
 // BSFaceGenKeyframeMultiple declarations for build sse-steam-1-7-104.
 //
 // Labels: v2
-// Code origin: declarations generated from a tools/skeleton.py skeleton and extended by hand from the local listings; names follow the community headers.
 // Task: p46-n-bsfacegenkeyframemultiple
 // Source exposure: mixed (names and declarations from community headers; base classes, sizes and
 // the compared functions from the pinned image).
@@ -42,8 +41,6 @@
 // Unk_01 to Unk_07, Unk_0A, Unk_0C: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); void placeholders that keep the image's vtable index of the call at 0x70
 // Unk_0D: GUESS(low); a void placeholder at vtable index 0x0D
 // g_customNameTable, g_expressionNameTable, g_phonemeNameTable: GUESS(low); the image's name tables at 0x20b0828, 0x20b0830 and 0x20b0950
-// BSFaceGenKeyframeMultiple::GetModifierName: COMMUNITY(powerof3/CommonLibSSE@654e55f7979c1733033d5dbef176e43827bac944, GPL-3.0); name only, the body is written from the target listing
-// g_modifierNameTable: GUESS(low); table of names at address 0x20b08c0 indexed by GetModifierName
 #pragma once
 
 #include <cstdint>
@@ -61,13 +58,11 @@ static_assert(sizeof(BSFaceGenKeyframe) == 0x10, "BSFaceGenKeyframe size");
 extern const char* const g_customNameTable[];
 extern const char* const g_expressionNameTable[];
 extern const char* const g_phonemeNameTable[];
-extern const char* const g_modifierNameTable[];
 
 class BSFaceGenKeyframeMultiple : public BSFaceGenKeyframe
 {
 public:
     static const char* GetCustomName(std::int32_t a_index);  // compared: 0x43ad00; no this pointer, the index arrives in ECX
-    static const char* GetModifierName(std::uint32_t a_index);  // compared: 0x43acc0
     static const char* GetExpressionName(std::uint32_t a_index);  // compared: 0x43aca0
     static const char* GetPhonemeName(std::uint32_t a_index);  // compared: 0x43ace0
     virtual void Unk_01();  // 08
