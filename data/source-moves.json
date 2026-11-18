@@ -985,7 +985,6 @@
   "reconstruction/contrib_bgsproceduretreeconditionalitem/BGSProcedureTreeConditionalItem.cpp": "reconstruction/skyrim/ai/BGSProcedureTreeConditionalItem_48a310.cpp",
   "reconstruction/contrib_bgsreverbparameters/BGSReverbParameters.cpp": "reconstruction/skyrim_shared/audio/BGSReverbParameters.cpp",
   "reconstruction/contrib_bgstalkingactivator/BGSTalkingActivator.cpp": "reconstruction/skyrim_shared/forms/BGSTalkingActivator.cpp",
-  "reconstruction/contrib_bsfacegenkeyframemultiple/BSFaceGenKeyframeMultiple.cpp": "reconstruction/skyrim_shared/facegen/BSFaceGenKeyframeMultiple_e493fee3.cpp",
   "reconstruction/contrib_enchantmentitem/EnchantmentItem.cpp": "reconstruction/skyrim_shared/magic/EnchantmentItem_14e750.cpp",
   "reconstruction/contrib_ingredientitem/IngredientItem.cpp": "reconstruction/skyrim_shared/magic/IngredientItem_14f8a0.cpp",
   "reconstruction/contrib_magicitemdata/MagicItemData.cpp": "reconstruction/skyrim_shared/magic/MagicItemData_951d00.cpp",
