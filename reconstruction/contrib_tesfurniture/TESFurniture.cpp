@@ -39,8 +39,8 @@
 #include "TESFurniture.h"
 void TESFurniture::InitializeData()
 {
-    dwordE4 = 0;
-    qwordE8 = nullptr;
+    furnFlags = 0;
+    associatedForm = nullptr;
     TESObjectACTI::InitializeData();
 }
 NiAVObject* TESFurniture::Clone3D(TESObjectREFR* a_ref)
