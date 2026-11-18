@@ -3,6 +3,7 @@
 // Labels: v2
 // Source exposure: mixed.
 // Origin: original reconstruction from independently decoded target and anonymous sibling.
+// Code origin: declarations adapted from the community headers and extended by hand from the local listings.
 // Drafted by gpt-6.1-terra. Evidence: findings/ghidra-import.md
 // Adapted declarations: CommonLibSSE-NG b93280e832f263dbef44e44cbe2936622a02f91a, include/RE/A/ActiveEffect.h, ActiveEffectReferenceEffectController.h and RE/R/ReferenceEffectController.h.
 // Declarations and field names: GUESS; selected offsets and call slots corroborated by target.
@@ -30,10 +31,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+// ActiveEffectReferenceEffectController::GetManagerHandlesSaveLoad, GetWindPoint, LoadGame: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
+// LoadRefHandle: GUESS(low); RVA 0x17a940, reads a handle from the load buffer into its second argument
 #pragma once
 #include <cstdint>
-class Actor; class MagicTarget; class TESObjectREFR; class NiNode; class BSFixedString; class BGSSaveFormBuffer; class BGSLoadFormBuffer;
+class Actor; class MagicTarget; class NiNode; class BSFixedString; class BGSSaveFormBuffer; class BGSLoadFormBuffer;
 struct NiPoint3 { float x,y,z; };
+class TESObjectREFR;
 class ActiveEffect { public: virtual void AdjustForPerks(Actor*,MagicTarget*); virtual void OnAdd(MagicTarget*); virtual void OnRemove(); virtual TESObjectREFR* GetVisualsTarget(); virtual void Update(float); virtual void EvaluateConditions(float,bool); virtual bool IsCausingHealthDamage(); virtual void SetLocation(const NiPoint3&); virtual void SaveGame(BGSSaveFormBuffer*); virtual void LoadGame(BGSLoadFormBuffer*); virtual void FinishLoadGame(BGSLoadFormBuffer*); virtual void Revert(BGSLoadFormBuffer*); virtual std::int32_t Compare(ActiveEffect*); virtual void HandleEvent(const BSFixedString&); virtual void SwitchAttachedRoot(NiNode*,NiNode*); };
 class ReferenceEffectController { public: virtual ~ReferenceEffectController(); };
-class ActiveEffectReferenceEffectController : public ReferenceEffectController { public: void HandleEvent(const BSFixedString&); void SwitchAttachedRoot(NiNode*,NiNode*); void SetWindPoint(const NiPoint3&); ActiveEffect* effect; std::uint32_t target; NiPoint3 windPoint; };
+void LoadRefHandle(BGSLoadFormBuffer* a_buf, std::uint32_t* a_handle);
+class ActiveEffectReferenceEffectController : public ReferenceEffectController { public: virtual bool GetManagerHandlesSaveLoad() const; virtual NiPoint3* GetWindPoint(); virtual void LoadGame(BGSLoadFormBuffer* a_buf); void HandleEvent(const BSFixedString&); void SwitchAttachedRoot(NiNode*,NiNode*); void SetWindPoint(const NiPoint3&); ActiveEffect* effect; std::uint32_t target; NiPoint3 windPoint; };
