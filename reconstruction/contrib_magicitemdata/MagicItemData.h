@@ -10,7 +10,6 @@
 // community names are unverified.
 // MagicItemData: COMMUNITY(powerof3/CommonLibSSE@654e55f, GPL-3.0) EXE_RTTI
 // MagicItemData::GetCount, MagicItemData::GetEnabled: COMMUNITY(powerof3/CommonLibSSE@654e55f, GPL-3.0)
-// unknown08: GUESS(low)
 // data18: GUESS(low)
 // MagicItemData::GetName, MagicItemData::GetEquipState: COMMUNITY(powerof3/CommonLibSSE@654e55f7979c1733033d5dbef176e43827bac944, GPL-3.0); names only, the bodies are written from the target listing
 // PlayerCharacter::singleton: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); global at address 0x3230778
@@ -40,6 +39,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+// unk08, unk10: GUESS(low); storage before data18, not read by the compared code
 #pragma once
 
 #include <cstdint>
@@ -62,8 +62,9 @@ public:
     virtual std::uint32_t GetCount();  // compared: 0x956d90
     virtual bool GetEnabled();  // compared: 0x951e80
 
-    // Padding up to the pointer read by GetEnabled at offset 0x18.
-    std::uint8_t unknown08[0x10];  // 08
+    // Members before the pointer read by GetEnabled at offset 0x18.
+    std::uint64_t unk08;  // 08
+    std::uint64_t unk10;  // 10
     void* data18;  // 18
 };
 static_assert(sizeof(MagicItemData) == 0x20, "MagicItemData size");
