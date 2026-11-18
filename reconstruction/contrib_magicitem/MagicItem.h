@@ -1,10 +1,9 @@
 // MagicItem, build sse-steam-1-7-104.
 // Code origin: declarations written by hand from the local listings and the community headers; the bodies are in the matching .cpp.
 // Labels: v2
-// Source exposure: mixed (target listing, anonymous sibling and unverified names).
+// Source exposure: mixed (names and declarations from community headers; the listing of the pinned image).
 // Evidence: findings/ghidra-import.md
 // Recipe: reconstruction/recipes/msvc-19.16.27054-o2.json
-// Drafted by gpt-6.1-terra.
 // MagicItem, GetFixedCastDuration, GetRange: GUESS(low)
 // GetChargeTime, IsPoison, IsAutoCalc, HasEffect: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e832f263dbef44e44cbe2936622a02f91a, MIT); names only, the bodies are written from the target listing
 // GetType: GUESS(low); virtual slot 0x53 (byte offset 0x298), returns the spell type compared in IsPoison
