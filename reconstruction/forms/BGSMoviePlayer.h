@@ -49,13 +49,13 @@ public:
 };
 static_assert(sizeof(MoviePlayer) == 0x58, "MoviePlayer size");
 
-// g_moviePlayerValue09: GUESS(low); the dword at RVA 0x33363c4 that Unk_09 returns.
-// g_moviePlayerFlag0B: GUESS(low); the byte at RVA 0x3336400 that Unk_0B returns.
-// g_moviePlayerObject: GUESS(low); the object at RVA 0x3331f40 passed to the callee in Unk_07.
-// InitMoviePlayerObject: GUESS(low); RVA 0x1009cf0, called by Unk_07 with the global object.
-// Main::singleton: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); global at RVA 0x3230530
+// g_moviePlayerValue09: GUESS(low); the dword at address 0x33363c4 that Unk_09 returns.
+// g_moviePlayerFlag0B: GUESS(low); the byte at address 0x3336400 that Unk_0B returns.
+// g_moviePlayerObject: GUESS(low); the object at address 0x3331f40 passed to the callee in Unk_07.
+// InitMoviePlayerObject: GUESS(low); address 0x1009cf0, called by Unk_07 with the global object.
+// Main::singleton: COMMUNITY(CharmedBaryon/CommonLibSSE-NG@b93280e, MIT); global at address 0x3230530
 // unk28: GUESS(low); member of Main read by Unk_0C.
-// g_bgsMoviePlayerUnk: GUESS(low); the dword at RVA 0x33363c8 that Unk_0A returns.
+// g_bgsMoviePlayerUnk: GUESS(low); the dword at address 0x33363c8 that Unk_0A returns.
 extern std::uint32_t g_bgsMoviePlayerUnk;
 extern std::uint32_t g_moviePlayerValue09;
 extern std::uint8_t g_moviePlayerFlag0B;
