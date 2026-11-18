@@ -9,7 +9,8 @@
 const char* BSFaceGenKeyframeMultiple::GetModifierName(std::uint32_t a_index)
 {
     if (a_index <= 0x10) {
-        return g_modifierNameTable[a_index];
+        const std::int32_t tableIndex = static_cast<std::int32_t>(a_index);
+        return g_modifierNameTable[tableIndex];
     }
     return nullptr;
 }
